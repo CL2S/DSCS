@@ -1,0 +1,283 @@
+{
+  "patient_id": "35689140",
+  "timestamp": "2025-12-02T01:11:59.285930",
+  "model_name": "qwen3:30b",
+  "model_trust_score": 0.7972674459459178,
+  "feature_differences": {
+    "sofa_respiration": 2.0,
+    "sofa_coagulation": 1.5,
+    "sofa_liver": 2.0,
+    "sofa_cardiovascular": 0.125,
+    "sofa_cns": 1.0,
+    "sofa_renal": 0.875
+  },
+  "predicted_sofa_features": {
+    "pao2_fio2_ratio": [
+      200.0,
+      190.0,
+      180.0,
+      170.0,
+      160.0,
+      150.0,
+      140.0,
+      130.0
+    ],
+    "platelet": [
+      100.0,
+      95.0,
+      90.0,
+      85.0,
+      80.0,
+      75.0,
+      70.0,
+      65.0
+    ],
+    "bilirubin_total": [
+      2.0,
+      2.2,
+      2.4,
+      2.6,
+      2.8,
+      3.0,
+      3.2,
+      3.4
+    ],
+    "vasopressor_rate": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9,
+      1.1,
+      1.2,
+      1.25
+    ],
+    "gcs_total": [
+      3.0,
+      2.8,
+      2.6,
+      2.4,
+      2.2,
+      2.0,
+      1.8,
+      1.6
+    ],
+    "creatinine": [
+      2.0,
+      2.2,
+      2.4,
+      2.6,
+      2.8,
+      3.0,
+      3.2,
+      3.4
+    ],
+    "urine_output_ml": [
+      500.0,
+      450.0,
+      400.0,
+      350.0,
+      300.0,
+      250.0,
+      200.0,
+      150.0
+    ],
+    "mechanical_ventilation": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "actual_sofa_features": {
+    "pao2_fio2_ratio": [
+      107.59,
+      114.32,
+      116.48,
+      140.58,
+      162.43,
+      314.74
+    ],
+    "platelet": [
+      89.0,
+      92.0,
+      118.0,
+      160.0
+    ],
+    "bilirubin_total": [
+      0.3,
+      0.7
+    ],
+    "vasopressor_rate": [
+      0.0,
+      0.07,
+      0.08,
+      0.1,
+      0.13,
+      0.15,
+      0.16,
+      0.25
+    ],
+    "gcs_total": [
+      3.0,
+      6.0,
+      7.0,
+      14.0,
+      15.0
+    ],
+    "creatinine": [
+      0.7,
+      0.8
+    ],
+    "urine_output_ml": [
+      88.0,
+      100.0,
+      125.0,
+      130.0,
+      150.0,
+      160.0,
+      215.0,
+      265.0
+    ],
+    "mechanical_ventilation": [
+      0.0
+    ]
+  },
+  "predicted_sofa_scores": {
+    "sofa_respiration": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sofa_coagulation": [
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "sofa_liver": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "sofa_cardiovascular": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sofa_cns": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "sofa_renal": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2
+    ]
+  },
+  "actual_sofa_scores": {
+    "sofa_respiration": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      1,
+      4,
+      4
+    ],
+    "sofa_coagulation": [
+      2,
+      2,
+      1,
+      0,
+      4,
+      4,
+      4,
+      4
+    ],
+    "sofa_liver": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sofa_cardiovascular": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sofa_cns": [
+      4,
+      4,
+      3,
+      1,
+      0,
+      4,
+      4,
+      4
+    ],
+    "sofa_renal": [
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1
+    ]
+  },
+  "analysis": {
+    "total_features_compared": 6,
+    "features_with_valid_data": 6,
+    "average_difference": 1.25
+  },
+  "debug_info": {
+    "sofa_extraction_method": "intervention_analysis.sofa_related_features",
+    "sofa_features_count": 8
+  }
+}

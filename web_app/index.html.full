@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sepsis Prediction System | Advanced Medical Intelligence</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+  <!-- Vue 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    :root {
+      /* Light theme (default) */
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #ffffff;
+      --color-bg-tertiary: #f1f5f9;
+      --color-bg-accent: #e0f2fe;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #64748b;
+      --color-border: #e2e8f0;
+      --color-primary: #0ea5e9;
+      --color-primary-dark: #0284c7;
+      --color-secondary: #10b981;
+      --color-secondary-dark: #059669;
+      --color-accent: #8b5cf6;
+      --color-danger: #ef4444;
+      --color-warning: #f59e0b;
+      --color-success: #10b981;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark {
+      /* Dark theme */
+      --color-bg-primary: #0f172a;
+      --color-bg-secondary: #1e293b;
+      --color-bg-tertiary: #334155;
+      --color-bg-accent: #1e40af;
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #cbd5e1;
+      --color-text-tertiary: #94a3b8;
+      --color-border: #475569;
+      --color-primary: #60a5fa;
+      --color-primary-dark: #3b82f6;
+      --color-secondary: #34d399;
+      --color-secondary-dark: #10b981;
+      --color-accent: #a78bfa;
+      --color-danger: #f87171;
+      --color-warning: #fbbf24;
+      --color-success: #34d399;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    h2 {
+      font-size: 2rem;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-xs {
+      font-size: 0.75rem;
+    }
+
+    .text-mono {
+      font-family: 'Source Code Pro', monospace;
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 768px) {
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .gap-2 {
+      gap: 0.5rem;
+    }
+
+    .gap-4 {
+      gap: 1rem;
+    }
+
+    .gap-6 {
+      gap: 1.5rem;
+    }
+
+    /* Components */
+    .card {
+      background-color: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-header {
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.875rem;
+      line-height: 1;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-border);
+    }
+
+    .btn-success {
+      background-color: var(--color-success);
+      color: white;
+    }
+
+    .btn-danger {
+      background-color: var(--color-danger);
+      color: white;
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+
+    .btn-lg {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+    }
+
+    .input {
+      padding: 0.75rem 1rem;
+      background-color: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-size: 0.875rem;
+      transition: all var(--transition-fast);
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    }
+
+    .textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
+    }
+
+    /* Navigation */
+    .nav {
+      background-color: var(--color-bg-secondary);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background-color: rgba(15, 23, 42, 0.8);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 2rem 0;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, var(--color-bg-accent), transparent);
+      border-radius: var(--radius-xl);
+      margin-bottom: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 1rem auto;
+    }
+
+    /* Status indicators */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-success {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--color-success);
+    }
+
+    .status-warning {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--color-warning);
+    }
+
+    .status-danger {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--color-danger);
+    }
+
+    /* Chart containers */
+    .chart-container {
+      background-color: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      height: 400px;
+      position: relative;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* KPI cards */
+    .kpi-card {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .kpi-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin: 0.5rem 0;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .kpi-label {
+      font-size: 0.875rem;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .tab:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+    }
+
+    /* Log panel */
+    .log-panel {
+      background-color: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.875rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .log-entry {
+      padding: 0.25rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .log-entry:last-child {
+      border-bottom: none;
+    }
+
+    .log-time {
+      color: var(--color-text-tertiary);
+      margin-right: 1rem;
+    }
+
+    .log-info {
+      color: var(--color-text-secondary);
+    }
+
+    .log-success {
+      color: var(--color-success);
+    }
+
+    .log-error {
+      color: var(--color-danger);
+    }
+
+    /* Loading states */
+    .loading {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid var(--color-border);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Animations */
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity var(--transition-base);
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+      opacity: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero {
+        padding: 2rem 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .grid-cols-2,
+      .grid-cols-3,
+      .grid-cols-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-lg {
+        padding: 0.75rem 1.5rem;
+      }
+    }
+
+    /* Utility classes */
+    .hidden {
+      display: none;
+    }
+
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .text-center { text-align: center; }
+    .w-full { width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="container flex items-center justify-between">
+        <div class="nav-brand">
+          <div class="nav-logo">S</div>
+          <div>
+            <h2 class="text-lg font-bold">Sepsis Prediction</h2>
+            <p class="text-sm text-tertiary">Advanced Medical Intelligence</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="btn btn-secondary" @click="toggleTheme">
+            <i class="ph ph-moon" v-if="!darkMode"></i>
+            <i class="ph ph-sun" v-else></i>
+          </button>
+          <div class="status-badge" :class="statusClass">
+            <i class="ph ph-circle-fill" style="font-size: 0.5rem"></i>
+            {{ statusText }}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="container">
+        <!-- Hero Section -->
+        <section class="hero mb-8">
+          <h1>Real-time Sepsis Risk Assessment</h1>
+          <p class="hero-subtitle">
+            AI-powered predictive analytics for early detection and intervention planning.
+            Monitor SOFA scores, evaluate multiple models, and visualize patient trajectories.
+          </p>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Left Column: Control Panel -->
+          <div class="lg:col-span-1">
+            <div class="card">
+              <div class="card-header">
+                <h3>Control Panel</h3>
+                <p class="text-sm text-tertiary mt-2">Configure prediction parameters</p>
+              </div>
+
+              <div class="space-y-4">
+                <!-- Mode Selection -->
+                <div class="input-group">
+                  <label class="label">Prediction Mode</label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button
+                      class="btn"
+                      :class="mode === 'single' ? 'btn-primary' : 'btn-secondary'"
+                      @click="mode = 'single'"
+                    >
+                      Single
+                    </button>
+                    <button
+                      class="btn"
+                      :class="mode === 'auto' ? 'btn-primary' : 'btn-secondary'"
+                      @click="mode = 'auto'"
+                    >
+                      Auto
+                    </button>
+                    <button
+                      class="btn"
+                      :class="mode === 'confidence' ? 'btn-primary' : 'btn-secondary'"
+                      @click="mode = 'confidence'"
+                    >
+                      Confidence
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="input-group">
+                  <label class="label">Model Selection</label>
+                  <select class="input select" v-model="selectedModel" v-if="mode !== 'auto'">
+                    <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                  </select>
+                  <div v-else class="space-y-2">
+                    <select class="input select" v-model="autoModels[0]">
+                      <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                    </select>
+                    <select class="input select" v-model="autoModels[1]">
+                      <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                    </select>
+                    <select class="input select" v-model="autoModels[2]">
+                      <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Patient Input -->
+                <div class="input-group" v-if="mode !== 'confidence'">
+                  <label class="label">Patient Description</label>
+                  <textarea
+                    class="input textarea"
+                    v-model="patientInput"
+                    placeholder="Enter patient summary, vitals, labs, history..."
+                    rows="4"
+                  ></textarea>
+                </div>
+
+                <!-- Intervention -->
+                <div class="input-group" v-if="mode !== 'confidence'">
+                  <label class="label">Intervention Plan</label>
+                  <input
+                    type="text"
+                    class="input"
+                    v-model="intervention"
+                    placeholder="e.g., Norepinephrine 5μg/kg/min, Fluids 30mL/kg"
+                  >
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-2">
+                  <button class="btn btn-primary flex-1" @click="runPrediction" :disabled="loading">
+                    <i class="ph ph-play-circle" v-if="!loading"></i>
+                    <div class="loading" v-else></div>
+                    {{ runButtonText }}
+                  </button>
+                  <button class="btn btn-secondary" @click="resetSession">
+                    <i class="ph ph-arrow-clockwise"></i>
+                  </button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="pt-4 border-t border-border">
+                  <p class="label mb-2">Quick Actions</p>
+                  <div class="flex flex-wrap gap-2">
+                    <button class="btn btn-sm btn-secondary" @click="loadExample">
+                      <i class="ph ph-file-text"></i> Load Example
+                    </button>
+                    <button class="btn btn-sm btn-secondary" @click="exportResults">
+                      <i class="ph ph-export"></i> Export
+                    </button>
+                    <button class="btn btn-sm btn-secondary" @click="showHelp">
+                      <i class="ph ph-question"></i> Help
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="card mt-6">
+              <div class="card-header">
+                <h3>System Status</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-sm">API Connection</span>
+                  <span class="status-badge status-success">Connected</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Database</span>
+                  <span class="status-badge status-success">Online</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Model Queue</span>
+                  <span class="status-badge status-success">Ready</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Last Updated</span>
+                  <span class="text-sm">{{ lastUpdate }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Results & Visualization -->
+          <div class="lg:col-span-2">
+            <!-- Tabs -->
+            <div class="tabs">
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'results' }"
+                @click="activeTab = 'results'"
+              >
+                <i class="ph ph-chart-line"></i> Results
+              </div>
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'charts' }"
+                @click="activeTab = 'charts'"
+              >
+                <i class="ph ph-chart-bar"></i> Visualization
+              </div>
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'logs' }"
+                @click="activeTab = 'logs'"
+              >
+                <i class="ph ph-terminal"></i> Logs
+              </div>
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'patients' }"
+                @click="activeTab = 'patients'"
+              >
+                <i class="ph ph-users"></i> Patients
+              </div>
+            </div>
+
+            <!-- Results Tab -->
+            <div v-if="activeTab === 'results'" class="space-y-6">
+              <!-- KPI Cards -->
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card kpi-card">
+                  <div class="kpi-label">Best Model</div>
+                  <div class="kpi-value">{{ kpi.model || '-' }}</div>
+                  <p class="text-xs text-tertiary">Highest confidence</p>
+                </div>
+                <div class="card kpi-card">
+                  <div class="kpi-label">Risk Level</div>
+                  <div class="kpi-value" :class="riskClass">{{ kpi.risk || '-' }}</div>
+                  <p class="text-xs text-tertiary">Weighted assessment</p>
+                </div>
+                <div class="card kpi-card">
+                  <div class="kpi-label">Confidence</div>
+                  <div class="kpi-value">{{ kpi.confidence || '-' }}</div>
+                  <p class="text-xs text-tertiary">Model certainty</p>
+                </div>
+                <div class="card kpi-card">
+                  <div class="kpi-label">SOFA Total</div>
+                  <div class="kpi-value">{{ kpi.sofa || '-' }}</div>
+                  <p class="text-xs text-tertiary">Latest score</p>
+                </div>
+              </div>
+
+              <!-- Detailed Results -->
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Reasoning -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3>Prediction Reasoning</h3>
+                  </div>
+                  <div class="log-panel" style="min-height: 200px;">
+                    <div v-if="result.reasoning" class="log-entry">
+                      {{ result.reasoning }}
+                    </div>
+                    <div v-else class="text-center p-8 text-tertiary">
+                      <i class="ph ph-file-text" style="font-size: 3rem;"></i>
+                      <p class="mt-4">No prediction results yet</p>
+                      <p class="text-sm">Run a prediction to see detailed reasoning</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Model Comparison -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3>Model Comparison</h3>
+                  </div>
+                  <div class="space-y-2">
+                    <div
+                      v-for="(modelResult, index) in result.modelResults"
+                      :key="index"
+                      class="flex items-center justify-between p-3 bg-tertiary rounded"
+                    >
+                      <div>
+                        <div class="font-medium">{{ modelResult.model }}</div>
+                        <div class="text-sm text-tertiary">Score: {{ modelResult.score }}</div>
+                      </div>
+                      <div class="status-badge" :class="getRiskClass(modelResult.risk)">
+                        {{ modelResult.risk }}
+                      </div>
+                    </div>
+                    <div v-if="!result.modelResults?.length" class="text-center p-8 text-tertiary">
+                      <i class="ph ph-chart-bar" style="font-size: 3rem;"></i>
+                      <p class="mt-4">No model data available</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Charts Tab -->
+            <div v-if="activeTab === 'charts'" class="space-y-6">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3>SOFA Trend</h3>
+                  </div>
+                  <div class="chart-container" id="sofaTrendChart"></div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h3>Component Analysis</h3>
+                  </div>
+                  <div class="chart-container" id="componentChart"></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3>Risk Distribution</h3>
+                </div>
+                <div class="chart-container" id="riskChart"></div>
+              </div>
+            </div>
+
+            <!-- Logs Tab -->
+            <div v-if="activeTab === 'logs'" class="card">
+              <div class="card-header flex justify-between">
+                <h3>System Logs</h3>
+                <button class="btn btn-sm btn-secondary" @click="clearLogs">
+                  <i class="ph ph-trash"></i> Clear
+                </button>
+              </div>
+              <div class="log-panel">
+                <div v-for="(log, index) in logs" :key="index" class="log-entry">
+                  <span class="log-time">{{ log.time }}</span>
+                  <span :class="logClass(log.type)">{{ log.message }}</span>
+                </div>
+                <div v-if="!logs.length" class="text-center p-8 text-tertiary">
+                  No logs yet
+                </div>
+              </div>
+            </div>
+
+            <!-- Patients Tab -->
+            <div v-if="activeTab === 'patients'" class="card">
+              <div class="card-header flex justify-between">
+                <h3>Patient Database</h3>
+                <button class="btn btn-sm btn-primary" @click="loadPatients">
+                  <i class="ph ph-arrow-clockwise"></i> Refresh
+                </button>
+              </div>
+              <div class="space-y-2">
+                <div v-for="patient in patients" :key="patient.id" class="p-3 border rounded">
+                  <div class="flex justify-between">
+                    <div>
+                      <div class="font-medium">Patient {{ patient.id }}</div>
+                      <div class="text-sm text-tertiary">{{ patient.description.substring(0, 100) }}...</div>
+                    </div>
+                    <button class="btn btn-sm btn-secondary" @click="loadPatient(patient)">
+                      Load
+                    </button>
+                  </div>
+                </div>
+                <div v-if="!patients.length" class="text-center p-8 text-tertiary">
+                  <i class="ph ph-users" style="font-size: 3rem;"></i>
+                  <p class="mt-4">No patients loaded</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border py-4 mt-8">
+      <div class="container text-center">
+        <p class="text-sm text-tertiary">
+          Sepsis Prediction System v2.0 • Medical AI Research Platform •
+          <span class="text-primary">Not for clinical use</span>
+        </p>
+        <p class="text-xs text-tertiary mt-2">
+          Built with Vue.js • Plotly • FastAPI • Machine Learning Models
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const { createApp, ref, computed, onMounted, watch } = Vue;
+
+    createApp({
+      setup() {
+        // Theme
+        const darkMode = ref(true);
+
+        // Application state
+        const mode = ref('single');
+        const selectedModel = ref('');
+        const autoModels = ref(['', '', '']);
+        const patientInput = ref('');
+        const intervention = ref('');
+        const loading = ref(false);
+        const activeTab = ref('results');
+        const lastUpdate = ref(new Date().toLocaleTimeString());
+
+        // Data
+        const models = ref([]);
+        const result = ref({
+          reasoning: '',
+          modelResults: []
+        });
+        const kpi = ref({
+          model: '',
+          risk: '',
+          confidence: '',
+          sofa: ''
+        });
+        const logs = ref([]);
+        const patients = ref([]);
+        const connectionStatus = ref('connected');
+
+        // Computed properties
+        const statusText = computed(() => {
+          switch(connectionStatus.value) {
+            case 'connected': return 'Connected';
+            case 'connecting': return 'Connecting...';
+            case 'error': return 'Connection Error';
+            default: return 'Unknown';
+          }
+        });
+
+        const statusClass = computed(() => {
+          switch(connectionStatus.value) {
+            case 'connected': return 'status-success';
+            case 'connecting': return 'status-warning';
+            case 'error': return 'status-danger';
+            default: return 'status-warning';
+          }
+        });
+
+        const runButtonText = computed(() => {
+          if (loading.value) return 'Running...';
+          switch(mode.value) {
+            case 'single': return 'Run Single Prediction';
+            case 'auto': return 'Run Auto Comparison';
+            case 'confidence': return 'Evaluate Confidence';
+            default: return 'Run Prediction';
+          }
+        });
+
+        const riskClass = computed(() => {
+          const risk = kpi.value.risk?.toLowerCase();
+          if (risk?.includes('high')) return 'text-danger';
+          if (risk?.includes('medium')) return 'text-warning';
+          if (risk?.includes('low')) return 'text-success';
+          return '';
+        });
+
+        // Methods
+        const toggleTheme = () => {
+          darkMode.value = !darkMode.value;
+          document.documentElement.classList.toggle('dark', darkMode.value);
+          addLog('info', `Switched to ${darkMode.value ? 'dark' : 'light'} theme`);
+        };
+
+        const addLog = (type, message) => {
+          const time = new Date().toLocaleTimeString();
+          logs.value.unshift({ time, type, message });
+          if (logs.value.length > 50) logs.value.pop();
+          lastUpdate.value = time;
+        };
+
+        const logClass = (type) => {
+          switch(type) {
+            case 'error': return 'log-error';
+            case 'success': return 'log-success';
+            default: return 'log-info';
+          }
+        };
+
+        const clearLogs = () => {
+          logs.value = [];
+          addLog('info', 'Logs cleared');
+        };
+
+        const getRiskClass = (risk) => {
+          if (!risk) return 'status-warning';
+          if (risk.toLowerCase().includes('high')) return 'status-danger';
+          if (risk.toLowerCase().includes('medium')) return 'status-warning';
+          if (risk.toLowerCase().includes('low')) return 'status-success';
+          return 'status-warning';
+        };
+
+        // API Methods
+        const initializeApp = async () => {
+          try {
+            addLog('info', 'Initializing application...');
+
+            // Load models
+            const modelsResponse = await axios.get('/api/models');
+            models.value = modelsResponse.data.models || [];
+            if (models.value.length > 0) {
+              selectedModel.value = models.value[0];
+              autoModels.value = models.value.slice(0, 3);
+            }
+
+            // Load patients
+            await loadPatients();
+
+            connectionStatus.value = 'connected';
+            addLog('success', 'Application initialized successfully');
+          } catch (error) {
+            connectionStatus.value = 'error';
+            addLog('error', `Initialization failed: ${error.message}`);
+
+            // Fallback models
+            models.value = ["gemma3:12b", "mistral:7b", "qwen3:4b", "qwen3:30b", "deepseek-r1:32b", "medllama2:latest"];
+            selectedModel.value = models.value[0];
+            autoModels.value = models.value.slice(0, 3);
+            addLog('info', 'Using fallback model list');
+          }
+        };
+
+        const loadPatients = async () => {
+          try {
+            addLog('info', 'Loading patients...');
+            const response = await axios.get('/api/patients/list?limit=10');
+            patients.value = response.data.patients || [];
+            addLog('success', `Loaded ${patients.value.length} patients`);
+          } catch (error) {
+            addLog('error', `Failed to load patients: ${error.message}`);
+            patients.value = [];
+          }
+        };
+
+        const loadPatient = (patient) => {
+          patientInput.value = patient.description;
+          addLog('info', `Loaded patient ${patient.id}`);
+        };
+
+        const runPrediction = async () => {
+          if (loading.value) return;
+
+          loading.value = true;
+          addLog('info', `Starting ${mode.value} prediction...`);
+
+          try {
+            let response;
+            const baseUrl = window.location.origin;
+
+            switch(mode.value) {
+              case 'single':
+                response = await axios.post(`${baseUrl}/api/run_single`, {
+                  model: selectedModel.value,
+                  input_description: patientInput.value,
+                  intervention: intervention.value
+                });
+                break;
+              case 'auto':
+                response = await axios.post(`${baseUrl}/api/run_auto`, {
+                  models: autoModels.value.filter(m => m),
+                  input_description: patientInput.value,
+                  intervention: intervention.value
+                });
+                break;
+              case 'confidence':
+                response = await axios.post(`${baseUrl}/api/confidence`, {
+                  model: selectedModel.value
+                });
+                break;
+            }
+
+            if (response.data) {
+              handlePredictionResult(response.data);
+              activeTab.value = 'results';
+              addLog('success', `${mode.value} prediction completed successfully`);
+            }
+          } catch (error) {
+            addLog('error', `Prediction failed: ${error.message}`);
+            console.error('Prediction error:', error);
+          } finally {
+            loading.value = false;
+          }
+        };
+
+        const handlePredictionResult = (data) => {
+          // Update KPI
+          kpi.value = {
+            model: data.prediction_model || data.best_model || '-',
+            risk: data.final_weighted_risk_level || data.risk_level || '-',
+            confidence: data.total_confidence ? data.total_confidence.toFixed(2) : '-',
+            sofa: extractLatestSOFA(data) || '-'
+          };
+
+          // Update reasoning
+          result.value.reasoning = data.prediction_data?.prediction_reasoning ||
+                                 data.reasoning ||
+                                 'No reasoning available';
+
+          // Update model results
+          if (data.per_model_risk) {
+            result.value.modelResults = data.per_model_risk.map(item => ({
+              model: item.model,
+              score: item.risk_score?.toFixed(2) || 'N/A',
+              risk: item.risk_level || 'Unknown'
+            }));
+          }
+
+          // Update charts
+          updateCharts(data);
+        };
+
+        const extractLatestSOFA = (data) => {
+          if (data.prediction_data?.hourly_sofa_totals) {
+            const totals = Object.values(data.prediction_data.hourly_sofa_totals);
+            return totals.length > 0 ? totals[totals.length - 1] : null;
+          }
+          return null;
+        };
+
+        const updateCharts = (data) => {
+          // SOFA Trend Chart
+          const sofaTrendData = extractSOFATrendData(data);
+          if (sofaTrendData) {
+            Plotly.newPlot('sofaTrendChart', sofaTrendData.traces, sofaTrendData.layout, {
+              responsive: true,
+              displayModeBar: true
+            });
+          }
+
+          // Component Chart
+          const componentData = extractComponentData(data);
+          if (componentData) {
+            Plotly.newPlot('componentChart', [componentData], {
+              title: 'SOFA Component Scores',
+              barmode: 'group',
+              plot_bgcolor: 'transparent',
+              paper_bgcolor: 'transparent',
+              font: { color: darkMode.value ? '#f1f5f9' : '#0f172a' }
+            }, { responsive: true });
+          }
+
+          // Risk Chart
+          const riskData = extractRiskData(data);
+          if (riskData) {
+            Plotly.newPlot('riskChart', [riskData], {
+              title: 'Risk Distribution',
+              plot_bgcolor: 'transparent',
+              paper_bgcolor: 'transparent',
+              font: { color: darkMode.value ? '#f1f5f9' : '#0f172a' }
+            }, { responsive: true });
+          }
+        };
+
+        const extractSOFATrendData = (data) => {
+          const hourly = data.prediction_data?.hourly_sofa_totals || data.hourly_sofa_totals || {};
+          const baseline = data.baseline_sofa_totals || null;
+
+          const hours = Object.keys(hourly).map(k => parseInt(k)).sort((a, b) => a - b);
+          const interventionValues = hours.map(k => +hourly[k] || 0);
+          const baselineValues = baseline ? hours.map(k => +baseline[k] || 0) : [];
+
+          const traces = [];
+
+          if (hours.length > 0) {
+            traces.push({
+              x: hours,
+              y: interventionValues,
+              mode: 'lines+markers',
+              name: 'Intervention',
+              line: { color: '#60a5fa', width: 3 },
+              marker: { size: 8 }
+            });
+          }
+
+          if (baselineValues.length > 0) {
+            traces.push({
+              x: hours,
+              y: baselineValues,
+              mode: 'lines',
+              name: 'Baseline',
+              line: { color: '#34d399', width: 2, dash: 'dash' }
+            });
+          }
+
+          return {
+            traces,
+            layout: {
+              title: 'SOFA Score Trend Over Time',
+              xaxis: { title: 'Hours' },
+              yaxis: { title: 'SOFA Score' },
+              plot_bgcolor: 'transparent',
+              paper_bgcolor: 'transparent',
+              font: { color: darkMode.value ? '#f1f5f9' : '#0f172a' }
+            }
+          };
+        };
+
+        const extractComponentData = (data) => {
+          const sofaScores = data.prediction_data?.predicted_sofa_scores || data.predicted_sofa_scores;
+          if (!sofaScores) return null;
+
+          const components = ['Respiration', 'Coagulation', 'Liver', 'Cardiovascular', 'CNS', 'Renal'];
+          const lastScores = components.map(comp => {
+            const key = `sofa_${comp.toLowerCase()}`;
+            const scores = sofaScores[key];
+            return scores && scores.length > 0 ? scores[scores.length - 1] : 0;
+          });
+
+          return {
+            x: components,
+            y: lastScores,
+            type: 'bar',
+            marker: { color: '#8b5cf6' }
+          };
+        };
+
+        const extractRiskData = (data) => {
+          if (!data.per_model_risk) return null;
+
+          const models = data.per_model_risk.map(item => item.model);
+          const scores = data.per_model_risk.map(item => item.risk_score || 0);
+
+          return {
+            x: models,
+            y: scores,
+            type: 'bar',
+            marker: {
+              color: scores.map(score => {
+                if (score > 0.7) return '#ef4444';
+                if (score > 0.4) return '#f59e0b';
+                return '#10b981';
+              })
+            }
+          };
+        };
+
+        const resetSession = () => {
+          patientInput.value = '';
+          intervention.value = '';
+          result.value = { reasoning: '', modelResults: [] };
+          kpi.value = { model: '', risk: '', confidence: '', sofa: '' };
+          addLog('info', 'Session reset');
+        };
+
+        const loadExample = () => {
+          patientInput.value = '65-year-old male with pneumonia, fever 39°C, BP 90/60, HR 120, RR 28, SpO2 88% on room air. WBC 18,000, creatinine 2.1, lactate 3.8. Recent ICU admission for respiratory failure.';
+          intervention.value = 'Norepinephrine 5μg/kg/min, IV fluids 30mL/kg, mechanical ventilation with PEEP 10, broad-spectrum antibiotics.';
+          addLog('info', 'Loaded example patient data');
+        };
+
+        const exportResults = () => {
+          const exportData = {
+            timestamp: new Date().toISOString(),
+            mode: mode.value,
+            patientInput: patientInput.value,
+            intervention: intervention.value,
+            result: result.value,
+            kpi: kpi.value
+          };
+
+          const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `sepsis_prediction_${new Date().toISOString().split('T')[0]}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
+          addLog('success', 'Results exported successfully');
+        };
+
+        const showHelp = () => {
+          addLog('info', 'Help documentation will be available soon');
+          alert('Help documentation is under development. For now, refer to the API documentation.');
+        };
+
+        // Lifecycle
+        onMounted(() => {
+          initializeApp();
+          addLog('info', 'Application mounted');
+
+          // Auto-refresh status
+          setInterval(() => {
+            lastUpdate.value = new Date().toLocaleTimeString();
+          }, 60000); // Update every minute
+        });
+
+        // Watch for theme changes to update charts
+        watch(darkMode, () => {
+          // Re-render charts with updated theme
+          if (result.value) {
+            setTimeout(() => updateCharts(result.value), 100);
+          }
+        });
+
+        return {
+          // State
+          darkMode,
+          mode,
+          selectedModel,
+          autoModels,
+          patientInput,
+          intervention,
+          loading,
+          activeTab,
+          lastUpdate,
+          models,
+          result,
+          kpi,
+          logs,
+          patients,
+          connectionStatus,
+
+          // Computed
+          statusText,
+          statusClass,
+          runButtonText,
+          riskClass,
+
+          // Methods
+          toggleTheme,
+          addLog,
+          logClass,
+          clearLogs,
+          getRiskClass,
+          initializeApp,
+          loadPatients,
+          loadPatient,
+          runPrediction,
+          resetSession,
+          loadExample,
+          exportResults,
+          showHelp
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sepsis Prediction System | Advanced Medical Intelligence</title>
+
+  <!-- PWA Metadata -->
+  <link rel="manifest" href="/web_app/manifest.json">
+  <meta name="application-name" content="Sepsis Prediction System">
+  <meta name="apple-mobile-web-app-title" content="Sepsis Predict">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="msapplication-TileColor" content="#0f172a">
+
+  <!-- Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/web_app/styles.css">
+
+  <!-- Inline critical CSS for above-the-fold content -->
+  <style>
+    /* Critical above-the-fold styles - No variable overrides to allow theme switching */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-bg-primary, #0f172a);
+      color: var(--color-text-primary, #f1f5f9);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid;
+      border-top-color: #60a5fa;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Ensure content is visible while styles.css loads */
+    .nav, .main, .card {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+
+  <!-- Preload external scripts -->
+  <link rel="preload" href="https://cdn.plot.ly/plotly-2.27.0.min.js" as="script">
+  <link rel="preload" href="https://unpkg.com/vue@3/dist/vue.global.js" as="script">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" as="script">
+</head>
+<body>
+  <div id="app">
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="container flex items-center justify-between">
+        <div class="nav-brand">
+          <div class="nav-logo">S</div>
+          <div>
+            <h2 class="text-lg font-bold">Sepsis Prediction</h2>
+            <p class="text-sm text-tertiary">Advanced Medical Intelligence</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="btn btn-secondary" @click="toggleTheme">
+            <i class="ph ph-moon" v-if="!darkMode"></i>
+            <i class="ph ph-sun" v-else></i>
+          </button>
+          <div class="status-badge" :class="statusClass">
+            <i class="ph ph-circle-fill" style="font-size: 0.5rem"></i>
+            {{ statusText }}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="container">
+        <!-- Hero Section -->
+        <section class="hero mb-8">
+          <h1>Real-time Sepsis Risk Assessment</h1>
+          <p class="hero-subtitle">
+            AI-powered predictive analytics for early detection and intervention planning.
+            Monitor SOFA scores, evaluate multiple models, and visualize patient trajectories.
+          </p>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Left Column: Control Panel -->
+          <div class="lg:col-span-1">
+            <div class="card">
+              <div class="card-header">
+                <h3>Control Panel</h3>
+                <p class="text-sm text-tertiary mt-2">Configure prediction parameters</p>
+              </div>
+
+              <div class="space-y-4">
+                <!-- Mode Selection -->
+                <div class="input-group">
+                  <label class="label">Prediction Mode</label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button
+                      class="btn"
+                      :class="mode === 'single' ? 'btn-primary' : 'btn-secondary'"
+                      @click="mode = 'single'"
+                    >
+                      Single
+                    </button>
+                    <button
+                      class="btn"
+                      :class="mode === 'auto' ? 'btn-primary' : 'btn-secondary'"
+                      @click="mode = 'auto'"
+                    >
+                      Auto
+                    </button>
+                    <button
+                      class="btn"
+                      :class="mode === 'confidence' ? 'btn-primary' : 'btn-secondary'"
+                      @click="mode = 'confidence'"
+                    >
+                      Confidence
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="input-group">
+                  <label class="label">Model Selection</label>
+                  <select class="input select" v-model="selectedModel" v-if="mode !== 'auto'">
+                    <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                  </select>
+                  <div v-else class="space-y-2">
+                    <select class="input select" v-model="autoModels[0]">
+                      <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                    </select>
+                    <select class="input select" v-model="autoModels[1]">
+                      <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                    </select>
+                    <select class="input select" v-model="autoModels[2]">
+                      <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Patient Input -->
+                <div class="input-group" v-if="mode !== 'confidence'">
+                  <label class="label">Patient Description</label>
+                  <textarea
+                    class="input textarea"
+                    v-model="patientInput"
+                    placeholder="Enter patient summary, vitals, labs, history..."
+                    rows="4"
+                  ></textarea>
+                </div>
+
+                <!-- Intervention -->
+                <div class="input-group" v-if="mode !== 'confidence'">
+                  <label class="label">Intervention Plan</label>
+                  <input
+                    type="text"
+                    class="input"
+                    v-model="intervention"
+                    placeholder="e.g., Norepinephrine 5μg/kg/min, Fluids 30mL/kg"
+                  >
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-2">
+                  <button class="btn btn-primary flex-1" @click="runPrediction" :disabled="loading">
+                    <i class="ph ph-play-circle" v-if="!loading"></i>
+                    <div class="loading" v-else></div>
+                    {{ runButtonText }}
+                  </button>
+                  <button class="btn btn-secondary" @click="resetSession">
+                    <i class="ph ph-arrow-clockwise"></i>
+                  </button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="pt-4 border-t border-border">
+                  <p class="label mb-2">Quick Actions</p>
+                  <div class="flex flex-wrap gap-2">
+                    <button class="btn btn-sm btn-secondary" @click="loadExample">
+                      <i class="ph ph-file-text"></i> Load Example
+                    </button>
+                    <button class="btn btn-sm btn-secondary" @click="exportResults">
+                      <i class="ph ph-export"></i> Export
+                    </button>
+                    <button class="btn btn-sm btn-secondary" @click="showHelp">
+                      <i class="ph ph-question"></i> Help
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="card mt-6">
+              <div class="card-header">
+                <h3>System Status</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-sm">API Connection</span>
+                  <span class="status-badge status-success">Connected</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Database</span>
+                  <span class="status-badge status-success">Online</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Model Queue</span>
+                  <span class="status-badge status-success">Ready</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Last Updated</span>
+                  <span class="text-sm">{{ lastUpdate }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Results & Visualization -->
+          <div class="lg:col-span-2">
+            <!-- Tabs -->
+            <div class="tabs">
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'results' }"
+                @click="activeTab = 'results'"
+              >
+                <i class="ph ph-chart-line"></i> Results
+              </div>
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'charts' }"
+                @click="activeTab = 'charts'"
+              >
+                <i class="ph ph-chart-bar"></i> Visualization
+              </div>
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'logs' }"
+                @click="activeTab = 'logs'"
+              >
+                <i class="ph ph-terminal"></i> Logs
+              </div>
+              <div
+                class="tab"
+                :class="{ active: activeTab === 'patients' }"
+                @click="activeTab = 'patients'"
+              >
+                <i class="ph ph-users"></i> Patients
+              </div>
+            </div>
+
+            <!-- Results Tab -->
+            <div v-if="activeTab === 'results'" class="space-y-6">
+              <!-- KPI Cards -->
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card kpi-card">
+                  <div class="kpi-label">Best Model</div>
+                  <div class="kpi-value">{{ kpi.model || '-' }}</div>
+                  <p class="text-xs text-tertiary">Highest confidence</p>
+                </div>
+                <div class="card kpi-card">
+                  <div class="kpi-label">Risk Level</div>
+                  <div class="kpi-value" :class="riskClass">{{ kpi.risk || '-' }}</div>
+                  <p class="text-xs text-tertiary">Weighted assessment</p>
+                </div>
+                <div class="card kpi-card">
+                  <div class="kpi-label">Confidence</div>
+                  <div class="kpi-value">{{ kpi.confidence || '-' }}</div>
+                  <p class="text-xs text-tertiary">Model certainty</p>
+                </div>
+                <div class="card kpi-card">
+                  <div class="kpi-label">SOFA Total</div>
+                  <div class="kpi-value">{{ kpi.sofa || '-' }}</div>
+                  <p class="text-xs text-tertiary">Latest score</p>
+                </div>
+              </div>
+
+              <!-- Detailed Results -->
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Reasoning -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3>Prediction Reasoning</h3>
+                  </div>
+                  <div class="log-panel" style="min-height: 200px;">
+                    <div v-if="result.reasoning" class="log-entry">
+                      {{ result.reasoning }}
+                    </div>
+                    <div v-else class="text-center p-8 text-tertiary">
+                      <i class="ph ph-file-text" style="font-size: 3rem;"></i>
+                      <p class="mt-4">No prediction results yet</p>
+                      <p class="text-sm">Run a prediction to see detailed reasoning</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Model Details for Single Mode / Comparison for Auto Mode -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 v-if="mode === 'single'">Model Details</h3>
+                    <h3 v-else-if="mode === 'auto'">Model Comparison</h3>
+                    <h3 v-else>Model Information</h3>
+                  </div>
+                  <div class="space-y-2">
+                    <!-- Single Mode: Show model confidence and details -->
+                    <div v-if="mode === 'single'" class="space-y-4">
+                      <div v-if="kpi.model && kpi.model !== '-'" class="p-4 bg-tertiary rounded">
+                        <div class="font-medium mb-2">Selected Model</div>
+                        <div class="text-lg">{{ kpi.model }}</div>
+                        <div class="text-sm text-tertiary mt-1">Confidence: {{ kpi.confidence || 'N/A' }}</div>
+                      </div>
+                      <div v-if="kpi.risk && kpi.risk !== '-'" class="p-4 bg-tertiary rounded">
+                        <div class="font-medium mb-2">Risk Assessment</div>
+                        <div class="text-lg" :class="riskClass">{{ kpi.risk }}</div>
+                        <div class="text-sm text-tertiary mt-1">Based on patient data and intervention</div>
+                      </div>
+                      <div v-if="kpi.sofa && kpi.sofa !== '-'" class="p-4 bg-tertiary rounded">
+                        <div class="font-medium mb-2">Latest SOFA Score</div>
+                        <div class="text-lg">{{ kpi.sofa }}</div>
+                        <div class="text-sm text-tertiary mt-1">Monitor for changes over time</div>
+                      </div>
+                    </div>
+
+                    <!-- Auto Mode: Show model comparison -->
+                    <div v-else-if="mode === 'auto'">
+                      <div
+                        v-for="(modelResult, index) in result.modelResults"
+                        :key="index"
+                        class="flex items-center justify-between p-3 bg-tertiary rounded"
+                      >
+                        <div>
+                          <div class="font-medium">{{ modelResult.model }}</div>
+                          <div class="text-sm text-tertiary">Score: {{ modelResult.score }}</div>
+                        </div>
+                        <div class="status-badge" :class="getRiskClass(modelResult.risk)">
+                          {{ modelResult.risk }}
+                        </div>
+                      </div>
+                      <div v-if="!result.modelResults?.length" class="text-center p-8 text-tertiary">
+                        <i class="ph ph-chart-bar" style="font-size: 3rem;"></i>
+                        <p class="mt-4">No model data available</p>
+                      </div>
+                    </div>
+
+                    <!-- Confidence Mode -->
+                    <div v-else class="text-center p-8 text-tertiary">
+                      <i class="ph ph-chart-line" style="font-size: 3rem;"></i>
+                      <p class="mt-4">Confidence evaluation mode</p>
+                      <p class="text-sm">Run confidence evaluation to see model performance metrics</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Charts Tab -->
+            <div v-if="activeTab === 'charts'" class="space-y-6">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3>SOFA Trend</h3>
+                  </div>
+                  <div class="chart-container" id="sofaTrendChart"></div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h3>Component Analysis</h3>
+                  </div>
+                  <div class="chart-container" id="componentChart"></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3>Risk Distribution</h3>
+                </div>
+                <div class="chart-container" id="riskChart"></div>
+              </div>
+            </div>
+
+            <!-- Logs Tab -->
+            <div v-if="activeTab === 'logs'" class="card">
+              <div class="card-header flex justify-between">
+                <h3>System Logs</h3>
+                <button class="btn btn-sm btn-secondary" @click="clearLogs">
+                  <i class="ph ph-trash"></i> Clear
+                </button>
+              </div>
+              <div class="log-panel">
+                <div v-for="(log, index) in logs" :key="index" class="log-entry">
+                  <span class="log-time">{{ log.time }}</span>
+                  <span :class="logClass(log.type)">{{ log.message }}</span>
+                </div>
+                <div v-if="!logs.length" class="text-center p-8 text-tertiary">
+                  No logs yet
+                </div>
+              </div>
+            </div>
+
+            <!-- Patients Tab -->
+            <div v-if="activeTab === 'patients'" class="card">
+              <div class="card-header flex justify-between">
+                <h3>Patient Database</h3>
+                <button class="btn btn-sm btn-primary" @click="loadPatients">
+                  <i class="ph ph-arrow-clockwise"></i> Refresh
+                </button>
+              </div>
+              <div v-if="patientsError" class="p-4 mb-4 bg-danger bg-opacity-10 border border-danger border-opacity-20 rounded">
+                <div class="flex items-center">
+                  <i class="ph ph-warning-circle text-danger mr-2"></i>
+                  <span class="text-sm text-danger">{{ patientsError }}</span>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div v-for="patient in patients" :key="patient.id" class="p-3 border rounded">
+                  <div class="flex justify-between">
+                    <div>
+                      <div class="font-medium">Patient {{ patient.id }}</div>
+                      <div class="text-sm text-tertiary">{{ (patient.input_description || patient.description || '').substring(0, 100) }}...</div>
+                    </div>
+                    <button class="btn btn-sm btn-secondary" @click="loadPatient(patient)">
+                      Load
+                    </button>
+                  </div>
+                </div>
+                <div v-if="!patients.length" class="text-center p-8 text-tertiary">
+                  <i class="ph ph-users" style="font-size: 3rem;"></i>
+                  <p class="mt-4">No patients loaded</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border py-4 mt-8">
+      <div class="container text-center">
+        <p class="text-sm text-tertiary">
+          Sepsis Prediction System v2.0 • Medical AI Research Platform •
+          <span class="text-primary">Not for clinical use</span>
+        </p>
+        <p class="text-xs text-tertiary mt-2">
+          Built with Vue.js • Plotly • FastAPI • Machine Learning Models
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- External Scripts -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Application JavaScript -->
+  <script src="/web_app/app.js"></script>
+
+  <!-- Service Worker Registration (optional) -->
+  <script>
+    // Register service worker for PWA capabilities
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/web_app/service-worker.js').catch(error => {
+          console.log('ServiceWorker registration failed:', error);
+        });
+      });
+    }
+
+    // Ensure styles.css is loaded
+    window.addEventListener('load', () => {
+      const stylesLoaded = Array.from(document.styleSheets).some(sheet =>
+        sheet.href && sheet.href.includes('styles.css')
+      );
+
+      if (!stylesLoaded) {
+        console.warn('styles.css failed to load, applying fallback styles');
+        // Could apply minimal fallback styles here
+      }
+    });
+  </script>
+</body>
+</html>

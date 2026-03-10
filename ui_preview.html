@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sepsis Prediction System - Web Application</title>
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- Vue Router CDN for SPA navigation -->
+  <script src="https://unpkg.com/vue-router@4"></script>
+  <!-- Axios for HTTP requests -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Plotly.js for modern interactive charts -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #1e90ff;
+      --accent-2: #22c55e;
+      --border: #e2e8f0;
+      --shadow: 0 6px 16px rgba(17,24,39,0.10);
+      --font-base: 18px;
+      --font-scale: 2;
+    }
+    html { font-size: calc(var(--font-base) * var(--font-scale)); }
+    body { margin: 0; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; line-height: 1.6; background: radial-gradient(900px 500px at 20% 0%, rgba(30,144,255,0.12), transparent 60%), radial-gradient(900px 500px at 80% 20%, rgba(34,197,94,0.10), transparent 60%), linear-gradient(180deg, #f9fafb, var(--bg)); font-size: 1rem; font-weight: 700; }
+    header { padding: 18px 22px; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2)); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px); display: flex; justify-content: space-between; align-items: center; }
+    h1 { margin: 0; font-size: 1.56rem; font-weight: 800; letter-spacing: 0.2px; line-height: 1.2; }
+    .container { display: grid; grid-template-columns: minmax(600px, 760px) 1fr; gap: 24px; padding: 24px 24px 24px 24px; max-width: 100%; margin: 0; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); }
+    .card .title { padding: 16px 20px; border-bottom: 1px solid var(--border); font-weight: 800; color: var(--text); font-size: 1.11rem; }
+    .card .body.stack { padding: 20px; }
+    label { display: block; margin-bottom: 8px; font-size: 0.89rem; font-weight: 800; color: var(--muted); }
+    input[type="text"], textarea, select { width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: var(--text); border-radius: 10px; padding: 14px 16px; outline: none; font-size: 0.94rem; font-weight: 800; line-height: 1.5; transition: border-color 0.2s ease; box-sizing: border-box; }
+    input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(30,144,255,0.1); }
+    textarea { min-height: 180px; resize: vertical; }
+    .row { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; padding: 13px 20px; border-radius: 12px; font-weight: 800; color: #ffffff; background: linear-gradient(90deg, var(--accent), #60a5fa); box-shadow: 0 4px 10px rgba(30,144,255,0.25); font-size: 0.89rem; transition: transform 0.1s ease, box-shadow 0.1s ease; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(30,144,255,0.3); }
+    .btn:active { transform: translateY(0); }
+    .btn.secondary { background: linear-gradient(90deg, var(--accent-2), #34d399); color: #ffffff; box-shadow: 0 4px 10px rgba(34,197,94,0.25); }
+    .btn.secondary:hover { box-shadow: 0 6px 14px rgba(34,197,94,0.3); }
+    .stack { display: grid; gap: 16px; }
+    .log, .result { white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; min-height: 140px; font-size: 0.83rem; font-weight: 800; line-height: 1.65; color: #334155; }
+    .scrollable-result { max-height: 500px; overflow-y: auto; }
+    .section-title { font-size: 0.89rem; color: var(--muted); margin-bottom: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+    .inline { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .inline input[type="file"] { color: var(--muted); font-size: 0.83rem; font-weight: 800; }
+    canvas, .plotly-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; width: 100%; height: auto; }
+    #sofaLinePlot, #sofaBarPlot { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; width: 100%; height: 400px; }
+    #sofaBarPlot { height: 300px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pill { display:inline-block; padding:8px 14px; border:1px solid #e2e8f0; border-radius:999px; font-size:0.78rem; font-weight: 800; color:var(--muted); background: #ffffff; margin-right: 6px; margin-bottom: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .kpi { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
+    .kpi .item { background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; text-align:center; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+    .kpi .item .label { font-size:0.78rem; color:var(--muted); margin-bottom: 4px; font-weight: 800; }
+    .kpi .item .value { font-size:1.44rem; font-weight: 900; color:#0f172a; letter-spacing: -0.5px; }
+    .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #fff; }
+    .lang-btn { border: none; background: transparent; padding: 8px 14px; cursor: pointer; font-size: 0.78rem; font-weight: 900; color: var(--muted); transition: all 0.2s; }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>{{ appTitle }}</h1>
+      <div class="lang-switch">
+        <button class="lang-btn" :class="{active: currentLang === 'en'}" @click="setLanguage('en')">EN</button>
+        <button class="lang-btn" :class="{active: currentLang === 'zh'}" @click="setLanguage('zh')">中文</button>
+      </div>
+    </header>
+    <main class="container">
+      <!-- Control Panel Card -->
+      <section class="card">
+        <div class="title">{{ i18n.controlPanel }}</div>
+        <div class="body stack">
+          <div class="row">
+            <label for="modeSelect">{{ i18n.runMode }}</label>
+            <select id="modeSelect" v-model="runMode" @change="onModeChange">
+              <option value="single">single</option>
+              <option value="auto">auto</option>
+              <option value="confidence">confidence</option>
+            </select>
+          </div>
+          <div class="inline">
+            <button class="btn secondary" @click="resetSession">{{ i18n.refreshSession }}</button>
+          </div>
+          <div class="row" v-if="runMode !== 'auto'">
+            <label for="modelSelect">{{ i18n.model }}</label>
+            <select id="modelSelect" v-model="selectedModel">
+              <option v-for="model in modelNames" :key="model" :value="model">{{ model }}</option>
+            </select>
+          </div>
+          <div class="row" v-if="runMode === 'auto'">
+            <label>{{ i18n.autoModeModels }}</label>
+            <select v-model="autoModels[0]">
+              <option v-for="model in modelNames" :key="model" :value="model">{{ model }}</option>
+            </select>
+            <select v-model="autoModels[1]" style="margin-top:6px;">
+              <option v-for="model in modelNames" :key="model" :value="model">{{ model }}</option>
+            </select>
+            <select v-model="autoModels[2]" style="margin-top:6px;">
+              <option v-for="model in modelNames" :key="model" :value="model">{{ model }}</option>
+            </select>
+          </div>
+          <div class="row" v-if="runMode !== 'confidence'">
+            <label for="patientText">{{ i18n.patientDesc }}</label>
+            <textarea id="patientText" v-model="patientDescription" :placeholder="i18n.patientPlaceholder"></textarea>
+          </div>
+          <div class="row" v-if="runMode !== 'confidence'">
+            <label for="intervention">{{ i18n.intervention }}</label>
+            <input id="intervention" type="text" v-model="intervention" :placeholder="i18n.interventionPlaceholder" />
+          </div>
+          <div class="inline">
+            <button id="runBtn" class="btn" @click="runPrediction">{{ runButtonText }}</button>
+            <button id="autoNextBtn" class="btn secondary" @click="nextAutoCase" v-if="runMode !== 'confidence'">{{ i18n.nextAutoCase }}</button>
+          </div>
+          <div>
+            <div class="section-title">Navigation</div>
+            <div class="inline">
+              <button class="btn" @click="activeTab = 'logs'">{{ i18n.navLogs }}</button>
+              <button class="btn secondary" @click="activeTab = 'results'">{{ i18n.navResults }}</button>
+              <button class="btn secondary" @click="activeTab = 'charts'">{{ i18n.navCharts }}</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Output Panel Card -->
+      <section class="card">
+        <div class="title">{{ i18n.outputPanel }}</div>
+        <div class="body stack">
+          <!-- Logs Tab -->
+          <div class="tab-content" :class="{active: activeTab === 'logs'}">
+            <div class="section-title">{{ i18n.logs }}</div>
+            <div id="log" class="log">{{ logs }}</div>
+          </div>
+
+          <!-- Results Tab -->
+          <div class="tab-content" :class="{active: activeTab === 'results'}">
+            <div id="bestResultHeader" class="inline" style="justify-content: space-between;">
+              <div class="section-title">{{ i18n.bestResult }}</div>
+              <div class="inline">
+                <input id="fileInput" type="file" accept="application/json" @change="onFileSelected" />
+                <button class="btn secondary" @click="loadSelectedFile">{{ i18n.loadJson }}</button>
+              </div>
+            </div>
+            <div class="kpi" id="kpiPanel">
+              <div class="item"><div class="label">{{ i18n.kpiModel }}</div><div class="value">{{ kpiModel }}</div></div>
+              <div class="item"><div class="label">{{ i18n.kpiResult }}</div><div class="value">{{ kpiConfidence }}</div></div>
+              <div class="item"><div class="label">{{ i18n.kpiRisk }}</div><div class="value">{{ kpiRisk }}</div></div>
+              <div class="item"><div class="label">{{ i18n.kpiSofa }}</div><div class="value">{{ kpiSofa }}</div></div>
+            </div>
+
+            <div id="confidencePanel" v-if="confidenceData" style="margin-top:12px;">
+              <div class="section-title">{{ i18n.trustEval }}</div>
+              <div class="grid" style="grid-template-columns: 1fr 1fr; gap:12px;">
+                <div class="item" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:10px;">
+                  <div class="section-title">{{ i18n.overallMetrics }}</div>
+                  <div class="result">{{ overallMetricsText }}</div>
+                </div>
+                <div class="item" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:10px;">
+                  <div class="section-title">{{ i18n.modelTrust }}</div>
+                  <div class="result">{{ trustScoreText }}</div>
+                </div>
+              </div>
+              <div style="margin-top:12px;">
+                <div class="section-title">{{ i18n.sofaCompMetrics }}</div>
+                <div id="componentMetrics" class="grid" style="grid-template-columns: 1fr 1fr; gap:12px;">
+                  <!-- Component metrics will be populated here -->
+                </div>
+              </div>
+            </div>
+
+            <div class="grid" style="margin-top:10px; grid-template-columns: 1fr 1fr; gap:12px;">
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div id="reasoningSection">
+                  <span class="section-title">{{ i18n.predReason }}</span>
+                  <div id="bestPredictionReasoning" class="result">{{ predictionReasoning }}</div>
+                </div>
+                <div id="featuresSection">
+                  <span class="section-title">{{ i18n.sofaFeatures }}</span>
+                  <div id="features" class="grid"></div>
+                </div>
+              </div>
+              <div id="evaluatorsSection">
+                <span class="section-title">{{ i18n.evalBreakdown }}</span>
+                <div id="bestEvaluators" class="result scrollable-result">{{ evaluatorsText }}</div>
+                <div class="inline" style="margin-top:8px;">
+                  <button class="btn secondary" @click="prevEvaluator">{{ i18n.prevEval }}</button>
+                  <button class="btn secondary" @click="nextEvaluator">{{ i18n.nextEval }}</button>
+                  <button class="btn" @click="activeTab = 'charts'">{{ i18n.viewCharts }}</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="otherModelsSection" style="margin-top:16px;">
+              <span class="section-title">{{ i18n.otherModels }}</span>
+              <div class="inline">
+                <button class="btn" @click="showOtherModels">{{ i18n.viewOther }}</button>
+              </div>
+              <div id="otherModels" class="result" v-if="showOtherModelsSection">{{ otherModelsText }}</div>
+            </div>
+          </div>
+
+          <!-- Charts Tab -->
+          <div class="tab-content" :class="{active: activeTab === 'charts'}">
+            <div class="grid" style="grid-template-columns: 1fr;">
+              <div>
+                <div class="section-title">{{ i18n.sofaTimeChart }}</div>
+                <div id="sofaLinePlot" style="width:100%; height:400px;"></div>
+              </div>
+              <div style="margin-top: 24px;">
+                <div class="section-title">{{ i18n.sofaCompChart }}</div>
+                <div id="sofaBarPlot" style="width:100%; height:300px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const { createApp, ref, computed, onMounted } = Vue;
+
+    const I18N_DATA = {
+      en: {
+        appTitle: 'Sepsis Prediction System',
+        controlPanel: 'Control Panel',
+        runMode: 'Run Mode',
+        refreshSession: 'Refresh Session',
+        model: 'Model',
+        autoModeModels: 'Auto Mode Models',
+        patientDesc: 'Patient Description',
+        patientPlaceholder: 'Paste or type patient summary, vitals, labs…',
+        intervention: 'Intervention',
+        interventionPlaceholder: 'e.g., fluids, norepinephrine, mechanical ventilation…',
+        runBtn: 'Run Prediction',
+        runAuto: 'Run Auto Prediction',
+        runConfidence: 'Run Confidence',
+        nextAutoCase: 'Next Auto Case',
+        navLogs: 'Go to Logs',
+        navResults: 'Go to Results',
+        navCharts: 'Go to Charts',
+        outputPanel: 'Output & Visualization',
+        logs: 'Logs',
+        bestResult: 'Best Result',
+        loadJson: 'Load JSON Preview',
+        kpiModel: 'Best Model',
+        kpiResult: 'Result',
+        kpiRisk: 'Risk Level',
+        kpiSofa: 'SOFA Totals',
+        trustEval: 'Trust Evaluation',
+        overallMetrics: 'Overall Metrics',
+        modelTrust: 'Model Trust Score',
+        sofaCompMetrics: 'SOFA Component Metrics',
+        predReason: 'Prediction Reasoning',
+        sofaFeatures: 'SOFA Related Features',
+        evalBreakdown: 'Evaluators Breakdown',
+        prevEval: 'Prev Evaluator',
+        nextEval: 'Next Evaluator',
+        viewCharts: 'View Charts',
+        otherModels: 'Other Models',
+        viewOther: 'View Other Models',
+        sofaTimeChart: 'SOFA Total Over Time (Intervention vs No Intervention)',
+        sofaCompChart: 'SOFA Component Scores (Last)',
+        noReasoning: 'No reasoning available.',
+        noEvaluator: 'No evaluator details.',
+        noFeatures: 'No features available.',
+        noOther: 'No alternative results yet.'
+      },
+      zh: {
+        appTitle: '脓毒症预测系统',
+        controlPanel: '控制面板',
+        runMode: '运行模式',
+        refreshSession: '重置会话',
+        model: '模型选择',
+        autoModeModels: '自动模式模型',
+        patientDesc: '患者描述',
+        patientPlaceholder: '粘贴或输入患者摘要、生命体征、实验室数据...',
+        intervention: '干预措施',
+        interventionPlaceholder: '例如：输液、去甲肾上腺素、机械通气...',
+        runBtn: '运行预测',
+        runAuto: '运行自动预测',
+        runConfidence: '运行置信度评估',
+        nextAutoCase: '下一个自动案例',
+        navLogs: '查看日志',
+        navResults: '查看结果',
+        navCharts: '查看图表',
+        outputPanel: '输出与可视化',
+        logs: '系统日志',
+        bestResult: '最佳结果',
+        loadJson: '加载 JSON 预览',
+        kpiModel: '最佳模型',
+        kpiResult: '结果置信度',
+        kpiRisk: '风险等级',
+        kpiSofa: 'SOFA 总分',
+        trustEval: '信任评估',
+        overallMetrics: '总体指标',
+        modelTrust: '模型信任分',
+        sofaCompMetrics: 'SOFA 组件指标',
+        predReason: '预测推理',
+        sofaFeatures: 'SOFA 相关特征',
+        evalBreakdown: '评估详情',
+        prevEval: '上一个评估者',
+        nextEval: '下一个评估者',
+        viewCharts: '查看图表',
+        otherModels: '其他模型',
+        viewOther: '查看其他模型结果',
+        sofaTimeChart: 'SOFA 总分随时间变化 (干预 vs 无干预)',
+        sofaCompChart: 'SOFA 组件得分 (最新)',
+        noReasoning: '暂无推理内容。',
+        noEvaluator: '暂无评估详情。',
+        noFeatures: '暂无特征数据。',
+        noOther: '暂无其他结果。'
+      }
+    };
+
+    createApp({
+      setup() {
+        // Reactive state
+        const currentLang = ref('en');
+        const runMode = ref('single');
+        const selectedModel = ref('');
+        const autoModels = ref(['', '', '']);
+        const patientDescription = ref('');
+        const intervention = ref('');
+        const activeTab = ref('logs');
+        const logs = ref('Ready.');
+        const kpiModel = ref('-');
+        const kpiConfidence = ref('-');
+        const kpiRisk = ref('-');
+        const kpiSofa = ref('-');
+        const confidenceData = ref(null);
+        const overallMetricsText = ref('-');
+        const trustScoreText = ref('-');
+        const predictionReasoning = ref('');
+        const evaluatorsText = ref('');
+        const showOtherModelsSection = ref(false);
+        const otherModelsText = ref('');
+        const modelNames = ref([]);
+        const lastResult = ref(null);
+        const currentEvals = ref([]);
+        const currentEvalIndex = ref(0);
+
+        // Computed properties
+        const i18n = computed(() => I18N_DATA[currentLang.value] || I18N_DATA.en);
+        const appTitle = computed(() => i18n.value.appTitle);
+        const runButtonText = computed(() => {
+          const t = i18n.value;
+          if (runMode.value === 'auto') return t.runAuto;
+          if (runMode.value === 'confidence') return t.runConfidence;
+          return t.runBtn;
+        });
+
+        // Methods
+        const setLanguage = (lang) => {
+          currentLang.value = lang;
+        };
+
+        const onModeChange = () => {
+          // Update UI based on mode
+        };
+
+        const resetSession = async () => {
+          try {
+            const response = await axios.post('/api/reset');
+            if (response.data.status === 'ok') {
+              patientDescription.value = '';
+              intervention.value = '';
+              kpiModel.value = '-';
+              kpiConfidence.value = '-';
+              kpiRisk.value = '-';
+              kpiSofa.value = '-';
+              logs.value = 'Ready.';
+              predictionReasoning.value = '';
+              evaluatorsText.value = '';
+              showOtherModelsSection.value = false;
+              confidenceData.value = null;
+              overallMetricsText.value = '-';
+              trustScoreText.value = '-';
+              appendLog('Session reset: UI cleared');
+            }
+          } catch (error) {
+            appendLog('Reset failed: ' + error.message);
+            alert('Reset failed: ' + error.message);
+          }
+        };
+
+        const appendLog = (text) => {
+          logs.value = (logs.value ? logs.value + '\n' : '') + text;
+        };
+
+        const runPrediction = async () => {
+          appendLog(`Starting ${runMode.value} prediction...`);
+
+          try {
+            let response;
+            if (runMode.value === 'single') {
+              response = await axios.post('/api/run_single', {
+                model: selectedModel.value,
+                input_description: patientDescription.value,
+                intervention: intervention.value
+              });
+            } else if (runMode.value === 'auto') {
+              response = await axios.post('/api/run_auto', {
+                models: autoModels.value,
+                input_description: patientDescription.value,
+                intervention: intervention.value
+              });
+            } else if (runMode.value === 'confidence') {
+              response = await axios.post('/api/confidence', {
+                model: selectedModel.value
+              });
+            }
+
+            if (response.data) {
+              handlePredictionResult(response.data);
+              activeTab.value = 'results';
+            }
+          } catch (error) {
+            appendLog('Prediction failed: ' + error.message);
+            console.error(error);
+          }
+        };
+
+        const handlePredictionResult = (result) => {
+          lastResult.value = result;
+
+          // Update KPI
+          kpiModel.value = result.prediction_model || '-';
+          kpiConfidence.value = result.total_confidence !== undefined ? result.total_confidence.toFixed(2) : '-';
+          kpiRisk.value = result.final_weighted_risk_level || '-';
+
+          // Extract SOFA totals
+          if (result.prediction_data && result.prediction_data.hourly_sofa_totals) {
+            const totals = Object.values(result.prediction_data.hourly_sofa_totals);
+            kpiSofa.value = totals.length > 0 ? totals[totals.length - 1] : '-';
+          } else {
+            kpiSofa.value = '-';
+          }
+
+          // Update prediction reasoning
+          if (result.prediction_data && result.prediction_data.prediction_reasoning) {
+            predictionReasoning.value = result.prediction_data.prediction_reasoning;
+          } else {
+            predictionReasoning.value = i18n.value.noReasoning;
+          }
+
+          // Update evaluators
+          if (result.evaluator_scores) {
+            const evalText = Object.entries(result.evaluator_scores)
+              .map(([model, score]) => `${model}: ${score}`)
+              .join('\n');
+            evaluatorsText.value = evalText;
+          } else {
+            evaluatorsText.value = i18n.value.noEvaluator;
+          }
+
+          // Draw charts
+          drawSofaLine(result);
+          drawSOFABar(result);
+
+          appendLog(`${runMode.value} prediction completed successfully.`);
+        };
+
+        const drawSofaLine = (result) => {
+          const container = document.getElementById('sofaLinePlot');
+          if (!container) return;
+
+          // Extract data from result
+          const hourly = (result.prediction_data && result.prediction_data.hourly_sofa_totals) || result.hourly_sofa_totals || {};
+          const baseline = result.baseline_sofa_totals || null;
+
+          // Prepare data for Plotly (simplified version)
+          const hours = Object.keys(hourly).map(k => parseInt(k)).sort((a,b) => a - b);
+          const interventionValues = hours.map(k => +hourly[k] || 0);
+          const baselineValues = baseline ? hours.map(k => +baseline[k] || 0) : [];
+
+          const traces = [];
+
+          if (hours.length > 0 && interventionValues.length > 0) {
+            traces.push({
+              x: hours,
+              y: interventionValues,
+              mode: 'lines+markers',
+              name: 'Intervention',
+              line: { color: '#1E88E5', width: 3 },
+              marker: { size: 8, color: '#1E88E5' }
+            });
+          }
+
+          if (baselineValues.length > 0) {
+            traces.push({
+              x: hours,
+              y: baselineValues,
+              mode: 'lines+markers',
+              name: 'Baseline',
+              line: { color: '#43A047', width: 2, dash: 'dash' },
+              marker: { size: 6, color: '#43A047', symbol: 'diamond' }
+            });
+          }
+
+          const layout = {
+            title: 'SOFA Total Over Time',
+            xaxis: { title: 'Time (hours)' },
+            yaxis: { title: 'SOFA Score' },
+            plot_bgcolor: '#FFFFFF',
+            paper_bgcolor: '#FFFFFF'
+          };
+
+          Plotly.newPlot(container, traces, layout, { responsive: true });
+        };
+
+        const drawSOFABar = (result) => {
+          const container = document.getElementById('sofaBarPlot');
+          if (!container) return;
+
+          // Extract SOFA component scores
+          let sofaScores = null;
+          if (result.prediction_data && result.prediction_data.predicted_sofa_scores) {
+            sofaScores = result.prediction_data.predicted_sofa_scores;
+          } else if (result.predicted_sofa_scores) {
+            sofaScores = result.predicted_sofa_scores;
+          }
+
+          if (!sofaScores) {
+            // Create empty plot
+            Plotly.newPlot(container, [], { title: 'SOFA Component Scores' }, { responsive: true });
+            return;
+          }
+
+          // Get the last time point
+          const components = ['sofa_respiration', 'sofa_coagulation', 'sofa_liver', 'sofa_cardiovascular', 'sofa_cns', 'sofa_renal'];
+          const labels = ['Respiration', 'Coagulation', 'Liver', 'Cardiovascular', 'CNS', 'Renal'];
+
+          const lastScores = {};
+          components.forEach(comp => {
+            const scores = sofaScores[comp];
+            if (scores && scores.length > 0) {
+              lastScores[comp] = scores[scores.length - 1];
+            } else {
+              lastScores[comp] = 0;
+            }
+          });
+
+          const trace = {
+            x: labels,
+            y: components.map(comp => lastScores[comp]),
+            type: 'bar',
+            marker: { color: '#1E88E5' }
+          };
+
+          const layout = {
+            title: 'SOFA Component Scores (Latest)',
+            xaxis: { title: 'Component' },
+            yaxis: { title: 'Score', range: [0, 4] },
+            plot_bgcolor: '#FFFFFF',
+            paper_bgcolor: '#FFFFFF'
+          };
+
+          Plotly.newPlot(container, [trace], layout, { responsive: true });
+        };
+
+        const nextAutoCase = async () => {
+          try {
+            const response = await axios.get('/api/next_auto_case');
+            if (response.data && response.data.input_description) {
+              patientDescription.value = response.data.input_description;
+              intervention.value = '';
+              appendLog('Loaded next auto case.');
+            } else {
+              appendLog('No more auto cases available.');
+            }
+          } catch (error) {
+            appendLog('Failed to load next auto case: ' + error.message);
+          }
+        };
+
+        const onFileSelected = (event) => {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            try {
+              const result = JSON.parse(e.target.result);
+              handlePredictionResult(result);
+              appendLog('Loaded result from file: ' + file.name);
+            } catch (error) {
+              appendLog('Failed to parse JSON file: ' + error.message);
+            }
+          };
+          reader.readAsText(file);
+        };
+
+        const loadSelectedFile = () => {
+          const fileInput = document.getElementById('fileInput');
+          if (fileInput.files.length > 0) {
+            onFileSelected({ target: { files: fileInput.files } });
+          } else {
+            appendLog('No file selected.');
+          }
+        };
+
+        const prevEvaluator = () => {
+          if (currentEvals.value.length > 0) {
+            currentEvalIndex.value = (currentEvalIndex.value - 1 + currentEvals.value.length) % currentEvals.value.length;
+            updateEvaluatorDisplay();
+          }
+        };
+
+        const nextEvaluator = () => {
+          if (currentEvals.value.length > 0) {
+            currentEvalIndex.value = (currentEvalIndex.value + 1) % currentEvals.value.length;
+            updateEvaluatorDisplay();
+          }
+        };
+
+        const updateEvaluatorDisplay = () => {
+          // Update evaluator display based on current index
+          // This is a simplified version
+        };
+
+        const showOtherModels = () => {
+          showOtherModelsSection.value = !showOtherModelsSection.value;
+          if (showOtherModelsSection.value && lastResult.value && lastResult.value.per_model_risk) {
+            otherModelsText.value = lastResult.value.per_model_risk
+              .map(item => `${item.model}: ${item.risk_level} (${item.risk_score})`)
+              .join('\n');
+          } else {
+            otherModelsText.value = i18n.value.noOther;
+          }
+        };
+
+        // Initialize
+        onMounted(async () => {
+          try {
+            // Load model names
+            const response = await axios.get('/api/models');
+            modelNames.value = response.data.models || [];
+            if (modelNames.value.length > 0) {
+              selectedModel.value = modelNames.value[0];
+              autoModels.value = modelNames.value.slice(0, 3);
+            }
+            appendLog('Application initialized.');
+          } catch (error) {
+            // Fallback to default models
+            modelNames.value = ["gemma3:12b", "mistral:7b", "qwen3:4b", "qwen3:30b", "deepseek-r1:32b", "medllama2:latest"];
+            selectedModel.value = modelNames.value[0];
+            autoModels.value = modelNames.value.slice(0, 3);
+            appendLog('Using default models (API not available).');
+          }
+        });
+
+        return {
+          // State
+          currentLang,
+          runMode,
+          selectedModel,
+          autoModels,
+          patientDescription,
+          intervention,
+          activeTab,
+          logs,
+          kpiModel,
+          kpiConfidence,
+          kpiRisk,
+          kpiSofa,
+          confidenceData,
+          overallMetricsText,
+          trustScoreText,
+          predictionReasoning,
+          evaluatorsText,
+          showOtherModelsSection,
+          otherModelsText,
+          modelNames,
+
+          // Computed
+          i18n,
+          appTitle,
+          runButtonText,
+
+          // Methods
+          setLanguage,
+          onModeChange,
+          resetSession,
+          runPrediction,
+          nextAutoCase,
+          onFileSelected,
+          loadSelectedFile,
+          prevEvaluator,
+          nextEvaluator,
+          showOtherModels
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

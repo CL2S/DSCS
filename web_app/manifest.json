@@ -1,0 +1,71 @@
+{
+  "name": "Sepsis Prediction System",
+  "short_name": "Sepsis Predict",
+  "description": "AI-powered predictive analytics for sepsis risk assessment and intervention planning",
+  "version": "2.0.0",
+  "version_name": "2.0.0",
+  "lang": "en-US",
+  "dir": "ltr",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "start_url": "/",
+  "categories": ["medical", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230ea5e9'/><text x='50' y='65' font-family='Arial' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>S</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230ea5e9'/><text x='50' y='65' font-family='Arial' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>S</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230ea5e9'/><text x='50' y='65' font-family='Arial' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>S</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Prediction",
+      "short_name": "Predict",
+      "description": "Start a new sepsis risk prediction",
+      "url": "/?mode=single",
+      "icons": [{
+        "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2310b981'/><text x='50' y='65' font-family='Arial' font-size='40' font-weight='bold' text-anchor='middle' fill='white'>+</text></svg>",
+        "sizes": "96x96"
+      }]
+    },
+    {
+      "name": "Patient Database",
+      "short_name": "Patients",
+      "description": "Browse patient database",
+      "url": "/?tab=patients",
+      "icons": [{
+        "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%238b5cf6'/><text x='50' y='65' font-family='Arial' font-size='40' font-weight='bold' text-anchor='middle' fill='white'>👥</text></svg>",
+        "sizes": "96x96"
+      }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'><rect width='1200' height='800' fill='%230f172a'/><rect x='50' y='50' width='1100' height='700' rx='20' fill='%231e293b'/><text x='600' y='150' font-family='Arial' font-size='60' font-weight='bold' text-anchor='middle' fill='white'>Sepsis Prediction System</text><text x='600' y='230' font-family='Arial' font-size='30' text-anchor='middle' fill='%2394a3b8'>Medical AI Dashboard</text><rect x='100' y='300' width='400' height='400' rx='15' fill='%23334155'/><rect x='550' y='300' width='550' height='400' rx='15' fill='%23334155'/><text x='300' y='350' font-family='Arial' font-size='24' font-weight='bold' text-anchor='middle' fill='white'>Control Panel</text><text x='825' y='350' font-family='Arial' font-size='24' font-weight='bold' text-anchor='middle' fill='white'>Visualization</text></svg>",
+      "sizes": "1200x800",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Desktop Dashboard"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "protocol_handlers": [],
+  "display_override": ["window-controls-overlay", "minimal-ui"]
+}

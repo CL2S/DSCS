@@ -1,0 +1,99 @@
+统一命令行与图形界面使用说明（Sepsis Prediction & Evaluation）
+
+一、环境准备
+- 推荐使用 conda 并导入 `environment.yml`：
+  conda env create -f environment.yml
+  conda activate sepsis-eval
+- 若仅命令行运行，确保安装必需依赖：
+  pip install dspy-ai matplotlib
+- 若使用评估（Ollama），确保本地可用并配置模型。
+
+二、图形界面（GUI）与网页界面
+- 有图形环境下直接运行：
+  python3 main.py
+  无需任何命令行参数；所有模式选择与输入均在界面内完成。
+- 如果图形环境不可用，程序会自动切换到网页界面（Web GUI）：
+  启动后终端会显示访问地址，例如：
+  Web GUI 已启动：请打开 http://0.0.0.0:<port>/ui_preview.html
+  默认端口为 8000，若占用会自动改用系统分配端口。
+- 手动启动网页界面：
+  python3 main.py --web --web-port 8000
+  也可以通过环境变量指定端口：WEB_PORT=8000 python3 main.py --web
+- 如果希望强制使用命令行：
+  python3 main.py --cli --help
+
+三、命令行（CLI）总入口：main.py
+- 查看帮助：
+  python3 main.py --cli --help
+- 无参数时进入交互式向导：
+  在无图形环境或仅执行 `python3 main.py --cli` 时，将进入命令行交互模式，按提示选择模式并逐步输入患者描述、干预及模型。
+
+支持的模式与所需输入：
+1) single（单次预测并评估）
+- 必需：`--input` 患者描述
+- 可选：`--model` 模型名称，默认取列表首项；`--intervention` 干预文本
+- 示例：
+  python3 main.py --cli --mode single --model gemma3:12b \
+    --input "Patient 30117609..." \
+    --intervention "Start norepinephrine infusion at 0.2 ug/kg/min"
+- 输出：
+  ./output/<model>/<patient_id>_<ts>.json（原始预测）
+  ./best_prediction_result_<patient_id>_<ts>.json（简化结果）
+
+2) auto（三模型自动轮换选优）
+- 必需：`--input` 患者描述；`--intervention` 干预文本
+- 可选：`--models` 三个模型（不提供则使用默认前三个）
+- 示例：
+  python3 main.py --cli --mode auto --models gemma3:12b mistral:7b qwen3:4b \
+    --input "Patient 30117609..." \
+    --intervention "Start norepinephrine infusion at 0.2 ug/kg/min"
+- 行为：
+  3个模型轮流作为预测者，其余两者评估；综合信任与评估置信度选择最佳。
+- 输出：
+  ./best_prediction_result_<patient_id>_<ts>.json（最佳结果简化版）
+
+3) confidence（事实预测与信任评估）
+- 无需输入参数；数据源默认 `./icu_stays_descriptions88.json`
+- 示例：
+  python3 main.py --cli --mode confidence
+- 行为：
+  运行 fact_prediction.py 的批处理，计算并保存模型信任度。
+- 输出：
+  ./output/Model_Trust_Score.json 等报告文件（若模块已启用）
+
+4) batch（批量自动处理三模型轮换）
+- 可选：`--data-file` 指定病例JSON（默认 ./icu_stays_descriptions88.json）
+- 必需：`--intervention` 统一干预文本
+- 可选：`--models` 三个模型
+- 示例：
+  python3 main.py --cli --mode batch --data-file ./icu_stays_descriptions88.json --models gemma3:12b mistral:7b qwen3:4b \
+    --intervention "Start norepinephrine infusion at 0.2 ug/kg/min"
+- 输出：
+  针对每个病例，生成 ./best_prediction_result_<patient_id>_<ts>.json
+
+四、其它脚本
+- sofa_prediction_main.py：交互（interactive）与批量（batch）仅用于SOFA评估流程：
+  python3 sofa_prediction_main.py --mode interactive
+  python3 sofa_prediction_main.py --mode batch
+- fact_prediction.py：事实预测与信任评分批量执行：
+  python3 fact_prediction.py
+
+五、GUI与CLI对应的输入控件说明
+- GUI 模式：
+  - Run Mode 下拉：single / auto / confidence
+  - single：模型下拉、患者描述输入框、干预输入框
+  - auto：三个模型下拉、患者描述输入框、干预输入框
+  - confidence：无需患者输入，直接运行事实预测与信任评估
+- CLI 模式：
+  - single：`--model`、`--input`、`--intervention`
+  - auto：`--models`（三个）、`--input`、`--intervention`
+  - confidence：无输入
+  - batch：`--data-file`、`--models`（三个）、`--intervention`
+
+六、常见问题
+- 错误“Error: No graphical environment detected...”：使用 `--cli` 模式运行。
+- 缺少 dspy-ai：安装 `pip install dspy-ai` 或启用 conda 环境。
+- Ollama 不可用：评估与置信度提取可能失败，先配置/启动 Ollama。
+
+七、模型列表修改
+- 在 `fact_prediction.py` 或 `main.py` 顶部的 `MODEL_NAMES` 中修改。

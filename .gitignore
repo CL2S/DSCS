@@ -1,0 +1,29 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.DS_Store
+
+# Local tooling / editor
+.claude/
+.vscode/
+
+# Data / outputs (too large / generated)
+output/
+test_output/
+vital_signs_plots/
+output_abalation/
+
+ai_clinician_dataset.csv
+ollama-linux-amd64.tgz
+bin/
+lib/
+
+*.db
+*.log
+
+# Optional generated artifacts
+knowledge_base_v1.json

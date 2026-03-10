@@ -1,0 +1,2738 @@
+[
+  {
+    "patient_info": {
+      "age": 43,
+      "gender": "男性",
+      "weight": 71.4,
+      "stay_id": 30117609,
+      "subject_id": 14413751
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为5.0μg·kg⁻¹·min⁻¹，根据血压反应调整至最大12.56μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        5.0,
+        0.03,
+        0.03,
+        0.03,
+        0.04,
+        6.25,
+        6.25,
+        12.56,
+        12.56,
+        12.56,
+        12.5,
+        12.5,
+        5.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 56,
+      "gender": "男性",
+      "weight": 87.05,
+      "stay_id": 30315020,
+      "subject_id": 11992186
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为5.0μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        5.0,
+        5.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        7,
+        5,
+        9,
+        9
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 34,
+      "gender": "男性",
+      "weight": 100.0,
+      "stay_id": 30717105,
+      "subject_id": 17744715
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.34μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.1,
+        0.1,
+        0.06,
+        0.09,
+        0.11,
+        0.3,
+        0.34,
+        0.32,
+        0.31,
+        0.24,
+        0.18,
+        0.14,
+        0.1
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        15,
+        13,
+        15,
+        19,
+        13,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 60,
+      "gender": "男性",
+      "weight": 95.0,
+      "stay_id": 30835026,
+      "subject_id": 11670720
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        7,
+        6,
+        6,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 72,
+      "gender": "男性",
+      "weight": 96.5,
+      "stay_id": 30861515,
+      "subject_id": 11699026
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        5,
+        4,
+        8,
+        5,
+        11,
+        11
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 49,
+      "gender": "男性",
+      "weight": 97.95,
+      "stay_id": 30893431,
+      "subject_id": 12214410
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.3μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.35,
+        0.25,
+        0.2,
+        0.08,
+        0.16,
+        0.14,
+        0.08,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.35
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        10,
+        7,
+        6,
+        5,
+        14,
+        13,
+        13
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 48,
+      "gender": "男性",
+      "weight": 138.0,
+      "stay_id": 30983281,
+      "subject_id": 11501310
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为12.5μg·kg⁻¹·min⁻¹，根据血压反应调整至最大25.95μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        12.54,
+        12.54,
+        12.54,
+        12.54,
+        12.53,
+        12.53,
+        12.53,
+        12.54,
+        12.54,
+        12.54,
+        25.95,
+        25.87,
+        12.54
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 63,
+      "gender": "男性",
+      "weight": 69.0,
+      "stay_id": 31149608,
+      "subject_id": 16155910
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为15.0μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        15.01,
+        15.01,
+        15.01,
+        0.18,
+        0.18,
+        0.12,
+        0.12,
+        0.16,
+        0.16,
+        0.16,
+        0.08,
+        0.04,
+        15.01
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        8,
+        4,
+        13,
+        13
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 58,
+      "gender": "女性",
+      "weight": 122.6,
+      "stay_id": 31613211,
+      "subject_id": 18084435
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.2μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.2,
+        0.2,
+        0.16,
+        0.1,
+        0.08,
+        0.08,
+        0.04,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        1,
+        11,
+        11
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 48,
+      "gender": "男性",
+      "weight": 93.9,
+      "stay_id": 31703381,
+      "subject_id": 19338519
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        8,
+        4,
+        6,
+        6,
+        14,
+        14
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 49,
+      "gender": "女性",
+      "weight": 77.7,
+      "stay_id": 32026706,
+      "subject_id": 19948815
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.4μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.4,
+        0.25,
+        0.1,
+        0.05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        11,
+        5,
+        7,
+        10,
+        12,
+        21,
+        21
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 42,
+      "gender": "女性",
+      "weight": 80.48571428571428,
+      "stay_id": 32092423,
+      "subject_id": 19670665
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        10,
+        10,
+        4,
+        4,
+        7,
+        13,
+        13
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 73,
+      "gender": "男性",
+      "weight": 86.13333333333333,
+      "stay_id": 32115504,
+      "subject_id": 14851532
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.0μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.06μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        0.03,
+        0.03,
+        0.05,
+        0.05,
+        0.06,
+        0.06,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 47,
+      "gender": "男性",
+      "weight": 64.55,
+      "stay_id": 32154852,
+      "subject_id": 12653149
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        8,
+        4,
+        4,
+        6,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 65,
+      "gender": "女性",
+      "weight": 60.8,
+      "stay_id": 32675591,
+      "subject_id": 18455034
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.06μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.05,
+        0.03,
+        0.03,
+        0.01,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.06,
+        0.04,
+        0.01,
+        0.05
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 28,
+      "gender": "男性",
+      "weight": 116.7,
+      "stay_id": 32759002,
+      "subject_id": 19425678
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        10.0,
+        5.03,
+        4.03,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.0,
+        3.0,
+        3.0,
+        2.0,
+        3.0,
+        10.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        7,
+        7,
+        4,
+        4,
+        7,
+        22,
+        22
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 67,
+      "gender": "男性",
+      "weight": 71.25,
+      "stay_id": 33413826,
+      "subject_id": 12626414
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        6,
+        5,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 66,
+      "gender": "男性",
+      "weight": 90.1,
+      "stay_id": 33491471,
+      "subject_id": 10165963
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.1μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.11,
+        0.11,
+        0.03,
+        0.03,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.11
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        9,
+        6,
+        5,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 52,
+      "gender": "女性",
+      "weight": 123.5,
+      "stay_id": 33547152,
+      "subject_id": 14785272
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为15.0μg·kg⁻¹·min⁻¹，根据血压反应调整至最大20.06μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        15.02,
+        20.06,
+        15.01,
+        15.01,
+        6.35,
+        6.25,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        0.18,
+        0.21,
+        15.02
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        17,
+        17
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 84,
+      "gender": "男性",
+      "weight": 92.2,
+      "stay_id": 33560183,
+      "subject_id": 14807966
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        6,
+        6
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 73,
+      "gender": "男性",
+      "weight": 62.5,
+      "stay_id": 33582866,
+      "subject_id": 11573077
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 77,
+      "gender": "女性",
+      "weight": 69.1,
+      "stay_id": 33815212,
+      "subject_id": 18034595
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.18μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.1,
+        0.1,
+        0.07,
+        0.18,
+        0.18,
+        0.18,
+        0.18,
+        0.18,
+        0.16,
+        0.14,
+        0.08,
+        0.1,
+        0.1
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        18,
+        18
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 67,
+      "gender": "女性",
+      "weight": 91.1,
+      "stay_id": 33872424,
+      "subject_id": 15468987
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为1.0μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        1.01,
+        1.01,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.01
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        6,
+        6,
+        5,
+        5,
+        8,
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 53,
+      "gender": "男性",
+      "weight": 91.5,
+      "stay_id": 34009410,
+      "subject_id": 16452899
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.3μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.28,
+        0.24,
+        0.14,
+        0.27,
+        0.14,
+        0.05,
+        0.05,
+        0.05,
+        0.03,
+        0.05,
+        0.0,
+        0.0,
+        0.28
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        6,
+        4,
+        4,
+        6,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 54,
+      "gender": "男性",
+      "weight": 63.9,
+      "stay_id": 34069747,
+      "subject_id": 15756685
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 79,
+      "gender": "男性",
+      "weight": 95.0,
+      "stay_id": 34177992,
+      "subject_id": 10826816
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.12μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.05,
+        0.12,
+        0.08,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        7,
+        9,
+        9
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 29,
+      "gender": "女性",
+      "weight": 86.4,
+      "stay_id": 34850631,
+      "subject_id": 10301071
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        14,
+        14
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 44,
+      "gender": "男性",
+      "weight": 83.0,
+      "stay_id": 34913842,
+      "subject_id": 14808044
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 58,
+      "gender": "男性",
+      "weight": 67.3,
+      "stay_id": 35013074,
+      "subject_id": 13363301
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        10,
+        4,
+        4,
+        6,
+        5,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 66,
+      "gender": "男性",
+      "weight": 121.85,
+      "stay_id": 35055081,
+      "subject_id": 10165963
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        15,
+        15,
+        15,
+        15,
+        16,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 34,
+      "gender": "男性",
+      "weight": 92.8,
+      "stay_id": 35176357,
+      "subject_id": 11692822
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.0μg·kg⁻¹·min⁻¹，根据血压反应调整至最大6.20μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.03,
+        6.2,
+        0.03,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.03
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 34,
+      "gender": "女性",
+      "weight": 77.3,
+      "stay_id": 35195734,
+      "subject_id": 17777745
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        7,
+        7
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 57,
+      "gender": "男性",
+      "weight": 64.53333333333335,
+      "stay_id": 35288241,
+      "subject_id": 17103757
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        6,
+        6,
+        13,
+        13
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 62,
+      "gender": "女性",
+      "weight": 84.41666666666667,
+      "stay_id": 35481394,
+      "subject_id": 10981725
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.15μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.07,
+        0.07,
+        0.03,
+        0.03,
+        0.0,
+        0.0,
+        0.1,
+        0.15,
+        0.05,
+        0.05,
+        0.04,
+        0.04,
+        0.07
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        7,
+        6,
+        14,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 44,
+      "gender": "男性",
+      "weight": 89.0,
+      "stay_id": 35689140,
+      "subject_id": 11861582
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大1.25μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.1,
+        0.13,
+        0.15,
+        0.16,
+        0.15,
+        0.13,
+        0.07,
+        0.0,
+        0.0,
+        0.08,
+        1.25,
+        0.25,
+        0.1
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        11,
+        11
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 32,
+      "gender": "女性",
+      "weight": 87.0,
+      "stay_id": 35695492,
+      "subject_id": 19444153
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        5,
+        6,
+        4,
+        8,
+        6,
+        9,
+        9
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 63,
+      "gender": "男性",
+      "weight": 128.0,
+      "stay_id": 35947626,
+      "subject_id": 10546885
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.2μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.24,
+        0.22,
+        0.12,
+        0.1,
+        0.03,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.24
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        5,
+        5,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 70,
+      "gender": "女性",
+      "weight": 65.0,
+      "stay_id": 35967288,
+      "subject_id": 11169912
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.3μg·kg⁻¹·min⁻¹，根据血压反应调整至最大37.49μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.3,
+        18.76,
+        37.49,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        9,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 77,
+      "gender": "男性",
+      "weight": 66.56666666666668,
+      "stay_id": 36231647,
+      "subject_id": 11094046
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.1μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.1,
+        0.1,
+        0.1,
+        0.08,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        6,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 53,
+      "gender": "男性",
+      "weight": 91.0,
+      "stay_id": 36336444,
+      "subject_id": 10050532
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        1,
+        2,
+        1,
+        9,
+        0,
+        4,
+        4
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 53,
+      "gender": "女性",
+      "weight": 49.5,
+      "stay_id": 36354239,
+      "subject_id": 13878384
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.12μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.1,
+        0.12,
+        0.12,
+        0.12,
+        0.08,
+        0.04,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        14,
+        14
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 54,
+      "gender": "女性",
+      "weight": 65.0,
+      "stay_id": 36407392,
+      "subject_id": 16974695
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 76,
+      "gender": "女性",
+      "weight": 77.0,
+      "stay_id": 36413466,
+      "subject_id": 19374686
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        5,
+        4,
+        4,
+        9,
+        9
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 58,
+      "gender": "女性",
+      "weight": 65.56315789473683,
+      "stay_id": 36478727,
+      "subject_id": 11622905
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        5,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 23,
+      "gender": "男性",
+      "weight": 101.0,
+      "stay_id": 36538885,
+      "subject_id": 10846707
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 68,
+      "gender": "男性",
+      "weight": 118.0,
+      "stay_id": 36582896,
+      "subject_id": 13073326
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        9,
+        13,
+        13
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 30,
+      "gender": "男性",
+      "weight": 109.6,
+      "stay_id": 36823688,
+      "subject_id": 10354450
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.1μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.08,
+        0.08,
+        0.07,
+        0.05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.08
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 74,
+      "gender": "男性",
+      "weight": 75.6,
+      "stay_id": 36952026,
+      "subject_id": 11216370
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.5μg·kg⁻¹·min⁻¹，根据血压反应调整至最大50.38μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.5,
+        50.38,
+        50.38,
+        0.43,
+        0.34,
+        0.26,
+        15.68,
+        0.15,
+        0.05,
+        0.11,
+        0.15,
+        0.25,
+        0.5
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 60,
+      "gender": "男性",
+      "weight": 88.1,
+      "stay_id": 36959670,
+      "subject_id": 19321849
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为12.1μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        12.06,
+        3.99,
+        2.97,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        12.06
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        5,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 71,
+      "gender": "女性",
+      "weight": 62.7,
+      "stay_id": 37075482,
+      "subject_id": 10068474
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为50.0μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        49.95,
+        0.32,
+        0.32,
+        0.27,
+        0.16,
+        0.12,
+        0.08,
+        0.1,
+        0.06,
+        0.05,
+        0.0,
+        0.0,
+        49.95
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        9,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 47,
+      "gender": "女性",
+      "weight": 99.21333333333332,
+      "stay_id": 37270813,
+      "subject_id": 12108578
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.3μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.36μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.3,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.14,
+        0.36,
+        0.36,
+        0.05,
+        0.03,
+        0.3
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        8,
+        6,
+        12,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 70,
+      "gender": "男性",
+      "weight": 105.9,
+      "stay_id": 37766106,
+      "subject_id": 10306412
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.2μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.2,
+        0.05,
+        0.05,
+        0.2,
+        0.1,
+        0.05,
+        0.05,
+        0.05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 57,
+      "gender": "男性",
+      "weight": 83.6,
+      "stay_id": 37984140,
+      "subject_id": 15155386
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为6.3μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        6.26,
+        0.51,
+        0.41,
+        0.2,
+        0.2,
+        0.2,
+        0.18,
+        0.15,
+        0.08,
+        0.02,
+        0.0,
+        0.0,
+        6.26
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        11,
+        12,
+        4,
+        11,
+        7,
+        9,
+        9
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 73,
+      "gender": "男性",
+      "weight": 94.5,
+      "stay_id": 38118363,
+      "subject_id": 17396841
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.2μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.2,
+        0.2,
+        0.2,
+        0.19,
+        0.06,
+        0.03,
+        0.03,
+        0.06,
+        0.06,
+        0.08,
+        0.08,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 37,
+      "gender": "男性",
+      "weight": 101.6,
+      "stay_id": 38128269,
+      "subject_id": 11595691
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 52,
+      "gender": "男性",
+      "weight": 90.0,
+      "stay_id": 38138760,
+      "subject_id": 14333149
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.1μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.1,
+        0.05,
+        0.06,
+        0.1,
+        0.06,
+        0.08,
+        0.06,
+        0.02,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        6,
+        6,
+        8,
+        11,
+        11
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 57,
+      "gender": "男性",
+      "weight": 88.5,
+      "stay_id": 38229486,
+      "subject_id": 15552515
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.3μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.3,
+        0.25,
+        0.0,
+        0.0,
+        0.0,
+        0.08,
+        0.18,
+        0.18,
+        0.15,
+        0.12,
+        0.0,
+        0.0,
+        0.3
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        12,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 44,
+      "gender": "女性",
+      "weight": 133.0,
+      "stay_id": 38256954,
+      "subject_id": 18405236
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.1μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.08,
+        0.08,
+        0.03,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.08
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        9,
+        9
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 54,
+      "gender": "男性",
+      "weight": 122.5,
+      "stay_id": 38293345,
+      "subject_id": 19619252
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        6,
+        4,
+        14,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 59,
+      "gender": "男性",
+      "weight": 80.0,
+      "stay_id": 38322114,
+      "subject_id": 19705230
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.2μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+        0.22,
+        0.2,
+        0.15,
+        0.08,
+        0.03,
+        0.0,
+        0.0,
+        0.0,
+        0.25
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 69,
+      "gender": "男性",
+      "weight": 66.29999999999998,
+      "stay_id": 38372527,
+      "subject_id": 10884861
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为15.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        14.96,
+        0.19,
+        0.1,
+        0.08,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        14.96
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        9,
+        5,
+        5,
+        14,
+        19,
+        19
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 58,
+      "gender": "男性",
+      "weight": 113.4,
+      "stay_id": 38432543,
+      "subject_id": 15782813
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为12.5μg·kg⁻¹·min⁻¹，根据血压反应调整至最大47.67μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        12.51,
+        38.33,
+        38.33,
+        38.01,
+        37.59,
+        37.59,
+        25.25,
+        25.19,
+        31.57,
+        47.67,
+        47.67,
+        37.96,
+        12.51
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        16,
+        16
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 52,
+      "gender": "女性",
+      "weight": 84.73333333333333,
+      "stay_id": 38442306,
+      "subject_id": 16258114
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        15,
+        15
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 60,
+      "gender": "男性",
+      "weight": 91.35,
+      "stay_id": 38673044,
+      "subject_id": 11186225
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.5μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.48,
+        0.48,
+        0.48,
+        0.46,
+        0.27,
+        0.16,
+        0.16,
+        0.15,
+        0.1,
+        0.07,
+        0.03,
+        0.0,
+        0.48
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        5,
+        9,
+        16,
+        13,
+        14,
+        14,
+        14
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 64,
+      "gender": "男性",
+      "weight": 83.7,
+      "stay_id": 38817112,
+      "subject_id": 13182275
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.1μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.25μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.05,
+        0.0,
+        0.0,
+        0.25,
+        0.06,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 55,
+      "gender": "女性",
+      "weight": 69.2,
+      "stay_id": 38839114,
+      "subject_id": 11172546
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.3μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.3,
+        0.3,
+        0.25,
+        0.28,
+        0.25,
+        0.18,
+        0.15,
+        0.12,
+        0.0,
+        0.0,
+        0.05,
+        0.08,
+        0.3
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        9,
+        9,
+        5,
+        5,
+        13,
+        13,
+        13
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 54,
+      "gender": "男性",
+      "weight": 133.7391304347826,
+      "stay_id": 38854605,
+      "subject_id": 12017639
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为30.1μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        30.05,
+        0.35,
+        0.37,
+        0.37,
+        0.37,
+        0.3,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.34,
+        0.26,
+        30.05
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 50,
+      "gender": "女性",
+      "weight": 55.6,
+      "stay_id": 38937052,
+      "subject_id": 16170098
+    },
+    "expert_intervention": {
+      "description": "无血管活性药物干预措施，建议密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        3,
+        5,
+        12,
+        12
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 57,
+      "gender": "男性",
+      "weight": 91.1,
+      "stay_id": 38948720,
+      "subject_id": 13411236
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为0.1μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.1,
+        0.05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        6,
+        6,
+        6,
+        13,
+        13
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 67,
+      "gender": "男性",
+      "weight": 93.0,
+      "stay_id": 39452059,
+      "subject_id": 10613163
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，初始剂量为0.0μg·kg⁻¹·min⁻¹，根据血压反应调整至最大0.04μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.04,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 62,
+      "gender": "男性",
+      "weight": 90.7,
+      "stay_id": 39657585,
+      "subject_id": 18463949
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为2.0μg·kg⁻¹·min⁻¹，剂量调整间隔4小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        2.0,
+        2.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        5,
+        4,
+        10,
+        10
+      ]
+    }
+  },
+  {
+    "patient_info": {
+      "age": 19,
+      "gender": "男性",
+      "weight": 73.0,
+      "stay_id": 39816062,
+      "subject_id": 17911943
+    },
+    "expert_intervention": {
+      "description": "立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+      "vasopressor_doses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        10.01,
+        10.01,
+        10.01,
+        9.96,
+        9.97,
+        9.97,
+        9.97,
+        9.97,
+        0.0
+      ]
+    },
+    "sofa_score_changes": {
+      "sofa_totals": [
+        4,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4
+      ]
+    }
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "test_timestamp": "2025-10-28 17:18:23",
+  "test_patient": {
+    "patient_id": "TEST_001",
+    "age": 65,
+    "gender": "M",
+    "admission_diagnosis": "脓毒症",
+    "current_vitals": {
+      "temperature": 38.5,
+      "heart_rate": 110,
+      "blood_pressure": "90/60",
+      "respiratory_rate": 24,
+      "oxygen_saturation": 92
+    },
+    "lab_results": {
+      "white_blood_cells": 15000,
+      "lactate": 3.2,
+      "procalcitonin": 2.5,
+      "creatinine": 1.8,
+      "bilirubin": 2.1,
+      "platelet": 120000
+    },
+    "clinical_notes": "患者入院时出现发热、心动过速、低血压等脓毒症症状，血培养阳性，目前正在接受抗生素治疗和液体复苏。"
+  },
+  "error": "'str' object has no attribute 'get'",
+  "error_type": "AttributeError"
+}

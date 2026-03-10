@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Septic Shock Prediction & Evaluation (Preview)</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #1e90ff;
+      --accent-2: #22c55e;
+      --border: #e2e8f0;
+      --shadow: 0 6px 16px rgba(17,24,39,0.10);
+      --font-base: 18px;
+      --font-scale: 2;
+    }
+    html { font-size: calc(var(--font-base) * var(--font-scale)); }
+    body { margin: 0; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; line-height: 1.6; background: radial-gradient(900px 500px at 20% 0%, rgba(30,144,255,0.12), transparent 60%), radial-gradient(900px 500px at 80% 20%, rgba(34,197,94,0.10), transparent 60%), linear-gradient(180deg, #f9fafb, var(--bg)); font-size: 1rem; font-weight: 700; }
+    header { padding: 18px 22px; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2)); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px); display: flex; justify-content: space-between; align-items: center; }
+    h1 { margin: 0; font-size: 1.56rem; font-weight: 800; letter-spacing: 0.2px; line-height: 1.2; }
+    .container { display: grid; grid-template-columns: minmax(600px, 760px) 1fr; gap: 24px; padding: 24px 24px 24px 24px; max-width: 100%; margin: 0; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); }
+    .card .title { padding: 16px 20px; border-bottom: 1px solid var(--border); font-weight: 800; color: var(--text); font-size: 1.11rem; }
+    .card .body.stack { padding: 20px; }
+    label { display: block; margin-bottom: 8px; font-size: 0.89rem; font-weight: 800; color: var(--muted); }
+    input[type="text"], textarea, select { width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: var(--text); border-radius: 10px; padding: 14px 16px; outline: none; font-size: 0.94rem; font-weight: 800; line-height: 1.5; transition: border-color 0.2s ease; box-sizing: border-box; }
+    input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(30,144,255,0.1); }
+    textarea { min-height: 180px; resize: vertical; }
+    .row { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; padding: 13px 20px; border-radius: 12px; font-weight: 800; color: #ffffff; background: linear-gradient(90deg, var(--accent), #60a5fa); box-shadow: 0 4px 10px rgba(30,144,255,0.25); font-size: 0.89rem; transition: transform 0.1s ease, box-shadow 0.1s ease; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(30,144,255,0.3); }
+    .btn:active { transform: translateY(0); }
+    .btn.secondary { background: linear-gradient(90deg, var(--accent-2), #34d399); color: #ffffff; box-shadow: 0 4px 10px rgba(34,197,94,0.25); }
+    .btn.secondary:hover { box-shadow: 0 6px 14px rgba(34,197,94,0.3); }
+    .stack { display: grid; gap: 16px; }
+    .log, .result { white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; min-height: 140px; font-size: 0.83rem; font-weight: 800; line-height: 1.65; color: #334155; }
+    .scrollable-result { max-height: 500px; overflow-y: auto; }
+    .section-title { font-size: 0.89rem; color: var(--muted); margin-bottom: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+    .inline { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .inline input[type="file"] { color: var(--muted); font-size: 0.83rem; font-weight: 800; }
+    canvas, .plotly-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; width: 100%; height: auto; }
+    #sofaLinePlot, #sofaBarPlot { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; width: 100%; height: 400px; }
+    #sofaBarPlot { height: 300px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pill { display:inline-block; padding:8px 14px; border:1px solid #e2e8f0; border-radius:999px; font-size:0.78rem; font-weight: 800; color:var(--muted); background: #ffffff; margin-right: 6px; margin-bottom: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .kpi { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
+    .kpi .item { background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; text-align:center; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+    .kpi .item .label { font-size:0.78rem; color:var(--muted); margin-bottom: 4px; font-weight: 800; }
+    .kpi .item .value { font-size:1.44rem; font-weight: 900; color:#0f172a; letter-spacing: -0.5px; }
+    .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #fff; }
+    .lang-btn { border: none; background: transparent; padding: 8px 14px; cursor: pointer; font-size: 0.78rem; font-weight: 900; color: var(--muted); transition: all 0.2s; }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+  </style>
+  <!-- Plotly.js for modern interactive charts -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <header>
+    <h1 id="appTitle">Septic Shock Prediction & Evaluation (Preview)</h1>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btnEn" type="button">EN</button>
+    </div>
+  </header>
+  <main class="container">
+    <section class="card">
+      <div class="title" data-i18n="controlPanel">Control Panel</div>
+      <div class="body stack">
+        <div class="row">
+          <label for="modeSelect" data-i18n="runMode">Run Mode</label>
+          <select id="modeSelect">
+            <option value="single" selected>single</option>
+            <option value="auto">auto</option>
+            <option value="confidence">confidence</option>
+          </select>
+        </div>
+        <div class="inline">
+          <button class="btn secondary" onclick="resetSession()" data-i18n="refreshSession">Refresh Session</button>
+        </div>
+        <div class="row" id="singleModelRow">
+          <label for="modelSelect" data-i18n="model">Model</label>
+          <select id="modelSelect"></select>
+        </div>
+        <div class="row" id="autoModelRows" style="display:none;">
+          <label data-i18n="autoModeModels">Auto Mode Models</label>
+          <select id="autoModel1"></select>
+          <select id="autoModel2" style="margin-top:6px;"></select>
+          <select id="autoModel3" style="margin-top:6px;"></select>
+        </div>
+        <div class="row" id="patientRow">
+          <label for="patientText" data-i18n="patientDesc">Patient Description</label>
+          <textarea id="patientText" placeholder="Paste or type patient summary, vitals, labs…" data-i18n-placeholder="patientPlaceholder"></textarea>
+        </div>
+        <div class="row" id="interventionRow">
+          <label for="intervention" data-i18n="intervention">Intervention</label>
+          <input id="intervention" type="text" placeholder="e.g., fluids, norepinephrine, mechanical ventilation…" data-i18n-placeholder="interventionPlaceholder" />
+        </div>
+        <div class="inline">
+          <button id="runBtn" class="btn" onclick="simulateRun()" data-i18n="runBtn">Run Prediction (preview)</button>
+          <button id="autoNextBtn" class="btn secondary" onclick="nextAutoCase()" data-i18n="nextAutoCase">Next Auto Case</button>
+        </div>
+        <div>
+          <div class="section-title">Navigation</div>
+          <div class="inline">
+            <button class="btn" onclick="showTab('logs')" data-i18n="navLogs">Go to Logs</button>
+            <button class="btn secondary" onclick="showTab('results')" data-i18n="navResults">Go to Results</button>
+            <button class="btn secondary" onclick="showTab('charts')" data-i18n="navCharts">Go to Charts</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="title" data-i18n="outputPanel">Output & Visualization</div>
+      <div class="body stack">
+        <div id="tab-logs">
+          <div class="section-title" data-i18n="logs">Logs</div>
+          <div id="log" class="log">Ready.</div>
+        </div>
+        <div id="tab-results" style="display:none;">
+          <div id="bestResultHeader" class="inline" style="justify-content: space-between;">
+            <div class="section-title" data-i18n="bestResult">Best Result</div>
+            <div class="inline">
+              <input id="fileInput" type="file" accept="application/json" />
+              <button class="btn secondary" onclick="loadSelectedFile()" data-i18n="loadJson">Load JSON Preview</button>
+            </div>
+          </div>
+          <div class="kpi" id="kpiPanel">
+            <div class="item"><div class="label" data-i18n="kpiModel">Best Model</div><div class="value" id="kpiModel">-</div></div>
+            <div class="item"><div class="label" data-i18n="kpiResult">Result</div><div class="value" id="kpiConfidence">-</div></div>
+            <div class="item"><div class="label" data-i18n="kpiRisk">Risk Level</div><div class="value" id="kpiRisk">-</div></div>
+            <div class="item"><div class="label" data-i18n="kpiSofa">SOFA Totals</div><div class="value" id="kpiSofa">-</div></div>
+          </div>
+
+          <div id="confidencePanel" style="display:none; margin-top:12px;">
+            <div class="section-title" data-i18n="trustEval">Trust Evaluation</div>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap:12px;">
+              <div class="item" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:10px;">
+                <div class="section-title" data-i18n="overallMetrics">Overall Metrics</div>
+                <div class="result" id="overallMetrics">-</div>
+              </div>
+              <div class="item" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:10px;">
+                <div class="section-title" data-i18n="modelTrust">Model Trust Score</div>
+                <div class="result" id="trustScore">-</div>
+              </div>
+            </div>
+            <div style="margin-top:12px;">
+              <div class="section-title" data-i18n="sofaCompMetrics">SOFA Component Metrics</div>
+              <div id="componentMetrics" class="grid" style="grid-template-columns: 1fr 1fr; gap:12px;"></div>
+            </div>
+          </div>
+
+          <div class="grid" style="margin-top:10px; grid-template-columns: 1fr 1fr; gap:12px;">
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div id="reasoningSection">
+                <span class="section-title" data-i18n="predReason">Prediction Reasoning</span>
+                <div id="bestPredictionReasoning" class="result"></div>
+              </div>
+              <div id="featuresSection">
+                <span class="section-title" data-i18n="sofaFeatures">SOFA Related Features</span>
+                <div id="features" class="grid"></div>
+              </div>
+            </div>
+            <div id="evaluatorsSection">
+              <span class="section-title" data-i18n="evalBreakdown">Evaluators Breakdown</span>
+              <div id="bestEvaluators" class="result scrollable-result"></div>
+              <div class="inline" style="margin-top:8px;">
+                <button class="btn secondary" onclick="prevEvaluator()" data-i18n="prevEval">Prev Evaluator</button>
+                <button class="btn secondary" onclick="nextEvaluator()" data-i18n="nextEval">Next Evaluator</button>
+                <button class="btn" onclick="showTab('charts')" data-i18n="viewCharts">View Charts</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="otherModelsSection" style="margin-top:16px;">
+            <span class="section-title" data-i18n="otherModels">Other Models</span>
+            <div class="inline">
+              <button class="btn" onclick="showOtherModels()" data-i18n="viewOther">View Other Models</button>
+            </div>
+            <div id="otherModels" class="result" style="display:none;">No alternative results yet.</div>
+          </div>
+        </div>
+        <div id="tab-charts" style="display:none;">
+          <div class="grid" style="grid-template-columns: 1fr;">
+            <div>
+              <div class="section-title" data-i18n="sofaTimeChart">SOFA Total Over Time (Intervention vs No Intervention)</div>
+              <div id="sofaLinePlot" style="width:100%; height:400px;"></div>
+            </div>
+            <div style="margin-top: 24px;">
+              <div class="section-title" data-i18n="sofaCompChart">SOFA Component Scores (Last)</div>
+              <div id="sofaBarPlot" style="width:100%; height:300px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let MODEL_NAMES = [];
+    let DEFAULT_AUTO = [];
+    let CURRENT_EVALS = [];
+    let CURRENT_EVAL_INDEX = 0;
+    let LAST_RESULT = null;
+    let CURRENT_LANG = 'en';
+
+    const I18N = {
+      en: {
+        appTitle: 'Septic Shock Prediction & Evaluation (Preview)',
+        controlPanel: 'Control Panel',
+        runMode: 'Run Mode',
+        refreshSession: 'Refresh Session',
+        model: 'Model',
+        autoModeModels: 'Auto Mode Models',
+        patientDesc: 'Patient Description',
+        patientPlaceholder: 'Paste or type patient summary, vitals, labs…',
+        intervention: 'Intervention',
+        interventionPlaceholder: 'e.g., fluids, norepinephrine, mechanical ventilation…',
+        runBtn: 'Run Prediction (preview)',
+        runAuto: 'Run Auto Prediction',
+        runConfidence: 'Run Confidence',
+        nextAutoCase: 'Next Auto Case',
+        navLogs: 'Go to Logs',
+        navResults: 'Go to Results',
+        navCharts: 'Go to Charts',
+        outputPanel: 'Output & Visualization',
+        logs: 'Logs',
+        bestResult: 'Best Result',
+        loadJson: 'Load JSON Preview',
+        kpiModel: 'Best Model',
+        kpiResult: 'Result',
+        kpiRisk: 'Risk Level',
+        kpiSofa: 'SOFA Totals',
+        trustEval: 'Trust Evaluation',
+        overallMetrics: 'Overall Metrics',
+        modelTrust: 'Model Trust Score',
+        sofaCompMetrics: 'SOFA Component Metrics',
+        predReason: 'Prediction Reasoning',
+        sofaFeatures: 'SOFA Related Features',
+        evalBreakdown: 'Evaluators Breakdown',
+        prevEval: 'Prev Evaluator',
+        nextEval: 'Next Evaluator',
+        viewCharts: 'View Charts',
+        otherModels: 'Other Models',
+        viewOther: 'View Other Models',
+        sofaTimeChart: 'SOFA Total Over Time (Intervention vs No Intervention)',
+        sofaCompChart: 'SOFA Component Scores (Last)',
+        noReasoning: 'No reasoning available.',
+        noEvaluator: 'No evaluator details.',
+        noFeatures: 'No features available.',
+        noOther: 'No alternative results yet.',
+        modelOutput: 'Model Output',
+        evaluator: 'Evaluator',
+        score: 'Score',
+        trustWeight: 'Trust Weight',
+        weighted: 'Weighted'
+      },
+      zh: {
+        appTitle: '脓毒性休克预测与评估 (预览版)',
+        controlPanel: '控制面板',
+        runMode: '运行模式',
+        refreshSession: '重置会话',
+        model: '模型选择',
+        autoModeModels: '自动模式模型',
+        patientDesc: '患者描述',
+        patientPlaceholder: '粘贴或输入患者摘要、生命体征、实验室数据...',
+        intervention: '干预措施',
+        interventionPlaceholder: '例如：输液、去甲肾上腺素、机械通气...',
+        runBtn: '运行预测 (预览)',
+        runAuto: '运行自动预测',
+        runConfidence: '运行置信度评估',
+        nextAutoCase: '下一个自动案例',
+        navLogs: '查看日志',
+        navResults: '查看结果',
+        navCharts: '查看图表',
+        outputPanel: '输出与可视化',
+        logs: '系统日志',
+        bestResult: '最佳结果',
+        loadJson: '加载 JSON 预览',
+        kpiModel: '最佳模型',
+        kpiResult: '结果置信度',
+        kpiRisk: '风险等级',
+        kpiSofa: 'SOFA 总分',
+        trustEval: '信任评估',
+        overallMetrics: '总体指标',
+        modelTrust: '模型信任分',
+        sofaCompMetrics: 'SOFA 组件指标',
+        predReason: '预测推理',
+        sofaFeatures: 'SOFA 相关特征',
+        evalBreakdown: '评估详情',
+        prevEval: '上一个评估者',
+        nextEval: '下一个评估者',
+        viewCharts: '查看图表',
+        otherModels: '其他模型',
+        viewOther: '查看其他模型结果',
+        sofaTimeChart: 'SOFA 总分随时间变化 (干预 vs 无干预)',
+        sofaCompChart: 'SOFA 组件得分 (最新)',
+        noReasoning: '暂无推理内容。',
+        noEvaluator: '暂无评估详情。',
+        noFeatures: '暂无特征数据。',
+        noOther: '暂无其他结果。',
+        modelOutput: '模型输出',
+        evaluator: '评估者',
+        score: '得分',
+        trustWeight: '信任权重',
+        weighted: '加权分'
+      }
+    };
+
+    function setLanguage(lang) {
+      CURRENT_LANG = 'en';
+      document.getElementById('btnEn').classList.add('active');
+      
+      const t = I18N.en;
+      document.getElementById('appTitle').textContent = t.appTitle;
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key]) el.placeholder = t[key];
+      });
+      
+      onModeChange(); // Refresh button text
+      if (LAST_RESULT) {
+         renderFeatures(LAST_RESULT.sofa_related_features || {}); // Refresh features text if needed
+         renderEvaluator(); // Refresh evaluator labels
+      }
+      
+      // Update charts
+      try {
+        const data = LAST_RESULT || {};
+        const hourly = (data.prediction_data && data.prediction_data.hourly_sofa_totals) || data.hourly_sofa_totals || {};
+        const baseline = data.baseline_sofa_totals || null;
+        drawSofaLine(hourly, baseline);
+        
+        let sofaScores = null;
+        if (data.prediction_data && data.prediction_data.predicted_sofa_scores) {
+          sofaScores = data.prediction_data.predicted_sofa_scores;
+        } else if (data.predicted_sofa_scores) {
+          sofaScores = data.predicted_sofa_scores;
+        } else if (data.prediction_data && data.prediction_data.prediction && data.prediction_data.prediction.sofa_scores) {
+          sofaScores = data.prediction_data.prediction.sofa_scores;
+        }
+        drawSOFABar(sofaScores || {});
+      } catch(_) {}
+    }
+
+    async function apiFetch(url, method = 'GET', data = null) {
+      const opts = { method, headers: {} };
+      if (data) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(data); }
+      const res = await fetch(url, opts);
+      const txt = await res.text();
+      let json = null; try { json = JSON.parse(txt); } catch (_) { json = { error: 'invalid_json', raw: txt }; }
+      if (!res.ok) throw new Error(json && json.error ? json.error : ('HTTP ' + res.status));
+      return json;
+    }
+
+    async function init() {
+      const sel = document.getElementById('modelSelect');
+      const a1 = document.getElementById('autoModel1');
+      const a2 = document.getElementById('autoModel2');
+      const a3 = document.getElementById('autoModel3');
+      try {
+        const { models } = await apiFetch('/api/models');
+        MODEL_NAMES = Array.isArray(models) ? models : [];
+      } catch (_) {
+        MODEL_NAMES = ["gemma3:12b","mistral:7b","qwen3:4b","qwen3:30b","deepseek-r1:32b","medllama2:latest"];
+      }
+      DEFAULT_AUTO = MODEL_NAMES.slice(0, 3);
+      [sel, a1, a2, a3].forEach(s => { s.innerHTML = ''; MODEL_NAMES.forEach(m => { const o = document.createElement('option'); o.value = m; o.textContent = m; s.appendChild(o); }); });
+      sel.value = MODEL_NAMES[0] || '';
+      a1.value = DEFAULT_AUTO[0] || '';
+      a2.value = DEFAULT_AUTO[1] || '';
+      a3.value = DEFAULT_AUTO[2] || '';
+      const modeSel = document.getElementById('modeSelect');
+      modeSel.addEventListener('change', onModeChange);
+      onModeChange();
+      drawSofaLine({}, null);
+      drawSOFABar({});
+    }
+
+    function onModeChange() {
+      const mode = document.getElementById('modeSelect').value;
+      const singleRow = document.getElementById('singleModelRow');
+      const autoRows = document.getElementById('autoModelRows');
+      const patientRow = document.getElementById('patientRow');
+      const interventionRow = document.getElementById('interventionRow');
+      const runBtn = document.getElementById('runBtn');
+      const autoNextBtn = document.getElementById('autoNextBtn');
+      const t = I18N[CURRENT_LANG] || I18N.en;
+
+      if (mode === 'auto') {
+        singleRow.style.display = 'none';
+        autoRows.style.display = 'block';
+        patientRow.style.display = 'block';
+        interventionRow.style.display = 'block';
+        runBtn.textContent = t.runAuto;
+        autoNextBtn.style.display = 'inline-flex';
+      } else if (mode === 'confidence') {
+        singleRow.style.display = 'block';
+        autoRows.style.display = 'none';
+        patientRow.style.display = 'none';
+        interventionRow.style.display = 'none';
+        runBtn.textContent = t.runConfidence;
+        autoNextBtn.style.display = 'none';
+      } else {
+        singleRow.style.display = 'block';
+        autoRows.style.display = 'none';
+        patientRow.style.display = 'block';
+        interventionRow.style.display = 'block';
+        runBtn.textContent = t.runBtn;
+        autoNextBtn.style.display = 'inline-flex';
+      }
+    }
+
+    async function resetSession() {
+      try {
+        await apiFetch('/api/reset');
+        document.getElementById('patientText').value = '';
+        document.getElementById('intervention').value = '';
+        document.getElementById('kpiModel').textContent = '-';
+        document.getElementById('kpiConfidence').textContent = '-';
+        document.getElementById('kpiRisk').textContent = '-';
+        document.getElementById('kpiSofa').textContent = '-';
+        const elLog = document.getElementById('log');
+        elLog.textContent = 'Ready.';
+        const elReason = document.getElementById('bestPredictionReasoning');
+        if (elReason) elReason.textContent = '';
+        const elEval = document.getElementById('bestEvaluators');
+        if (elEval) elEval.textContent = '';
+        const elOther = document.getElementById('otherModels');
+        if (elOther) {
+           const t = I18N[CURRENT_LANG] || I18N.en;
+           elOther.textContent = t.noOther; 
+           elOther.style.display = 'none'; 
+        }
+        const elFeatures = document.getElementById('features');
+        if (elFeatures) elFeatures.innerHTML = '';
+        const elConfidencePanel = document.getElementById('confidencePanel');
+        if (elConfidencePanel) { elConfidencePanel.style.display = 'none'; }
+        const elOverall = document.getElementById('overallMetrics');
+        if (elOverall) elOverall.textContent = '-';
+        const elTrust = document.getElementById('trustScore');
+        if (elTrust) elTrust.textContent = '-';
+        drawSofaLine({}, null);
+        drawSOFABar({});
+        appendLog('Session reset: UI cleared');
+      } catch (err) {
+        appendLog('Reset failed: ' + err.message);
+        alert('Reset failed: ' + err.message);
+      }
+    }
+
+    function showTab(name) {
+      document.getElementById('tab-logs').style.display = (name==='logs')?'block':'none';
+      document.getElementById('tab-results').style.display = (name==='results')?'block':'none';
+      document.getElementById('tab-charts').style.display = (name==='charts')?'block':'none';
+    }
+
+    function appendLog(text) {
+      const log = document.getElementById('log');
+      log.textContent = (log.textContent ? log.textContent + '\n' : '') + text;
+    }
+
+    function drawSofaLine(interventionTotals, baselineTotals) {
+      const container = document.getElementById('sofaLinePlot');
+      if (!container) return;
+
+      // Prepare data
+      const hours = Object.keys(interventionTotals || {}).map(k => parseInt(k)).sort((a,b)=>a-b);
+      const interventionValues = hours.map(k => +interventionTotals[k] || 0);
+      const baselineValues = baselineTotals ? hours.map(k => +baselineTotals[k] || 0) : [];
+
+      // Medical theme colors
+      const medicalTheme = {
+        primary: '#1E88E5',  // Professional blue
+        secondary: '#43A047', // Life green
+        accent: '#FF7043',   // Alert orange
+        neutral: '#78909C',  // Neutral gray
+        gridColor: '#E0E0E0',
+        backgroundColor: '#FFFFFF',
+        textColor: '#212121'
+      };
+
+      const traces = [];
+
+      // Intervention trace
+      if (hours.length > 0 && interventionValues.length > 0) {
+        traces.push({
+          x: hours,
+          y: interventionValues,
+          mode: 'lines+markers',
+          name: 'Intervention',
+          line: {
+            color: medicalTheme.primary,
+            width: 3,
+            shape: 'linear'
+          },
+          marker: {
+            size: 8,
+            color: medicalTheme.primary
+          },
+          hovertemplate: 'Hour: %{x}<br>SOFA: %{y}<extra></extra>'
+        });
+      }
+
+      // Baseline trace
+      if (baselineValues.length > 0) {
+        traces.push({
+          x: hours,
+          y: baselineValues,
+          mode: 'lines+markers',
+          name: 'Baseline',
+          line: {
+            color: medicalTheme.secondary,
+            width: 2,
+            dash: 'dash',
+            shape: 'linear'
+          },
+          marker: {
+            size: 6,
+            color: medicalTheme.secondary,
+            symbol: 'diamond'
+          },
+          hovertemplate: 'Hour: %{x}<br>Baseline SOFA: %{y}<extra></extra>'
+        });
+      }
+
+      const layout = {
+        title: {
+          text: 'SOFA Total Over Time',
+          font: {
+            size: 16,
+            color: medicalTheme.textColor
+          },
+          x: 0.5,
+          xanchor: 'center'
+        },
+        xaxis: {
+          title: 'Time (hours)',
+          gridcolor: medicalTheme.gridColor,
+          linecolor: medicalTheme.neutral,
+          tickfont: {
+            size: 12
+          },
+          showgrid: true,
+          zeroline: false
+        },
+        yaxis: {
+          title: 'SOFA Score',
+          gridcolor: medicalTheme.gridColor,
+          linecolor: medicalTheme.neutral,
+          tickfont: {
+            size: 12
+          },
+          range: [0, Math.max(4, ...interventionValues, ...baselineValues) * 1.1 || 4],
+          showgrid: true,
+          zeroline: false
+        },
+        plot_bgcolor: medicalTheme.backgroundColor,
+        paper_bgcolor: medicalTheme.backgroundColor,
+        font: {
+          family: 'Arial, Helvetica, sans-serif',
+          color: medicalTheme.textColor
+        },
+        hovermode: 'x unified',
+        legend: {
+          x: 0.01,
+          y: 0.99,
+          xanchor: 'left',
+          yanchor: 'top',
+          bgcolor: 'rgba(255,255,255,0.8)',
+          bordercolor: medicalTheme.gridColor,
+          borderwidth: 1
+        },
+        margin: {
+          l: 60,
+          r: 30,
+          b: 50,
+          t: 60,
+          pad: 10
+        }
+      };
+
+      const config = {
+        responsive: true,
+        displayModeBar: true,
+        displaylogo: false,
+        modeBarButtonsToRemove: ['sendDataToCloud', 'autoScale2d', 'resetScale2d'],
+        modeBarButtonsToAdd: ['drawline', 'drawopenpath', 'eraseshape']
+      };
+
+      Plotly.newPlot(container, traces, layout, config);
+    }
+
+    function drawSOFABar(scores) {
+      const container = document.getElementById('sofaBarPlot');
+      if (!container) return;
+
+      // Filter SOFA components
+      const keys = Object.keys(scores).filter(k => k.startsWith('sofa_') && k !== 'sofa_total');
+      const values = keys.map(k => +scores[k] || 0);
+
+      if (keys.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 40px; color: #64748b;">No SOFA component data available</div>';
+        return;
+      }
+
+      // System names mapping
+      const systemNames = {
+        'sofa_respiration': '呼吸系统',
+        'sofa_coagulation': '凝血功能',
+        'sofa_liver': '肝脏功能',
+        'sofa_cardiovascular': '心血管系统',
+        'sofa_cns': '中枢神经系统',
+        'sofa_renal': '肾脏功能'
+      };
+
+      // Medical theme colors (same as in themes.py)
+      const sofaComponentColors = [
+        '#4FC3F7',  // 呼吸系统 - 浅蓝
+        '#7986CB',  // 凝血功能 - 紫蓝
+        '#4DB6AC',  // 肝脏功能 - 青绿
+        '#FFB74D',  // 心血管系统 - 橙黄
+        '#BA68C8',  // 中枢神经系统 - 紫色
+        '#81C784'   // 肾脏功能 - 绿色
+      ];
+
+      const medicalTheme = {
+        primary: '#1E88E5',
+        secondary: '#43A047',
+        accent: '#FF7043',
+        neutral: '#78909C',
+        gridColor: '#E0E0E0',
+        backgroundColor: '#FFFFFF',
+        textColor: '#212121'
+      };
+
+      // Prepare data
+      const categories = keys.map(k => systemNames[k] || k.replace('sofa_', '').replace('_', ' '));
+      const colors = keys.map((k, i) => sofaComponentColors[i % sofaComponentColors.length]);
+
+      const trace = {
+        x: categories,
+        y: values,
+        type: 'bar',
+        name: 'SOFA得分',
+        marker: {
+          color: colors,
+          line: {
+            color: medicalTheme.textColor,
+            width: 1
+          }
+        },
+        text: values.map(v => v.toFixed(1)),
+        textposition: 'auto',
+        hovertemplate: '系统: %{x}<br>得分: %{y}<extra></extra>'
+      };
+
+      const layout = {
+        title: {
+          text: 'SOFA各组件得分',
+          font: {
+            size: 16,
+            color: medicalTheme.textColor
+          },
+          x: 0.5,
+          xanchor: 'center'
+        },
+        xaxis: {
+          title: '系统',
+          gridcolor: medicalTheme.gridColor,
+          linecolor: medicalTheme.neutral,
+          tickfont: {
+            size: 12
+          },
+          tickangle: -45,
+          showgrid: false
+        },
+        yaxis: {
+          title: 'SOFA得分',
+          gridcolor: medicalTheme.gridColor,
+          linecolor: medicalTheme.neutral,
+          tickfont: {
+            size: 12
+          },
+          range: [0, Math.max(4, ...values) * 1.2 || 4],
+          showgrid: true,
+          zeroline: false
+        },
+        plot_bgcolor: medicalTheme.backgroundColor,
+        paper_bgcolor: medicalTheme.backgroundColor,
+        font: {
+          family: 'Arial, Helvetica, sans-serif',
+          color: medicalTheme.textColor
+        },
+        hovermode: 'closest',
+        margin: {
+          l: 60,
+          r: 30,
+          b: 80,  // Extra bottom margin for angled labels
+          t: 60,
+          pad: 10
+        },
+        showlegend: false
+      };
+
+      const config = {
+        responsive: true,
+        displayModeBar: true,
+        displaylogo: false,
+        modeBarButtonsToRemove: ['sendDataToCloud', 'autoScale2d', 'resetScale2d'],
+        modeBarButtonsToAdd: ['drawline', 'drawopenpath', 'eraseshape']
+      };
+
+      Plotly.newPlot(container, [trace], layout, config);
+    }
+
+    function featureValue(features, name) {
+      if (!features || !(name in features)) return null;
+      const v = features[name];
+      if (Array.isArray(v)) return +v[v.length - 1];
+      const n = +v; return isNaN(n) ? null : n;
+    }
+
+    function computeSOFAFromFeatures(features) {
+      if (!features) return {};
+      const pf = featureValue(features, 'pao2_fio2_ratio');
+      const mv = featureValue(features, 'mechanical_ventilation') || 0;
+      const plt = featureValue(features, 'platelet');
+      const bili = featureValue(features, 'bilirubin_total');
+      const vaso = featureValue(features, 'vasopressor_rate');
+      const gcs = featureValue(features, 'gcs_total');
+      const crea = featureValue(features, 'creatinine');
+      const urine = featureValue(features, 'urine_output_ml');
+
+      function respScore() {
+        if (pf == null) return 0;
+        if (pf <= 100 && mv) return 4;
+        if (pf <= 200 && mv) return 3;
+        if (pf <= 300) return 2;
+        if (pf <= 400) return 1;
+        return 0;
+      }
+      function coagScore() {
+        if (plt == null) return 0;
+        if (plt < 20) return 4;
+        if (plt < 50) return 3;
+        if (plt < 100) return 2;
+        if (plt < 150) return 1;
+        return 0;
+      }
+      function liverScore() {
+        if (bili == null) return 0;
+        if (bili >= 12) return 4;
+        if (bili >= 6) return 3;
+        if (bili >= 2) return 2;
+        if (bili >= 1.2) return 1;
+        return 0;
+      }
+      function cardioScore() {
+        if (vaso == null) return 0;
+        if (vaso > 0.1) return 4; // roughly ≥0.1 μg/kg/min
+        if (vaso > 0.04) return 3; // roughly 0.05–0.1
+        if (vaso > 0) return 2; // low-dose vasopressor
+        return 1; // MAP < 70 approx (no data)
+      }
+      function cnsScore() {
+        if (gcs == null) return 0;
+        if (gcs <= 5) return 4;
+        if (gcs <= 8) return 3;
+        if (gcs <= 12) return 2;
+        if (gcs <= 14) return 1;
+        return 0;
+      }
+      function renalScore() {
+        let s = 0;
+        if (crea != null) {
+          if (crea >= 5.0) s = Math.max(s, 4);
+          else if (crea >= 3.5) s = Math.max(s, 3);
+          else if (crea >= 2.0) s = Math.max(s, 2);
+          else if (crea >= 1.2) s = Math.max(s, 1);
+        }
+        if (urine != null) {
+          if (urine < 200) s = Math.max(s, 4);
+          else if (urine < 500) s = Math.max(s, 3);
+        }
+        return s;
+      }
+
+      const scores = {
+        sofa_respiration: respScore(),
+        sofa_coagulation: coagScore(),
+        sofa_liver: liverScore(),
+        sofa_cardiovascular: cardioScore(),
+        sofa_cns: cnsScore(),
+        sofa_renal: renalScore()
+      };
+      scores.sofa_total = Object.values(scores).reduce((a,b)=>a+b,0);
+      return scores;
+    }
+
+    function renderFeatures(features) {
+      const el = document.getElementById('features');
+      el.innerHTML = '';
+      const t = I18N[CURRENT_LANG] || I18N.en;
+      if (!features) { el.textContent = t.noFeatures; return; }
+      const keys = Object.keys(features);
+      if (!keys.length) { el.textContent = t.noFeatures; return; }
+      keys.forEach(k => {
+        const pill = document.createElement('div');
+        pill.className = 'pill';
+        const v = features[k];
+        let series = [];
+        if (Array.isArray(v)) series = v.map(x=>String(x)).slice(0, 8);
+        else if (typeof v === 'object' && v) {
+          const ord = Object.keys(v).sort((a,b)=>parseInt(a)-parseInt(b));
+          series = ord.map(key => String(v[key])).slice(0, 8);
+        } else series = [String(v)];
+        pill.textContent = `${k}: [${series.join(', ')}]`;
+        el.appendChild(pill);
+      });
+    }
+
+    function setResult(data) {
+      LAST_RESULT = data || null;
+      const t = I18N[CURRENT_LANG] || I18N.en;
+      // KPI summary
+      document.getElementById('kpiModel').textContent = data.prediction_model || '-';
+      let conf = 0;
+      if (typeof data.total_confidence === 'number') conf = data.total_confidence;
+      else if (data.total_confidence) conf = parseFloat(data.total_confidence);
+      if (isNaN(conf)) conf = 0;
+      let confDisplay = conf <= 1 ? (conf * 100) : conf;
+      if (confDisplay < 0) confDisplay = 0; if (confDisplay > 100) confDisplay = 100;
+      document.getElementById('kpiConfidence').textContent = (confDisplay || 0).toFixed(1);
+
+      // extract features
+      let features = null;
+      if (data.prediction_data && data.prediction_data.prediction && data.prediction_data.prediction.intervention_analysis) {
+        features = data.prediction_data.prediction.intervention_analysis.sofa_related_features || null;
+      } else if (data.predicted_sofa_features) {
+        features = data.predicted_sofa_features;
+      } else if (data.sofa_related_features) {
+        features = data.sofa_related_features;
+      }
+      renderFeatures(features);
+
+      // prefer model-produced SOFA scores; fallback to compute from features
+      let sofaScores = null;
+      if (data.prediction_data && data.prediction_data.predicted_sofa_scores) {
+        sofaScores = data.prediction_data.predicted_sofa_scores;
+      } else if (data.predicted_sofa_scores) {
+        sofaScores = data.predicted_sofa_scores;
+      } else if (data.prediction_data && data.prediction_data.prediction && data.prediction_data.prediction.sofa_scores) {
+        sofaScores = data.prediction_data.prediction.sofa_scores;
+      }
+      if (!sofaScores) {
+        sofaScores = computeSOFAFromFeatures(features || {});
+      }
+      try {
+        const hourly = (data.prediction_data && data.prediction_data.hourly_sofa_totals) || data.hourly_sofa_totals || {};
+        const xs = Object.keys(hourly || {}).map(k => parseInt(k)).sort((a,b)=>a-b);
+        const arr = xs.map(k => +hourly[k] || 0);
+        if (arr.length) {
+          document.getElementById('kpiSofa').textContent = JSON.stringify(arr);
+        } else {
+          const total = sofaScores && typeof sofaScores.sofa_total !== 'undefined' ? (+sofaScores.sofa_total || 0) : 0;
+          document.getElementById('kpiSofa').textContent = JSON.stringify([total]);
+        }
+      } catch (_) { document.getElementById('kpiSofa').textContent = '-'; }
+      drawSOFABar(sofaScores || {});
+      // draw line chart for totals: use hourly totals from prediction; baseline尝试使用 output_summary推算或缺省呈现同轴淡色
+      try {
+        const hourly = (data.prediction_data && data.prediction_data.hourly_sofa_totals) || data.hourly_sofa_totals || {};
+        const baseline = data.baseline_sofa_totals || null;
+        drawSofaLine(hourly || {}, baseline || null);
+      } catch (_) { drawSofaLine({}, null); }
+      // risk level
+      try {
+        const risk = data.final_weighted_risk_level || (data.prediction_data && data.prediction_data.prediction && data.prediction_data.prediction.intervention_analysis && data.prediction_data.prediction.intervention_analysis.risk_level) || '';
+        document.getElementById('kpiRisk').textContent = risk || '-';
+      } catch (_) { document.getElementById('kpiRisk').textContent = '-'; }
+
+      try {
+        const rp = (data.prediction_data && data.prediction_data.prediction && data.prediction_data.prediction.intervention_analysis && data.prediction_data.prediction.intervention_analysis.reasoning) || data.reasoning || '';
+        document.getElementById('bestPredictionReasoning').textContent = rp || t.noReasoning;
+      } catch (_) { document.getElementById('bestPredictionReasoning').textContent = t.noReasoning; }
+      try {
+        let evals = data.eval_breakdown || data.evaluator_scores || data.selected_evaluators || [];
+        if (Array.isArray(evals)) {
+          CURRENT_EVALS = evals;
+        } else if (evals && typeof evals === 'object') {
+          CURRENT_EVALS = Object.keys(evals).map(k => ({ evaluator: k, score: evals[k] }));
+        } else {
+          CURRENT_EVALS = [];
+        }
+        CURRENT_EVAL_INDEX = 0;
+        renderEvaluator();
+      } catch (_) { document.getElementById('bestEvaluators').textContent = t.noEvaluator; }
+      try {
+        const others = (data.all_results || []).filter(r => r.model !== data.prediction_model);
+        const container = document.getElementById('otherModels');
+        container.textContent = '';
+        if (!others.length) {
+          container.textContent = t.noOther;
+        } else {
+          others.forEach((r) => {
+            const div = document.createElement('div');
+            div.className = 'result';
+            div.style.marginTop = '8px';
+            const title = document.createElement('div');
+            title.className = 'section-title';
+            title.textContent = 'Model: ' + r.model;
+            const pred = document.createElement('div');
+            pred.className = 'result';
+            // concise summary
+            const pd = r.prediction_data || {};
+            const ia = pd && pd.prediction && pd.prediction.intervention_analysis || {};
+            const sofa = pd && (pd.predicted_sofa_scores || (pd.prediction && pd.prediction.sofa_scores) || {});
+            pred.textContent = JSON.stringify({
+              sofa_total: sofa && sofa.sofa_total,
+              risk_level: ia && ia.risk_level,
+              reasoning: ia && ia.reasoning ? String(ia.reasoning).slice(0, 600) + (String(ia.reasoning).length>600?'…':'') : ''
+            }, null, 2);
+            const evals2 = document.createElement('div');
+            evals2.className = 'result';
+            evals2.textContent = JSON.stringify(r.eval_breakdown || [], null, 2);
+            div.appendChild(title);
+            div.appendChild(pred);
+            div.appendChild(evals2);
+            container.appendChild(div);
+          });
+        }
+      } catch (_) {}
+      showTab('charts');
+    }
+
+    function showOtherModels() {
+      const section = document.getElementById('otherModelsSection');
+      const container = document.getElementById('otherModels');
+      section.style.display = 'block';
+      container.style.display = 'block';
+      const data = LAST_RESULT || {};
+      const others = (data.all_results || []).filter(r => r.model !== data.prediction_model);
+      container.textContent = '';
+      if (!others.length) {
+        container.textContent = 'No alternative results yet.';
+        showTab('results');
+        return;
+      }
+      others.forEach((r) => {
+        const div = document.createElement('div');
+        div.className = 'result';
+        div.style.marginTop = '8px';
+        const title = document.createElement('div');
+        title.className = 'section-title';
+        title.textContent = 'Model: ' + r.model;
+        const pred = document.createElement('div');
+        pred.className = 'result';
+        const pd = r.prediction_data || {};
+        const ia = pd && pd.prediction && pd.prediction.intervention_analysis || {};
+        const sofa = pd && (pd.predicted_sofa_scores || (pd.prediction && pd.prediction.sofa_scores) || {});
+        pred.textContent = JSON.stringify({
+          sofa_total: sofa && sofa.sofa_total,
+          risk_level: ia && ia.risk_level,
+          reasoning: ia && ia.reasoning ? String(ia.reasoning).slice(0, 600) + (String(ia.reasoning).length>600?'…':'') : ''
+        }, null, 2);
+        const evals2 = document.createElement('div');
+        evals2.className = 'result';
+        evals2.textContent = JSON.stringify(r.eval_breakdown || [], null, 2);
+        div.appendChild(title);
+        div.appendChild(pred);
+        div.appendChild(evals2);
+        container.appendChild(div);
+      });
+      showTab('results');
+    }
+
+    function renderEvaluator() {
+      const el = document.getElementById('bestEvaluators');
+      el.innerHTML = '';
+      const t = I18N[CURRENT_LANG] || I18N.en;
+      if (!CURRENT_EVALS.length) { el.textContent = t.noEvaluator; return; }
+      const i = Math.max(0, Math.min(CURRENT_EVAL_INDEX, CURRENT_EVALS.length - 1));
+      const cur = CURRENT_EVALS[i] || {};
+      const name = cur.evaluator || cur.model || 'unknown';
+      const score = cur.score;
+      const tw = cur.trust_weight;
+      const ws = (cur.weighted_score != null ? cur.weighted_score : (cur.weighted != null ? cur.weighted : undefined));
+      const mo = cur.model_output ? String(cur.model_output).slice(0, 800) + (String(cur.model_output).length>800?'…':'') : '';
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+      const mk = (label, value) => {
+        const wrap = document.createElement('div');
+        const lab = document.createElement('div'); lab.className = 'section-title'; lab.textContent = label;
+        const val = document.createElement('div'); val.className = 'result'; val.style.minHeight = 'auto'; val.textContent = value == null ? '-' : String(value);
+        wrap.appendChild(lab); wrap.appendChild(val);
+        return wrap;
+      };
+      grid.appendChild(mk(t.evaluator, name));
+      grid.appendChild(mk(t.score, score));
+      grid.appendChild(mk(t.trustWeight, tw));
+      grid.appendChild(mk(t.weighted, ws));
+      const outputLab = document.createElement('div'); outputLab.className = 'section-title'; outputLab.textContent = t.modelOutput;
+      const outputBox = document.createElement('div'); outputBox.className = 'result'; outputBox.textContent = mo || 'No output';
+      el.appendChild(grid);
+      el.appendChild(outputLab);
+      el.appendChild(outputBox);
+    }
+
+    function nextEvaluator() {
+      if (CURRENT_EVALS.length) { CURRENT_EVAL_INDEX = (CURRENT_EVAL_INDEX + 1) % CURRENT_EVALS.length; renderEvaluator(); }
+    }
+
+    function prevEvaluator() {
+      if (CURRENT_EVALS.length) { CURRENT_EVAL_INDEX = (CURRENT_EVAL_INDEX - 1 + CURRENT_EVALS.length) % CURRENT_EVALS.length; renderEvaluator(); }
+    }
+
+    async function simulateRun() {
+      const mode = document.getElementById('modeSelect').value;
+      const model = document.getElementById('modelSelect').value;
+      const patient = document.getElementById('patientText').value.trim();
+      const inv = document.getElementById('intervention').value.trim();
+      if (mode !== 'confidence' && !inv) { alert('Please enter intervention'); return; }
+      if (mode === 'single' && !patient) { alert('Please enter patient description'); return; }
+      appendLog('Starting prediction…');
+      appendLog('Mode: ' + mode);
+      try {
+        if (mode === 'confidence') {
+          document.getElementById('bestResultHeader').style.display = 'none';
+          document.getElementById('reasoningSection').style.display = 'none';
+          document.getElementById('evaluatorsSection').style.display = 'none';
+          document.getElementById('featuresSection').style.display = 'none';
+          document.getElementById('otherModelsSection').style.display = 'none';
+          const payload = { model };
+          const res = await apiFetch('/api/confidence', 'POST', payload);
+          if (res && res.status === 'ok' && res.metrics) {
+            renderConfidence(res);
+            appendLog('Confidence ready for model: ' + model + ' (patient ' + (res.patient_id||'-') + ')');
+            showTab('results');
+          } else if (res && res.status === 'no_result') {
+            appendLog('No confidence report available for ' + model);
+            alert('No confidence report available');
+          } else {
+            appendLog('Confidence completed');
+            showTab('logs');
+          }
+        } else if (mode === 'auto') {
+          document.getElementById('confidencePanel').style.display = 'none';
+          document.getElementById('bestResultHeader').style.display = 'flex';
+          document.getElementById('reasoningSection').style.display = 'block';
+          document.getElementById('evaluatorsSection').style.display = 'block';
+          document.getElementById('featuresSection').style.display = 'block';
+          document.getElementById('otherModelsSection').style.display = 'block';
+          const m1 = document.getElementById('autoModel1').value;
+          const m2 = document.getElementById('autoModel2').value;
+          const m3 = document.getElementById('autoModel3').value;
+          const models = [m1, m2, m3];
+          appendLog('Auto rotation models: ' + models.join(', '));
+          let result;
+          try {
+            result = await apiFetch('/api/run_auto', 'POST', { models, input_description: patient, intervention: inv });
+          } catch (e) {
+            appendLog('Auto failed: ' + e.message + '; falling back to single');
+            result = await apiFetch('/api/run_single', 'POST', { model: models[0], input_description: patient, intervention: inv });
+          }
+          setResult(result);
+          appendLog('Done. Confidence ' + (result.total_confidence || 0));
+        } else {
+          document.getElementById('confidencePanel').style.display = 'none';
+          document.getElementById('bestResultHeader').style.display = 'flex';
+          document.getElementById('reasoningSection').style.display = 'block';
+          document.getElementById('evaluatorsSection').style.display = 'block';
+          document.getElementById('featuresSection').style.display = 'block';
+          document.getElementById('otherModelsSection').style.display = 'block';
+          const result = await apiFetch('/api/run_single', 'POST', { model, input_description: patient, intervention: inv });
+          setResult(result);
+          appendLog('Done. Confidence ' + (result.total_confidence || 0));
+        }
+        showTab('results');
+      } catch (err) {
+        appendLog('Error: ' + err.message);
+        alert('Request failed: ' + err.message);
+      }
+    }
+
+    function renderConfidence(res) {
+      try {
+        document.getElementById('confidencePanel').style.display = 'block';
+        const trust = typeof res.model_trust_score === 'number' ? res.model_trust_score : (res.metrics && res.metrics.trust);
+        document.getElementById('trustScore').textContent = 'Trust: ' + (Number(trust).toFixed(3));
+        try {
+          document.getElementById('kpiModel').textContent = res.model || '-';
+          const pct = Math.max(0, Math.min(100, Number(trust || 0) * 100));
+          document.getElementById('kpiConfidence').textContent = pct.toFixed(1) + '%';
+        } catch (_) {}
+        const ov = res.metrics && res.metrics.overall ? res.metrics.overall : {};
+        const ovTxt = {
+          accuracy: (ov.accuracy||0).toFixed(3),
+          precision: (ov.precision||0).toFixed(3),
+          f1: (ov.f1||0).toFixed(3),
+          auc_roc: (ov.auc||0).toFixed(3)
+        };
+        document.getElementById('overallMetrics').textContent = JSON.stringify(ovTxt, null, 2);
+        const cm = res.metrics && res.metrics.components ? res.metrics.components : {};
+        const grid = document.getElementById('componentMetrics');
+        grid.innerHTML = '';
+        const order = ['sofa_respiration','sofa_coagulation','sofa_liver','sofa_cardiovascular','sofa_cns','sofa_renal'];
+        order.forEach(k => {
+          const m = cm[k] || {};
+          const box = document.createElement('div');
+          box.style.background = '#fff';
+          box.style.border = '1px solid #e2e8f0';
+          box.style.borderRadius = '12px';
+          box.style.padding = '10px';
+          const title = document.createElement('div');
+          title.className = 'section-title';
+          title.textContent = k.replace('sofa_','').toUpperCase();
+          const body = document.createElement('div');
+          body.className = 'result';
+          body.textContent = JSON.stringify({
+            accuracy: (m.accuracy||0).toFixed(3),
+            precision: (m.precision||0).toFixed(3),
+            f1: (m.f1||0).toFixed(3),
+            auc_roc: (m.auc||0).toFixed(3)
+          }, null, 2);
+          box.appendChild(title);
+          box.appendChild(body);
+          grid.appendChild(box);
+        });
+      } catch (_) {}
+    }
+
+    async function nextAutoCase() {
+      try {
+        const c = await apiFetch('/api/next_auto_case');
+        document.getElementById('patientText').value = c.input_description || '';
+        appendLog('Loaded auto case ' + (c.stay_id || ''));
+        showTab('results');
+      } catch (err) {
+        appendLog('Error: ' + err.message);
+        alert('Load auto case failed: ' + err.message);
+      }
+    }
+
+    function loadSelectedFile() {
+      const input = document.getElementById('fileInput');
+      const file = input.files && input.files[0];
+      if (!file) { alert('Select a JSON file first'); return; }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          setResult(data);
+          appendLog('Loaded local result file: ' + file.name);
+          showTab('results');
+        } catch (err) {
+          alert('JSON parse error: ' + err.message);
+        }
+      };
+      reader.readAsText(file, 'utf-8');
+    }
+
+    init();
+  </script>
+</body>
+</html>
