@@ -76,3 +76,13 @@ python merged_main.py [--mode auto|manual]
 详细技术路线图与学术化说明见：`TECHNICAL_ROUTE_EXPERIENCE_MEMORY.md`。
 
 可直接执行的函数级改造清单见：`EXECUTABLE_REFACTOR_CHECKLIST.md`。
+
+
+## GitHub 提交说明（当前分支）
+
+若需将本地 `work` 分支提交到 GitHub，可执行：
+
+```bash
+git remote add origin git@github.com:CL2S/DSCS.git  # 若已存在可跳过
+git push -u origin work
+```
