@@ -61,3 +61,18 @@ python merged_main.py [--mode auto|manual]
 - 确保系统中已安装并配置好Ollama
 - 根据模型需求确保有足够的GPU资源
 - 在并行处理时，程序会自动管理GPU资源分配
+
+## 经验知识库（前沿记忆增强）
+
+项目已支持混合记忆经验库（`advanced_experience_memory.py`），用于持续积累历史病例经验并在新预测时提供检索增强。
+
+核心机制：
+- 混合检索：语义向量 + 符号规则 + 时间衰减
+- 记忆分层：情景记忆（病例）、语义记忆（统计分布）、程序记忆（可执行规则）
+- 在线巩固：新结果写入后自动更新规则与统计
+
+默认会由 `experience_integration.py` 优先加载该前沿经验库（失败时回退到原有经验库实现）。
+
+详细技术路线图与学术化说明见：`TECHNICAL_ROUTE_EXPERIENCE_MEMORY.md`。
+
+可直接执行的函数级改造清单见：`EXECUTABLE_REFACTOR_CHECKLIST.md`。

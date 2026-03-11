@@ -6,11 +6,69 @@
 
 import json
 import os
+import re
 from typing import Dict, Any, Optional, List
 from datetime import datetime
 
 from experience_knowledge_base import ExperienceKnowledgeBase, integrate_with_prediction
 
+try:
+    from advanced_experience_memory import AdvancedExperienceMemoryBank
+except Exception:
+    AdvancedExperienceMemoryBank = None
+
+
+
+
+def _clinical_risk_gate(input_description: str, intervention: str) -> Dict[str, Any]:
+    """基础经验阈值门控：用于限制高危场景下经验置信度过度上调。"""
+    text = (input_description or "") + "\n" + (intervention or "")
+
+    def _series_last(key: str):
+        m = re.search(rf"{re.escape(key)}.*?\[(.*?)\]", text)
+        if not m:
+            return None
+        vals = []
+        for p in m.group(1).split(','):
+            p = p.strip()
+            if not p or p.lower() == 'nan':
+                continue
+            try:
+                vals.append(float(p))
+            except Exception:
+                continue
+        return vals[-1] if vals else None
+
+    rr = _series_last("呼吸频率变化")
+    sbp = _series_last("收缩压变化")
+    map_v = _series_last("平均动脉压变化")
+    gcs = _series_last("格拉斯哥昏迷评分变化")
+    lactate = _series_last("乳酸变化")
+    ne = _series_last("去甲肾上腺素")
+    if ne is None:
+        ne = _series_last("血管活性药物使用剂量")
+
+    qsofa = 0
+    qsofa += 1 if rr is not None and rr >= 22 else 0
+    qsofa += 1 if sbp is not None and sbp <= 100 else 0
+    qsofa += 1 if gcs is not None and gcs < 15 else 0
+
+    high_risk = False
+    triggers = []
+    if qsofa >= 2:
+        high_risk = True
+        triggers.append("qSOFA>=2")
+    if map_v is not None and map_v < 65:
+        high_risk = True
+        triggers.append("MAP<65")
+    if lactate is not None and lactate > 4:
+        high_risk = True
+        triggers.append("lactate>4")
+    if ne is not None and ne > 0.1:
+        high_risk = True
+        triggers.append("norepinephrine>0.1")
+
+    return {"high_risk_gate": high_risk, "triggers": triggers}
 
 class ExperienceIntegration:
     """
@@ -24,7 +82,15 @@ class ExperienceIntegration:
         Args:
             ekb_path: 经验知识库存储路径
         """
-        self.ekb = ExperienceKnowledgeBase(storage_path=ekb_path)
+        # 优先使用前沿混合记忆经验库；失败时回退到原有实现
+        advanced_path = ekb_path.replace("experience_knowledge_base.json", "advanced_experience_memory.json")
+        if AdvancedExperienceMemoryBank is not None:
+            try:
+                self.ekb = AdvancedExperienceMemoryBank(storage_path=advanced_path)
+            except Exception:
+                self.ekb = ExperienceKnowledgeBase(storage_path=ekb_path)
+        else:
+            self.ekb = ExperienceKnowledgeBase(storage_path=ekb_path)
         self.integration_enabled = True
 
         # 加载现有经验（从best_result目录）
@@ -226,6 +292,13 @@ class ExperienceIntegration:
                 exp_based_confidence = weighted_conf / total_weight
                 # 混合基础置信度和经验置信度（权重可调）
                 adjusted = 0.7 * base_confidence + 0.3 * exp_based_confidence
+
+                # 临床高危门控：高风险时限制经验导致的上调幅度
+                gate = _clinical_risk_gate(input_description, intervention)
+                if gate.get("high_risk_gate"):
+                    max_uplift = 0.08
+                    adjusted = min(adjusted, base_confidence + max_uplift)
+
                 return min(1.0, max(0.0, adjusted))
 
             return base_confidence
