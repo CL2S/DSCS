@@ -1,0 +1,179 @@
+{
+  "input_description": "ICU住院编号 31703381，对应患者编号 19338519，48岁男性，体重93.9kg。监测持续时间为 0 小时（共 7 次测量，每4小时一次）：【生命体征】心率变化：[105.0, 105.0]（单位：次/分）收缩压变化：[89.0, 89.0]（单位：mmHg）舒张压变化：[70.0, 70.0]（单位：mmHg）体温变化：[98.8, 98.8]（单位：℃）呼吸频率变化：[15.0,...",
+  "intervention": "立即启动去甲肾上腺素输注，维持剂量为50.0μg·kg⁻¹·min⁻¹，剂量调整间隔1小时，密切监测血压和器官灌注，评估8小时内发生感染性休克的风险",
+  "prediction_model": "gemma3:12b",
+  "evaluation_models": [
+    "gemma3:12b"
+  ],
+  "total_confidence": 0.45,
+  "trust_a": null,
+  "prediction_model_dynamic_confidence": null,
+  "prediction_model_total_confidence": null,
+  "evaluation_models_trust": null,
+  "predicted_sofa_scores_series": {
+    "sofa_respiration": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sofa_coagulation": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      2,
+      2,
+      3
+    ],
+    "sofa_liver": [
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "sofa_cardiovascular": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "sofa_cns": [
+      1,
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3
+    ],
+    "sofa_renal": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2
+    ]
+  },
+  "hourly_sofa_totals": {
+    "0": 8,
+    "1": 10,
+    "2": 11,
+    "3": 11,
+    "4": 11,
+    "5": 14,
+    "6": 14,
+    "7": 15
+  },
+  "predicted_sofa_scores": {
+    "sofa_respiration": 1,
+    "sofa_coagulation": 3,
+    "sofa_liver": 2,
+    "sofa_cardiovascular": 4,
+    "sofa_cns": 3,
+    "sofa_renal": 2,
+    "sofa_total": 15
+  },
+  "predicted_sofa_total": 15.0,
+  "predicted_sofa_features": {
+    "pao2_fio2_ratio": [
+      280.0,
+      250.0,
+      220.0,
+      200.0,
+      180.0,
+      160.0,
+      140.0,
+      120.0
+    ],
+    "platelet": [
+      180.0,
+      160.0,
+      140.0,
+      120.0,
+      100.0,
+      80.0,
+      60.0,
+      40.0
+    ],
+    "bilirubin_total": [
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5,
+      5.0
+    ],
+    "vasopressor_rate": [
+      50.0,
+      50.0,
+      50.0,
+      50.0,
+      60.0,
+      70.0,
+      80.0,
+      90.0
+    ],
+    "gcs_total": [
+      14.0,
+      13.0,
+      12.0,
+      11.0,
+      10.0,
+      9.0,
+      8.0,
+      7.0
+    ],
+    "creatinine": [
+      1.1,
+      1.3,
+      1.5,
+      1.7,
+      1.9,
+      2.1,
+      2.3,
+      2.5
+    ],
+    "urine_output_ml": [
+      1500.0,
+      1200.0,
+      900.0,
+      600.0,
+      300.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mechanical_ventilation": [
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "risk_level": "critical",
+  "reasoning": "患者存在低血压和心率加快，提示可能存在感染性休克风险。启动去甲肾上腺素输注是积极的干预措施，旨在改善血压和器官灌注。然而，需要密切监测生命体征变化趋势，特别是体温、呼吸频率和乳酸水平，以评估感染性休克的风险。去甲肾上腺素的初始剂量为50.0μg·kg⁻¹·min⁻¹，需要根据血压和器官灌注情况进行调整。未来8小时内，患者的SOFA评分相关特征可能会出现波动，需要持续评估。"
+}

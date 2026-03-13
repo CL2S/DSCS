@@ -1,0 +1,1143 @@
+{
+  "input_description": "ICU住院编号 32759002，对应患者编号 19425678，28岁男性，体重116.7kg。监测持续时间为 0 小时（共 7 次测量，每4小时一次）：【生命体征】心率变化：[80.67, 80.67]（单位：次/分）收缩压变化：[69.67, 69.67]（单位：mmHg）舒张压变化：[49.67, 49.67]（单位：mmHg）体温变化：[N/A, N/A]（单位：℃）呼吸频率变化：[26.0, 26.0]（单位：次/分）血氧饱和度变化：[100.0, 100.0]（单位：%）平均动脉压变化：[56.33, 56.33]（单位：mmHg）【SOFA评分相关特征】氧合指数变化：[191.58, 191.58, 191.58, 191.58, 191.58, 191.58, 191.58]（单位：mmHg）机械通气使用情况：[0, 0, 0, 0, 0, 0, 0]（单位：）血小板计数变化：[42.0, 39.0, 44.5, 42.0, 42.0, 42.0, 42.0]（单位：×10³/μL）总胆红素变化：[12.3, 12.3, 12.3, 12.3, 12.3, 12.3, 12.3]（单位：mg/dL）血管活性药物使用剂量：[0.0, 0.0, 0.0, 0.0, 0.0, 10.0, 10.0]（单位：μg/kg/min）格拉斯哥昏迷评分变化：[15, 15, 15, 15, 15, 3, 3]（单位：分）血清肌酐变化：[1.3, 1.4, 1.3, 1.3, 1.3, 1.3, 1.3]（单位：mg/dL）尿量变化：[0.0, 0.0, 0.0, 0.0, 0.0, 20.0, 20.0]（单位：mL）【疾病评分】SOFA总分变化：[4, 4, 0, 0, 3, 13, 13]（单位：分）SIRS评分变化：[0, 0, 0, 0, 0, 1, 1]（单位：分）",
+  "intervention": "立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+  "prediction_model": "qwen3:30b",
+  "evaluation_models": [
+    "gemma3:12b",
+    "deepseek-r1:32b",
+    "qwen3:30b"
+  ],
+  "total_confidence": 0.5298163436316534,
+  "trust_a": 0.2,
+  "prediction_model_dynamic_confidence": 0.41227042953956666,
+  "prediction_model_total_confidence": 0.5298163436316534,
+  "evaluation_models_trust": {
+    "gemma3:12b": {
+      "dynamic_confidence": 0.13215492753441227,
+      "total_confidence": 0.30572394202752984
+    },
+    "deepseek-r1:32b": {
+      "dynamic_confidence": 0.1594202893297963,
+      "total_confidence": 0.32753623146383704
+    },
+    "qwen3:30b": {
+      "dynamic_confidence": 0.41227042953956666,
+      "total_confidence": 0.5298163436316534
+    }
+  },
+  "predicted_sofa_scores_series": {
+    "sofa_respiration": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sofa_coagulation": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sofa_liver": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1
+    ],
+    "sofa_cardiovascular": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "sofa_cns": [
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      2
+    ],
+    "sofa_renal": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1
+    ]
+  },
+  "hourly_sofa_totals": {
+    "0": 12,
+    "1": 12,
+    "2": 12,
+    "3": 12,
+    "4": 11,
+    "5": 11,
+    "6": 9,
+    "7": 8
+  },
+  "predicted_sofa_scores": {
+    "sofa_respiration": 1,
+    "sofa_coagulation": 1,
+    "sofa_liver": 1,
+    "sofa_cardiovascular": 2,
+    "sofa_cns": 2,
+    "sofa_renal": 1,
+    "sofa_total": 8
+  },
+  "predicted_sofa_total": 8.0,
+  "predicted_sofa_features": {
+    "pao2_fio2_ratio": [
+      250.0,
+      260.0,
+      270.0,
+      280.0,
+      290.0,
+      300.0,
+      310.0,
+      320.0
+    ],
+    "platelet": [
+      100.0,
+      105.0,
+      110.0,
+      115.0,
+      120.0,
+      125.0,
+      130.0,
+      135.0
+    ],
+    "bilirubin_total": [
+      2.5,
+      2.4,
+      2.3,
+      2.2,
+      2.1,
+      2.0,
+      1.9,
+      1.8
+    ],
+    "vasopressor_rate": [
+      10.0,
+      9.5,
+      9.0,
+      8.5,
+      8.0,
+      7.5,
+      7.0,
+      6.5
+    ],
+    "gcs_total": [
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0
+    ],
+    "creatinine": [
+      2.5,
+      2.4,
+      2.3,
+      2.2,
+      2.1,
+      2.0,
+      1.9,
+      1.8
+    ],
+    "urine_output_ml": [
+      500.0,
+      600.0,
+      700.0,
+      800.0,
+      900.0,
+      1000.0,
+      1100.0,
+      1200.0
+    ],
+    "mechanical_ventilation": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "risk_level": "moderate",
+  "reasoning": "患者当前处于感染性休克状态，表现为持续低血压（收缩压69.67 mmHg）、血管活性药物依赖（10 μg/kg/min）及严重意识障碍（GCS 3），SOFA评分13分，提示多器官功能衰竭。干预措施包括立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善。基于当前状态和干预措施，预计未来8小时内血压和器官灌注将逐步改善，但患者意识障碍和多器官功能衰竭仍需密切监测。当前干预措施有效，但风险仍然存在，需持续监测以防止恶化。",
+  "selected_evaluators": [
+    "gemma3:12b",
+    "deepseek-r1:32b",
+    "qwen3:30b"
+  ],
+  "evaluator_scores": {
+    "gemma3:12b": 0.0,
+    "deepseek-r1:32b": 0.0,
+    "qwen3:30b": 0.0
+  },
+  "risk_analysis_models": [
+    "gemma3:12b",
+    "deepseek-r1:32b",
+    "qwen3:30b"
+  ],
+  "per_model_risk": [
+    {
+      "model": "gemma3:12b",
+      "risk_level": "medium",
+      "risk_score": 0.65,
+      "reasoning": "患者目前处于低血压、意识水平下降和器官功能障碍加重状态，提示脓毒症进展。启动去甲肾上腺素输注，并根据血管反应性改善趋势进行剂量递减，表明病情可能趋于稳定。然而，仍需密切监测，以防止感染性休克复发或器官功能进一步衰竭。去甲肾上腺素的递减提示血管反应性改善，但仍需警惕。"
+    },
+    {
+      "model": "deepseek-r1:32b",
+      "risk_level": "medium",
+      "risk_score": 0.75,
+      "reasoning": "患者目前处于严重脓毒症状态，伴随多器官功能障碍和意识状态恶化，提示感染性休克风险极高。立即启动去甲肾上腺素输注以维持血压和器官灌注，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善。未来8小时内，患者的状况可能会趋于稳定或有所改善，但感染性休克的风险仍然存在。"
+    },
+    {
+      "model": "qwen3:30b",
+      "risk_level": "medium",
+      "risk_score": 0.65,
+      "reasoning": "患者当前处于感染性休克状态，表现为持续低血压（收缩压69.67 mmHg）、血管活性药物依赖（10 μg/kg/min）及严重意识障碍（GCS 3），SOFA评分13分，提示多器官功能衰竭。干预措施包括立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善。基于当前状态和干预措施，预计未来8小时内血压和器官灌注将逐步改善，但患者意识障碍和多器官功能衰竭仍需密切监测。当前干预措施有效，但风险仍然存在，需持续监测以防止恶化。"
+    }
+  ],
+  "final_weighted_risk_score": 0.6781611937513818,
+  "final_weighted_risk_level": "high",
+  "all_results": [
+    {
+      "model": "gemma3:12b",
+      "prediction_file": "./output/gemma3_12b/predict_32759002_gemma3_12b.json",
+      "dynamic_confidence": 0.13215492753441227,
+      "total_confidence": 0.30572394202752984,
+      "total_score": 0.30572394202752984,
+      "eval_breakdown": [
+        {
+          "evaluator": "gemma3:12b",
+          "score": 1.0,
+          "trust_weight": 0.30572394202752984,
+          "dynamic_confidence": 0.13215492753441227,
+          "total_confidence": 0.30572394202752984,
+          "weighted_score": 0.30572394202752984
+        },
+        {
+          "evaluator": "deepseek-r1:32b",
+          "score": 0.0,
+          "trust_weight": 0.32753623146383704,
+          "dynamic_confidence": 0.1594202893297963,
+          "total_confidence": 0.32753623146383704,
+          "weighted_score": 0.0,
+          "report_file": "output/deepseek-r1/evaluator_32759002_deepseek-r1_32b_20260309_110413.json"
+        },
+        {
+          "evaluator": "qwen3:30b",
+          "score": 0.0,
+          "trust_weight": 0.5298163436316534,
+          "dynamic_confidence": 0.41227042953956666,
+          "total_confidence": 0.5298163436316534,
+          "weighted_score": 0.0,
+          "report_file": "output/qwen3/evaluator_32759002_qwen3_30b_20260309_110413.json"
+        }
+      ],
+      "prediction_data": {
+        "patient_id": "32759002",
+        "model_name": "gemma3:12b",
+        "input_description": "ICU住院编号 32759002，对应患者编号 19425678，28岁男性，体重116.7kg。监测持续时间为 0 小时（共 7 次测量，每4小时一次）：【生命体征】心率变化：[80.67, 80.67]（单位：次/分）收缩压变化：[69.67, 69.67]（单位：mmHg）舒张压变化：[49.67, 49.67]（单位：mmHg）体温变化：[N/A, N/A]（单位：℃）呼吸频率变化：[26.0, 26.0]（单位：次/分）血氧饱和度变化：[100.0, 100.0]（单位：%）平均动脉压变化：[56.33, 56.33]（单位：mmHg）【SOFA评分相关特征】氧合指数变化：[191.58, 191.58, 191.58, 191.58, 191.58, 191.58, 191.58]（单位：mmHg）机械通气使用情况：[0, 0, 0, 0, 0, 0, 0]（单位：）血小板计数变化：[42.0, 39.0, 44.5, 42.0, 42.0, 42.0, 42.0]（单位：×10³/μL）总胆红素变化：[12.3, 12.3, 12.3, 12.3, 12.3, 12.3, 12.3]（单位：mg/dL）血管活性药物使用剂量：[0.0, 0.0, 0.0, 0.0, 0.0, 10.0, 10.0]（单位：μg/kg/min）格拉斯哥昏迷评分变化：[15, 15, 15, 15, 15, 3, 3]（单位：分）血清肌酐变化：[1.3, 1.4, 1.3, 1.3, 1.3, 1.3, 1.3]（单位：mg/dL）尿量变化：[0.0, 0.0, 0.0, 0.0, 0.0, 20.0, 20.0]（单位：mL）【疾病评分】SOFA总分变化：[4, 4, 0, 0, 3, 13, 13]（单位：分）SIRS评分变化：[0, 0, 0, 0, 0, 1, 1]（单位：分）",
+        "intervention": "立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+        "dynamic_confidence": 0.17620657004588303,
+        "total_confidence": 0.2988699134220878,
+        "prediction": {
+          "intervention_analysis": {
+            "risk_level": "low",
+            "sofa_related_features": {
+              "pao2_fio2_ratio": [
+                280.0,
+                310.0,
+                330.0,
+                345.0,
+                355.0,
+                360.0,
+                362.0,
+                361.0
+              ],
+              "platelet": [
+                120.0,
+                140.0,
+                160.0,
+                180.0,
+                200.0,
+                220.0,
+                240.0,
+                260.0
+              ],
+              "bilirubin_total": [
+                2.0,
+                1.8,
+                1.6,
+                1.4,
+                1.2,
+                1.0,
+                0.8,
+                0.6
+              ],
+              "vasopressor_rate": [
+                10.0,
+                8.0,
+                6.0,
+                4.0,
+                2.0,
+                1.0,
+                0.5,
+                0.2
+              ],
+              "gcs_total": [
+                8.0,
+                9.0,
+                10.0,
+                11.0,
+                12.0,
+                13.0,
+                14.0,
+                15.0
+              ],
+              "creatinine": [
+                2.5,
+                2.2,
+                2.0,
+                1.8,
+                1.6,
+                1.4,
+                1.2,
+                1.0
+              ],
+              "urine_output_ml": [
+                500.0,
+                800.0,
+                1000.0,
+                1200.0,
+                1400.0,
+                600.0,
+                800.0,
+                1000.0
+              ],
+              "mechanical_ventilation": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                0.0,
+                0.0
+              ]
+            },
+            "reasoning": "患者目前处于低血压、意识水平下降和器官功能障碍加重状态，提示脓毒症进展。启动去甲肾上腺素输注，并根据血管反应性改善趋势进行剂量递减，表明病情可能趋于稳定。然而，仍需密切监测，以防止感染性休克复发或器官功能进一步衰竭。去甲肾上腺素的递减提示血管反应性改善，但仍需警惕。"
+          },
+          "sofa_scores_series": {
+            "sofa_respiration": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "sofa_coagulation": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "sofa_liver": [
+              2,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "sofa_cardiovascular": [
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "sofa_cns": [
+              3,
+              3,
+              2,
+              2,
+              2,
+              1,
+              1,
+              0
+            ],
+            "sofa_renal": [
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          },
+          "hourly_sofa_totals": {
+            "0": 11,
+            "1": 10,
+            "2": 8,
+            "3": 6,
+            "4": 6,
+            "5": 4,
+            "6": 4,
+            "7": 2
+          },
+          "sofa_scores": {
+            "sofa_respiration": 1,
+            "sofa_coagulation": 0,
+            "sofa_liver": 0,
+            "sofa_cardiovascular": 1,
+            "sofa_cns": 0,
+            "sofa_renal": 0,
+            "sofa_total": 2
+          }
+        },
+        "timestamp": 1773025451.8247123,
+        "hourly_sofa_totals": {
+          "0": 11,
+          "1": 10,
+          "2": 8,
+          "3": 6,
+          "4": 6,
+          "5": 4,
+          "6": 4,
+          "7": 2
+        },
+        "predicted_sofa_scores": {
+          "sofa_respiration": 1,
+          "sofa_coagulation": 0,
+          "sofa_liver": 0,
+          "sofa_cardiovascular": 1,
+          "sofa_cns": 0,
+          "sofa_renal": 0,
+          "sofa_total": 2
+        },
+        "predicted_sofa_scores_series": {
+          "sofa_respiration": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "sofa_coagulation": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "sofa_liver": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "sofa_cardiovascular": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "sofa_cns": [
+            3,
+            3,
+            2,
+            2,
+            2,
+            1,
+            1,
+            0
+          ],
+          "sofa_renal": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "model": "deepseek-r1:32b",
+      "prediction_file": "./output/deepseek-r1_32b/predict_32759002_deepseek-r1_32b.json",
+      "dynamic_confidence": 0.1594202893297963,
+      "total_confidence": 0.32753623146383704,
+      "total_score": 0.32753623146383704,
+      "eval_breakdown": [
+        {
+          "evaluator": "deepseek-r1:32b",
+          "score": 1.0,
+          "trust_weight": 0.32753623146383704,
+          "dynamic_confidence": 0.1594202893297963,
+          "total_confidence": 0.32753623146383704,
+          "weighted_score": 0.32753623146383704
+        },
+        {
+          "evaluator": "gemma3:12b",
+          "score": 0.0,
+          "trust_weight": 0.30572394202752984,
+          "dynamic_confidence": 0.13215492753441227,
+          "total_confidence": 0.30572394202752984,
+          "weighted_score": 0.0,
+          "report_file": "output/gemma3/evaluator_32759002_gemma3_12b_20260309_110413.json"
+        },
+        {
+          "evaluator": "qwen3:30b",
+          "score": 0.0,
+          "trust_weight": 0.5298163436316534,
+          "dynamic_confidence": 0.41227042953956666,
+          "total_confidence": 0.5298163436316534,
+          "weighted_score": 0.0,
+          "report_file": "output/qwen3/evaluator_32759002_qwen3_30b_20260309_110413.json"
+        }
+      ],
+      "prediction_data": {
+        "patient_id": "32759002",
+        "model_name": "deepseek-r1:32b",
+        "input_description": "ICU住院编号 32759002，对应患者编号 19425678，28岁男性，体重116.7kg。监测持续时间为 0 小时（共 7 次测量，每4小时一次）：【生命体征】心率变化：[80.67, 80.67]（单位：次/分）收缩压变化：[69.67, 69.67]（单位：mmHg）舒张压变化：[49.67, 49.67]（单位：mmHg）体温变化：[N/A, N/A]（单位：℃）呼吸频率变化：[26.0, 26.0]（单位：次/分）血氧饱和度变化：[100.0, 100.0]（单位：%）平均动脉压变化：[56.33, 56.33]（单位：mmHg）【SOFA评分相关特征】氧合指数变化：[191.58, 191.58, 191.58, 191.58, 191.58, 191.58, 191.58]（单位：mmHg）机械通气使用情况：[0, 0, 0, 0, 0, 0, 0]（单位：）血小板计数变化：[42.0, 39.0, 44.5, 42.0, 42.0, 42.0, 42.0]（单位：×10³/μL）总胆红素变化：[12.3, 12.3, 12.3, 12.3, 12.3, 12.3, 12.3]（单位：mg/dL）血管活性药物使用剂量：[0.0, 0.0, 0.0, 0.0, 0.0, 10.0, 10.0]（单位：μg/kg/min）格拉斯哥昏迷评分变化：[15, 15, 15, 15, 15, 3, 3]（单位：分）血清肌酐变化：[1.3, 1.4, 1.3, 1.3, 1.3, 1.3, 1.3]（单位：mg/dL）尿量变化：[0.0, 0.0, 0.0, 0.0, 0.0, 20.0, 20.0]（单位：mL）【疾病评分】SOFA总分变化：[4, 4, 0, 0, 3, 13, 13]（单位：分）SIRS评分变化：[0, 0, 0, 0, 0, 1, 1]（单位：分）",
+        "intervention": "立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+        "dynamic_confidence": 0.21256038577306172,
+        "total_confidence": 0.3274119971770263,
+        "prediction": {
+          "intervention_analysis": {
+            "risk_level": "low",
+            "sofa_related_features": {
+              "pao2_fio2_ratio": [
+                300.0,
+                310.0,
+                320.0,
+                330.0,
+                340.0,
+                350.0,
+                360.0,
+                370.0
+              ],
+              "platelet": [
+                80.0,
+                90.0,
+                100.0,
+                110.0,
+                120.0,
+                130.0,
+                140.0,
+                150.0
+              ],
+              "bilirubin_total": [
+                2.6,
+                2.5,
+                2.4,
+                2.3,
+                2.2,
+                2.1,
+                2.0,
+                1.9
+              ],
+              "vasopressor_rate": [
+                10.0,
+                9.0,
+                8.0,
+                7.0,
+                6.0,
+                5.0,
+                4.0,
+                3.0
+              ],
+              "gcs_total": [
+                8.0,
+                9.0,
+                10.0,
+                11.0,
+                12.0,
+                13.0,
+                14.0,
+                15.0
+              ],
+              "creatinine": [
+                2.4,
+                2.2,
+                2.0,
+                1.8,
+                1.6,
+                1.4,
+                1.2,
+                1.0
+              ],
+              "urine_output_ml": [
+                600.0,
+                700.0,
+                800.0,
+                900.0,
+                1000.0,
+                1100.0,
+                1200.0,
+                1300.0
+              ],
+              "mechanical_ventilation": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "reasoning": "患者目前处于严重脓毒症状态，伴随多器官功能障碍和意识状态恶化，提示感染性休克风险极高。立即启动去甲肾上腺素输注以维持血压和器官灌注，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善。未来8小时内，患者的状况可能会趋于稳定或有所改善，但感染性休克的风险仍然存在。"
+          },
+          "sofa_scores_series": {
+            "sofa_respiration": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "sofa_coagulation": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ],
+            "sofa_liver": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1
+            ],
+            "sofa_cardiovascular": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1
+            ],
+            "sofa_cns": [
+              3,
+              3,
+              2,
+              2,
+              2,
+              1,
+              1,
+              0
+            ],
+            "sofa_renal": [
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          },
+          "hourly_sofa_totals": {
+            "0": 12,
+            "1": 12,
+            "2": 10,
+            "3": 9,
+            "4": 9,
+            "5": 7,
+            "6": 7,
+            "7": 3
+          },
+          "sofa_scores": {
+            "sofa_respiration": 1,
+            "sofa_coagulation": 0,
+            "sofa_liver": 1,
+            "sofa_cardiovascular": 1,
+            "sofa_cns": 0,
+            "sofa_renal": 0,
+            "sofa_total": 3
+          }
+        },
+        "timestamp": 1773025452.5240154,
+        "hourly_sofa_totals": {
+          "0": 12,
+          "1": 12,
+          "2": 10,
+          "3": 9,
+          "4": 9,
+          "5": 7,
+          "6": 7,
+          "7": 3
+        },
+        "predicted_sofa_scores": {
+          "sofa_respiration": 1,
+          "sofa_coagulation": 0,
+          "sofa_liver": 1,
+          "sofa_cardiovascular": 1,
+          "sofa_cns": 0,
+          "sofa_renal": 0,
+          "sofa_total": 3
+        },
+        "predicted_sofa_scores_series": {
+          "sofa_respiration": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "sofa_coagulation": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "sofa_liver": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1
+          ],
+          "sofa_cardiovascular": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            1
+          ],
+          "sofa_cns": [
+            3,
+            3,
+            2,
+            2,
+            2,
+            1,
+            1,
+            0
+          ],
+          "sofa_renal": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "model": "qwen3:30b",
+      "prediction_file": "./output/qwen3_30b/predict_32759002_qwen3_30b.json",
+      "dynamic_confidence": 0.41227042953956666,
+      "total_confidence": 0.5298163436316534,
+      "total_score": 0.5298163436316534,
+      "eval_breakdown": [
+        {
+          "evaluator": "qwen3:30b",
+          "score": 1.0,
+          "trust_weight": 0.5298163436316534,
+          "dynamic_confidence": 0.41227042953956666,
+          "total_confidence": 0.5298163436316534,
+          "weighted_score": 0.5298163436316534
+        },
+        {
+          "evaluator": "gemma3:12b",
+          "score": 0.0,
+          "trust_weight": 0.30572394202752984,
+          "dynamic_confidence": 0.13215492753441227,
+          "total_confidence": 0.30572394202752984,
+          "weighted_score": 0.0,
+          "report_file": "output/gemma3/evaluator_32759002_gemma3_12b_20260309_110413.json"
+        },
+        {
+          "evaluator": "deepseek-r1:32b",
+          "score": 0.0,
+          "trust_weight": 0.32753623146383704,
+          "dynamic_confidence": 0.1594202893297963,
+          "total_confidence": 0.32753623146383704,
+          "weighted_score": 0.0,
+          "report_file": "output/deepseek-r1/evaluator_32759002_deepseek-r1_32b_20260309_110413.json"
+        }
+      ],
+      "prediction_data": {
+        "patient_id": "32759002",
+        "model_name": "qwen3:30b",
+        "input_description": "ICU住院编号 32759002，对应患者编号 19425678，28岁男性，体重116.7kg。监测持续时间为 0 小时（共 7 次测量，每4小时一次）：【生命体征】心率变化：[80.67, 80.67]（单位：次/分）收缩压变化：[69.67, 69.67]（单位：mmHg）舒张压变化：[49.67, 49.67]（单位：mmHg）体温变化：[N/A, N/A]（单位：℃）呼吸频率变化：[26.0, 26.0]（单位：次/分）血氧饱和度变化：[100.0, 100.0]（单位：%）平均动脉压变化：[56.33, 56.33]（单位：mmHg）【SOFA评分相关特征】氧合指数变化：[191.58, 191.58, 191.58, 191.58, 191.58, 191.58, 191.58]（单位：mmHg）机械通气使用情况：[0, 0, 0, 0, 0, 0, 0]（单位：）血小板计数变化：[42.0, 39.0, 44.5, 42.0, 42.0, 42.0, 42.0]（单位：×10³/μL）总胆红素变化：[12.3, 12.3, 12.3, 12.3, 12.3, 12.3, 12.3]（单位：mg/dL）血管活性药物使用剂量：[0.0, 0.0, 0.0, 0.0, 0.0, 10.0, 10.0]（单位：μg/kg/min）格拉斯哥昏迷评分变化：[15, 15, 15, 15, 15, 3, 3]（单位：分）血清肌酐变化：[1.3, 1.4, 1.3, 1.3, 1.3, 1.3, 1.3]（单位：mg/dL）尿量变化：[0.0, 0.0, 0.0, 0.0, 0.0, 20.0, 20.0]（单位：mL）【疾病评分】SOFA总分变化：[4, 4, 0, 0, 3, 13, 13]（单位：分）SIRS评分变化：[0, 0, 0, 0, 0, 1, 1]（单位：分）",
+        "intervention": "立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善，评估8小时内发生感染性休克的风险",
+        "dynamic_confidence": 0.5496939060527556,
+        "total_confidence": 0.5989048208805212,
+        "prediction": {
+          "intervention_analysis": {
+            "risk_level": "moderate",
+            "sofa_related_features": {
+              "pao2_fio2_ratio": [
+                250.0,
+                260.0,
+                270.0,
+                280.0,
+                290.0,
+                300.0,
+                310.0,
+                320.0
+              ],
+              "platelet": [
+                100.0,
+                105.0,
+                110.0,
+                115.0,
+                120.0,
+                125.0,
+                130.0,
+                135.0
+              ],
+              "bilirubin_total": [
+                2.5,
+                2.4,
+                2.3,
+                2.2,
+                2.1,
+                2.0,
+                1.9,
+                1.8
+              ],
+              "vasopressor_rate": [
+                10.0,
+                9.5,
+                9.0,
+                8.5,
+                8.0,
+                7.5,
+                7.0,
+                6.5
+              ],
+              "gcs_total": [
+                3.0,
+                4.0,
+                5.0,
+                6.0,
+                7.0,
+                8.0,
+                9.0,
+                10.0
+              ],
+              "creatinine": [
+                2.5,
+                2.4,
+                2.3,
+                2.2,
+                2.1,
+                2.0,
+                1.9,
+                1.8
+              ],
+              "urine_output_ml": [
+                500.0,
+                600.0,
+                700.0,
+                800.0,
+                900.0,
+                1000.0,
+                1100.0,
+                1200.0
+              ],
+              "mechanical_ventilation": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "reasoning": "患者当前处于感染性休克状态，表现为持续低血压（收缩压69.67 mmHg）、血管活性药物依赖（10 μg/kg/min）及严重意识障碍（GCS 3），SOFA评分13分，提示多器官功能衰竭。干预措施包括立即启动去甲肾上腺素输注，维持剂量为10.0μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递减趋势，提示血管反应性改善。基于当前状态和干预措施，预计未来8小时内血压和器官灌注将逐步改善，但患者意识障碍和多器官功能衰竭仍需密切监测。当前干预措施有效，但风险仍然存在，需持续监测以防止恶化。"
+          },
+          "sofa_scores_series": {
+            "sofa_respiration": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "sofa_coagulation": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "sofa_liver": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1
+            ],
+            "sofa_cardiovascular": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "sofa_cns": [
+              4,
+              4,
+              4,
+              4,
+              3,
+              3,
+              3,
+              2
+            ],
+            "sofa_renal": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          "hourly_sofa_totals": {
+            "0": 12,
+            "1": 12,
+            "2": 12,
+            "3": 12,
+            "4": 11,
+            "5": 11,
+            "6": 9,
+            "7": 8
+          },
+          "sofa_scores": {
+            "sofa_respiration": 1,
+            "sofa_coagulation": 1,
+            "sofa_liver": 1,
+            "sofa_cardiovascular": 2,
+            "sofa_cns": 2,
+            "sofa_renal": 1,
+            "sofa_total": 8
+          }
+        },
+        "timestamp": 1773025453.0513217,
+        "hourly_sofa_totals": {
+          "0": 12,
+          "1": 12,
+          "2": 12,
+          "3": 12,
+          "4": 11,
+          "5": 11,
+          "6": 9,
+          "7": 8
+        },
+        "predicted_sofa_scores": {
+          "sofa_respiration": 1,
+          "sofa_coagulation": 1,
+          "sofa_liver": 1,
+          "sofa_cardiovascular": 2,
+          "sofa_cns": 2,
+          "sofa_renal": 1,
+          "sofa_total": 8
+        },
+        "predicted_sofa_scores_series": {
+          "sofa_respiration": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "sofa_coagulation": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "sofa_liver": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1
+          ],
+          "sofa_cardiovascular": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "sofa_cns": [
+            4,
+            4,
+            4,
+            4,
+            3,
+            3,
+            3,
+            2
+          ],
+          "sofa_renal": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "eval_breakdown": [
+    {
+      "evaluator": "qwen3:30b",
+      "score": 1.0,
+      "trust_weight": 0.5298163436316534,
+      "dynamic_confidence": 0.41227042953956666,
+      "total_confidence": 0.5298163436316534,
+      "weighted_score": 0.5298163436316534
+    },
+    {
+      "evaluator": "gemma3:12b",
+      "score": 0.0,
+      "trust_weight": 0.30572394202752984,
+      "dynamic_confidence": 0.13215492753441227,
+      "total_confidence": 0.30572394202752984,
+      "weighted_score": 0.0,
+      "report_file": "output/gemma3/evaluator_32759002_gemma3_12b_20260309_110413.json"
+    },
+    {
+      "evaluator": "deepseek-r1:32b",
+      "score": 0.0,
+      "trust_weight": 0.32753623146383704,
+      "dynamic_confidence": 0.1594202893297963,
+      "total_confidence": 0.32753623146383704,
+      "weighted_score": 0.0,
+      "report_file": "output/deepseek-r1/evaluator_32759002_deepseek-r1_32b_20260309_110413.json"
+    }
+  ]
+}

@@ -56,8 +56,15 @@
 - **[test_viz.py](file:///data/wzx/test_viz.py)** / **[test_gui_viz.py](file:///data/wzx/test_gui_viz.py)**: 可视化功能的单元测试脚本。
 - **[viz.py](file:///data/wzx/viz.py)**: (未直接列出但被引用) 绘图后端，支持趋势图和雷达图生成。
 
-## 7. 文档与说明 (Documentation)
-- **[README.md](file:///data/wzx/README.md)**: 项目总体介绍。
+## 7. 经验知识库 (Experience & Knowledge Base)
+- **[advanced_experience_memory.py](file:///data/wzx/advanced_experience_memory.py)**: 前沿混合记忆经验库的核心实现。包含情景记忆、语义记忆和程序记忆的三层架构，支持混合检索（语义+符号+质量+时效）和在线巩固。
+- **[experience_integration.py](file:///data/wzx/experience_integration.py)**: 经验库集成模块。负责将经验检索无缝接入预测流程，实现从 `AdvancedExperienceMemoryBank` 到旧版 `ExperienceKnowledgeBase` 的自动回退与兼容。
+- **[experience_knowledge_base.py](file:///data/wzx/experience_knowledge_base.py)**: 基础版经验知识库实现。提供基本的相似病例检索功能，作为系统的保底方案。
+
+## 8. 文档与说明 (Documentation)
+- **[README.md](file:///data/wzx/README.md)**: 项目总体介绍，包含 GitHub 提交指南与最新功能说明。
 - **[PROJECT_CONFIG.md](file:///data/wzx/PROJECT_CONFIG.md)**: 项目配置参数说明。
 - **[usage_instructions.txt](file:///data/wzx/usage_instructions.txt)** / **[readme.txt](file:///data/wzx/readme.txt)**: 使用说明与简单备注。
 - **[技术路线终稿.pdf](file:///data/wzx/技术路线终稿.pdf)**: 项目设计的核心技术文档。
+- **[TECHNICAL_ROUTE_EXPERIENCE_MEMORY.md](file:///data/wzx/TECHNICAL_ROUTE_EXPERIENCE_MEMORY.md)**: 经验记忆系统的详细技术路线文档，阐述了混合记忆架构、检索评分公式及系统集成方式。
+- **[EXECUTABLE_REFACTOR_CHECKLIST.md](file:///data/wzx/EXECUTABLE_REFACTOR_CHECKLIST.md)**: 函数级重构清单。列出了为支持新经验库所需的具体代码改造点，如阈值解析和高危门控逻辑。

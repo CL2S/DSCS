@@ -1,0 +1,109 @@
+{
+  "timestamp": "2025-12-29 16:36:33",
+  "model_name": "qwen3:30b",
+  "prediction_model_name": "qwen3:30b",
+  "patient_id": "39816062",
+  "input_description": "ICU住院编号 39816062，对应患者编号 17911943， a 19-year-old male weighing 73.0 kg. The monitoring duration is 0 hours (a total of 7 measurements, once every 4 hours): 【Vital signs】 Heart rate changes: [86.33, 86.33] (Unit: beats/min) Systolic blood pressure changes: [78.0, 78.0] (Unit: mmHg) Diastolic blood pressure changes: [62.0, 62.0] (Unit: mmHg) Body temperature changes: [98.75, 98.75] (Unit: °C) Respiratory rate changes: [17.67, 17.67] (Unit: breaths/min) Oxygen saturation changes: [100.0, 100.0] (Unit: %) Mean arterial pressure changes: [67.33, 67.33] (Unit: mmHg) 【Characteristics related to SOFA score】 Oxygenation index changes: [311.17, 311.17, 311.17, 311.17, 311.17, 311.17, 311.17] (Unit: mmHg) Mechanical ventilation usage: [0, 0, 0, 0, 0, 0, 0] (Unit: ) Platelet count changes: [75.0, 109.0, 109.0, 109.0, 109.0, 109.0, 109.0] (Unit: ×10³/μL) Total bilirubin changes: [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6] (Unit: mg/dL) Vasoactive drug dosage: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] (Unit: μg/kg/min) Glasgow Coma Scale score changes: [15, 15, 15, 15, 15, 15, 15] (Unit: points) Serum creatinine changes: [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1] (Unit: mg/dL) Urine output changes: [0.0, 0.0, 0.0, 0.0, 0.0, 240.0, 240.0] (Unit: mL) 【Disease scores】 Total SOFA score changes: [0, 0, 0, 0, 2, 5, 5] (Unit: points) SIRS score changes: [0, 0, 0, 0, 1, 2, 2] (Unit: points)",
+  "intervention": "Immediately initiate norepinephrine infusion at a maintenance dose of 10.0 μg·kg⁻¹·min⁻¹, with a dose adjustment interval of 2 hours. Closely monitor blood pressure and organ perfusion. An increasing dose trend indicates a decrease in vascular reactivity. Assess the risk of septic shock within 8 hours.",
+  "evaluator_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 16,
+    "dynamic_confidence": 0.0,
+    "total_confidence": 0.1591496960383168
+  },
+  "prediction_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 16,
+    "dynamic_confidence": 0.0,
+    "total_confidence": 0.1591496960383168
+  },
+  "predicted_vital_signs": {
+    "pao2_fio2_ratio": [
+      280.0,
+      260.0,
+      240.0,
+      220.0,
+      200.0,
+      180.0,
+      160.0,
+      140.0
+    ],
+    "platelet": [
+      75.0,
+      70.0,
+      65.0,
+      60.0,
+      55.0,
+      50.0,
+      45.0,
+      40.0
+    ],
+    "bilirubin_total": [
+      1.5,
+      1.7,
+      1.9,
+      2.1,
+      2.3,
+      2.5,
+      2.7,
+      2.9
+    ],
+    "vasopressor_rate": [
+      10.0,
+      10.5,
+      11.0,
+      11.5,
+      12.0,
+      12.5,
+      13.0,
+      13.5
+    ],
+    "gcs_total": [
+      13.0,
+      12.5,
+      12.0,
+      11.5,
+      11.0,
+      10.5,
+      10.0,
+      9.5
+    ],
+    "creatinine": [
+      1.3,
+      1.4,
+      1.5,
+      1.6,
+      1.7,
+      1.8,
+      1.9,
+      2.0
+    ],
+    "urine_output_ml": [
+      500.0,
+      450.0,
+      400.0,
+      350.0,
+      300.0,
+      250.0,
+      200.0,
+      150.0
+    ],
+    "mechanical_ventilation": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "confidence_score": 0.0,
+  "evaluation": {
+    "success": false,
+    "model_output": null,
+    "error": "Ollama命令执行超时"
+  },
+  "key_reasons": []
+}

@@ -1,0 +1,463 @@
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 1}
+ \label{tab:patient1}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{30117609} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.806 & 0.771 & 0.782 \\
+ Evaluation Score & 1 & 0.650 & 0.300 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[7, 8, 8, 10, 10, 11, 11, 13]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.750} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 9, 9, 9, 11, 11, 12, 13]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[8, 13, 12, 13, 14, 16, 16, 16]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.817} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 4, 4, 4, 15, 15]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 2}
+ \label{tab:patient2}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{30315020} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.816 & 0.764 & 0.760 \\
+ Evaluation Score & 1 & 0.850 & 0.650 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[9, 8, 8, 8, 8, 8, 5, 5]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.550} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[11, 11, 9, 8, 8, 6, 6, 3]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[8, 6, 5, 4, 4, 4, 4, 4]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.618} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 4, 7, 5, 9, 9]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 3}
+ \label{tab:patient3}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{30717105} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.826 & 0.737 & 0.750 \\
+ Evaluation Score & 1 & 0.650 & 0.250 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[7, 7, 9, 9, 9, 11, 11, 10]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 8, 7, 8, 10, 10, 11, 14]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[9, 13, 12, 12, 14, 15, 16, 16]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[15, 13, 15, 19, 13, 15, 15]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 4}
+ \label{tab:patient4}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{30835026} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.837 & 0.711 & 0.735 \\
+ Evaluation Score & 1 & 0.550 & 0.750 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[7, 8, 8, 11, 11, 11, 13, 13]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[6, 8, 8, 10, 11, 11, 11, 11]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[6, 8, 9, 9, 10, 10, 13, 12]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 7, 6, 6, 15, 15]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 5}
+ \label{tab:patient5}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{30861515} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.847 & 0.728 & 0.702 \\
+ Evaluation Score & 1 & 0.230 & 0.450 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[6, 8, 8, 9, 10, 11, 11, 11]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[5, 7, 7, 7, 7, 10, 10, 10]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.750} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[5, 10, 8, 9, 8, 12, 14, 14]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.819} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 5, 4, 8, 5, 11, 11]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 6}
+ \label{tab:patient6}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{30893431} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.857 & 0.710 & 0.688 \\
+ Evaluation Score & 1 & 0.850 & 0.650 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[9, 7, 7, 6, 6, 6, 3, 3]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.600} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[10, 8, 6, 5, 4, 4, 1, 1]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[5, 4, 3, 3, 3, 3, 3, 4]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.635} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[10, 7, 6, 5, 14, 13, 13]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 7}
+ \label{tab:patient7}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{30983281} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.867 & 0.693 & 0.661 \\
+ Evaluation Score & 1 & 0.750 & 0.450 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[9, 10, 12, 14, 14, 14, 14, 15]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[6, 8, 10, 11, 13, 13, 14, 15]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[10, 11, 14, 15, 18, 19, 19, 19]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 4, 4, 4, 15, 15]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 8}
+ \label{tab:patient8}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{31149608} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.877 & 0.677 & 0.645 \\
+ Evaluation Score & 1 & 0.750 & 0.650 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[7, 6, 5, 5, 5, 5, 3, 2]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[8, 9, 9, 9, 9, 10, 11, 11]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[8, 7, 6, 5, 3, 3, 4, 4]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 4, 8, 4, 13, 13]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 9}
+ \label{tab:patient9}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{31613211} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.888 & 0.662 & 0.631 \\
+ Evaluation Score & 1 & 0.650 & 0.650 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[5, 5, 5, 6, 5, 4, 4, 4]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.600} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[8, 6, 6, 5, 4, 3, 3, 3]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.600} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[7, 6, 6, 4, 3, 3, 4, 4]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.620} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 4, 4, 1, 11, 11]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 10}
+ \label{tab:patient10}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{31703381} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.898 & 0.711 & 0.750 \\
+ Evaluation Score & 1 & 0.450 & 0.350 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.920} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[9, 9, 9, 11, 12, 13, 12, 12]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.750} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[2, 7, 6, 7, 8, 9, 11, 11]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 7, 7, 8, 9, 11, 12, 15]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.849} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 8, 4, 6, 6, 14, 14]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 11}
+ \label{tab:patient11}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{32026706} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.908 & 0.609 & 0.641 \\
+ Evaluation Score & 1 & 0.650 & 0.400 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[9, 9, 9, 8, 8, 8, 5, 4]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[9, 8, 8, 5, 4, 4, 3, 1]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.750} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[3, 6, 6, 7, 8, 9, 11, 11]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.680} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[11, 5, 7, 10, 12, 21, 21]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 12}
+ \label{tab:patient12}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{32092423} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.918 & 0.606 & 0.647 \\
+ Evaluation Score & 1 & 0.450 & 0.250 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[12, 12, 14, 15, 15, 15, 17, 15]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[1, 1, 3, 4, 5, 5, 7, 7]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.750} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[2, 4, 6, 7, 7, 9, 11, 12]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.762} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[10, 10, 4, 4, 7, 13, 13]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 13}
+ \label{tab:patient13}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{32115504} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.929 & 0.639 & 0.598 \\
+ Evaluation Score & 1 & 0.350 & 0.650 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[7, 8, 8, 7, 7, 11, 11, 11]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[2, 7, 6, 7, 8, 9, 11, 11]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[8, 10, 11, 13, 12, 13, 15, 15]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 4, 4, 4, 15, 15]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 14}
+ \label{tab:patient14}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{32154852} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.939 & 0.577 & 0.631 \\
+ Evaluation Score & 1 & 0.450 & 0.400 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[6, 7, 8, 7, 7, 10, 10, 10]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[2, 5, 6, 7, 7, 6, 8, 8]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.750} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[5, 7, 9, 9, 10, 12, 13, 12]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.823} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 8, 4, 4, 6, 10, 10]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 15}
+ \label{tab:patient15}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{32675591} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & gemma3:12b & deepseek-r1:32b \\
+ Confidence & 0.949 & 0.545 & 0.615 \\
+ Evaluation Score & 1 & 0.650 & 0.700 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[6, 8, 9, 8, 9, 11, 11, 12]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.850} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[8, 8, 8, 7, 7, 8, 8, 8]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{1.000} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[6, 8, 10, 10, 10, 12, 12, 13]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{1.000} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[4, 4, 4, 4, 4, 12, 12]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \caption{Model Evaluation for Patient 16}
+ \label{tab:patient16}
+ \begin{tabular}{cccc}
+ \toprule
+ \textbf{ Patient ID } & \multicolumn{3}{c}{32759002} \\
+ \midrule
+ \textbf{ Type } & \textbf{ Predict Model } & \textbf{ Evaluate Model 1 } & \textbf{ Evaluate Model 2 } \\
+ LLM Name & qwen3:30b & deepseek-r1:32b & gemma3:12b \\
+ Confidence & 0.959 & 0.596 & 0.528 \\
+ Evaluation Score & 1 & 0.850 & 0.650 \\
+ \midrule
+ \addlinespace
+ \multirow{2}{*}{\textbf{ Best Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[12, 12, 12, 12, 11, 11, 9, 8]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 1} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.750} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[12, 12, 10, 9, 9, 7, 7, 3]$} \\
+ \midrule
+ \multirow{2}{*}{Other Result 2} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.650} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[11, 10, 8, 6, 6, 4, 4, 2]$} \\
+ \midrule
+ \multirow{2}{*}{\textbf{ Actual Result }} & \textbf{ risk\_level } & \multicolumn{2}{c}{0.679} \\
+      & \textbf{ SOFA score } & \multicolumn{2}{c}{$[7, 7, 4, 4, 7, 22, 22]$} \\
+ \bottomrule
+ \end{tabular}
+\end{table}

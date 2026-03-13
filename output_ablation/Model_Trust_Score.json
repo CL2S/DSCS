@@ -1,0 +1,22 @@
+{
+  "meditron:7b": {
+    "average_score": 0.8485503454419141,
+    "count": 72
+  },
+  "medllama2:latest": {
+    "average_score": 0.8014076421576506,
+    "count": 72
+  },
+  "qwen3:30b": {
+    "average_score": 0.795748480191584,
+    "count": 72
+  },
+  "gemma3:12b": {
+    "average_score": 0.7895232869269068,
+    "count": 73
+  },
+  "deepseek-r1:32b": {
+    "average_score": 0.7868184427928845,
+    "count": 72
+  }
+}

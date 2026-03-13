@@ -1,0 +1,550 @@
+{
+  "total_cases": 18,
+  "cases_summary": [
+    {
+      "case_id": "exp_32115504_1773025451",
+      "patient_id": "32115504",
+      "quality_score": 1.0,
+      "tags": [
+        "elderly",
+        "m",
+        "norepinephrine",
+        "risk_high",
+        "sofa_high",
+        "high_quality"
+      ],
+      "risk_level": "high",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.541021751675511
+    },
+    {
+      "case_id": "exp_32154852_1773025451",
+      "patient_id": "32154852",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "m",
+        "vasopressor",
+        "risk_high",
+        "sofa_high",
+        "high_quality"
+      ],
+      "risk_level": "high",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.450852547447581
+    },
+    {
+      "case_id": "exp_30717105_1773025451",
+      "patient_id": "30717105",
+      "quality_score": 1.0,
+      "tags": [
+        "young",
+        "m",
+        "norepinephrine",
+        "risk_high",
+        "sofa_high",
+        "high_quality"
+      ],
+      "risk_level": "high",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.4930253084837073
+    },
+    {
+      "case_id": "exp_31149608_1773025451",
+      "patient_id": "31149608",
+      "quality_score": 1.0,
+      "tags": [
+        "elderly",
+        "m",
+        "norepinephrine",
+        "risk_low",
+        "sofa_low",
+        "high_quality"
+      ],
+      "risk_level": "low",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.804350330964861
+    },
+    {
+      "case_id": "exp_30861515_1773025451",
+      "patient_id": "30861515",
+      "quality_score": 1.0,
+      "tags": [
+        "elderly",
+        "m",
+        "vasopressor",
+        "risk_high",
+        "sofa_high",
+        "high_quality"
+      ],
+      "risk_level": "high",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.3302127642047077
+    },
+    {
+      "case_id": "exp_30893431_1773025451",
+      "patient_id": "30893431",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "m",
+        "norepinephrine",
+        "risk_low",
+        "sofa_low",
+        "high_quality"
+      ],
+      "risk_level": "low",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.9078163228436171
+    },
+    {
+      "case_id": "exp_30835026_1773025451",
+      "patient_id": "30835026",
+      "quality_score": 1.0,
+      "tags": [
+        "elderly",
+        "m",
+        "vasopressor",
+        "risk_critical",
+        "sofa_critical",
+        "high_quality"
+      ],
+      "risk_level": "critical",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.7790689853001147
+    },
+    {
+      "case_id": "exp_32026706_1773025451",
+      "patient_id": "32026706",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "f",
+        "norepinephrine",
+        "risk_low",
+        "sofa_low",
+        "high_quality"
+      ],
+      "risk_level": "low",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.5601117377416804
+    },
+    {
+      "case_id": "exp_32675591_1773025451",
+      "patient_id": "32675591",
+      "quality_score": 0.87624976289229,
+      "tags": [
+        "elderly",
+        "f",
+        "norepinephrine",
+        "risk_high",
+        "sofa_critical",
+        "high_quality"
+      ],
+      "risk_level": "high",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 0.9723970338515985
+    },
+    {
+      "case_id": "exp_31703381_1773025451",
+      "patient_id": "31703381",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "m",
+        "vasopressor",
+        "risk_high",
+        "sofa_critical",
+        "high_quality"
+      ],
+      "risk_level": "high",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.4003692085577966
+    },
+    {
+      "case_id": "exp_39816062_1773025451",
+      "patient_id": "39816062",
+      "quality_score": 0.8854135828567483,
+      "tags": [
+        "young",
+        "m",
+        "norepinephrine",
+        "risk_high",
+        "sofa_high",
+        "high_quality"
+      ],
+      "risk_level": "high",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.0007895099851098
+    },
+    {
+      "case_id": "exp_30983281_1773025451",
+      "patient_id": "30983281",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "m",
+        "norepinephrine",
+        "risk_critical",
+        "sofa_critical",
+        "high_quality"
+      ],
+      "risk_level": "critical",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.684698871282546
+    },
+    {
+      "case_id": "exp_30117609_1773025451",
+      "patient_id": "30117609",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "m",
+        "norepinephrine",
+        "risk_critical",
+        "sofa_critical",
+        "high_quality"
+      ],
+      "risk_level": "critical",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.5416613146740237
+    },
+    {
+      "case_id": "exp_32759002_1773025451",
+      "patient_id": "32759002",
+      "quality_score": 1.0,
+      "tags": [
+        "young",
+        "m",
+        "norepinephrine",
+        "risk_moderate",
+        "sofa_moderate",
+        "high_quality"
+      ],
+      "risk_level": "moderate",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.809080764675623
+    },
+    {
+      "case_id": "exp_31613211_1773025451",
+      "patient_id": "31613211",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "f",
+        "norepinephrine",
+        "risk_low",
+        "sofa_low",
+        "high_quality"
+      ],
+      "risk_level": "low",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.7281728987393625
+    },
+    {
+      "case_id": "exp_30315020_1773025451",
+      "patient_id": "30315020",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "m",
+        "norepinephrine",
+        "risk_low",
+        "sofa_low",
+        "high_quality"
+      ],
+      "risk_level": "low",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.959523006345886
+    },
+    {
+      "case_id": "exp_32092423_1773025451",
+      "patient_id": "32092423",
+      "quality_score": 1.0,
+      "tags": [
+        "middle_aged",
+        "f",
+        "vasopressor",
+        "risk_critical",
+        "sofa_critical",
+        "high_quality"
+      ],
+      "risk_level": "critical",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 1.3528479996062286
+    },
+    {
+      "case_id": "exp_32759002_1773025453",
+      "patient_id": "32759002",
+      "quality_score": 0.6424466062906946,
+      "tags": [
+        "young",
+        "m",
+        "norepinephrine",
+        "risk_moderate",
+        "sofa_moderate",
+        "medium_quality"
+      ],
+      "risk_level": "moderate",
+      "prediction_model": "qwen3:30b",
+      "total_confidence": 0.5298163436316534
+    }
+  ],
+  "knowledge_rules": [
+    {
+      "rule_id": "rule_exp_32115504_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "severe",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "deteriorate",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "deteriorate",
+        "gcs_total": "improve",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_32115504_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_32154852_1773025451",
+      "intervention_type": "vasopressor",
+      "initial_state": "moderate",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "deteriorate",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "stable",
+        "gcs_total": "deteriorate",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_32154852_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_30717105_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "severe",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "deteriorate",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "deteriorate",
+        "gcs_total": "stable",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_30717105_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_31149608_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "critical",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "stable",
+        "gcs_total": "stable",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_31149608_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_30861515_1773025451",
+      "intervention_type": "vasopressor",
+      "initial_state": "moderate",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "deteriorate",
+        "platelet": "deteriorate",
+        "bilirubin_total": "deteriorate",
+        "vasopressor_rate": "deteriorate",
+        "gcs_total": "deteriorate",
+        "creatinine": "improve"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_30861515_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_30893431_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "severe",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "improve",
+        "gcs_total": "improve",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_30893431_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_30835026_1773025451",
+      "intervention_type": "vasopressor",
+      "initial_state": "severe",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "stable",
+        "gcs_total": "deteriorate",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_30835026_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_32026706_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "critical",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "improve",
+        "gcs_total": "improve",
+        "creatinine": "improve"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_32026706_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_32675591_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "moderate",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "deteriorate",
+        "bilirubin_total": "deteriorate",
+        "vasopressor_rate": "deteriorate",
+        "gcs_total": "deteriorate",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 0.87624976289229,
+      "source_case": "exp_32675591_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_31703381_1773025451",
+      "intervention_type": "vasopressor",
+      "initial_state": "severe",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "deteriorate",
+        "platelet": "stable",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "stable",
+        "gcs_total": "deteriorate",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_31703381_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_39816062_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "moderate",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "deteriorate",
+        "platelet": "deteriorate",
+        "bilirubin_total": "deteriorate",
+        "vasopressor_rate": "deteriorate",
+        "gcs_total": "deteriorate",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 0.8854135828567483,
+      "source_case": "exp_39816062_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_30983281_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "moderate",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "stable",
+        "platelet": "deteriorate",
+        "bilirubin_total": "deteriorate",
+        "vasopressor_rate": "deteriorate",
+        "gcs_total": "deteriorate",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_30983281_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_30117609_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "severe",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "deteriorate",
+        "bilirubin_total": "improve",
+        "gcs_total": "deteriorate",
+        "creatinine": "improve"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_30117609_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_32759002_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "critical",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "stable",
+        "gcs_total": "improve",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_32759002_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_31613211_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "moderate",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "deteriorate",
+        "bilirubin_total": "deteriorate",
+        "vasopressor_rate": "improve",
+        "gcs_total": "stable",
+        "creatinine": "improve"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_31613211_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_30315020_1773025451",
+      "intervention_type": "norepinephrine",
+      "initial_state": "moderate",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "improve",
+        "bilirubin_total": "improve",
+        "vasopressor_rate": "improve",
+        "gcs_total": "improve",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_30315020_1773025451"
+    },
+    {
+      "rule_id": "rule_exp_32092423_1773025451",
+      "intervention_type": "vasopressor",
+      "initial_state": "critical",
+      "predicted_changes": {
+        "pao2_fio2_ratio": "improve",
+        "platelet": "deteriorate",
+        "bilirubin_total": "deteriorate",
+        "vasopressor_rate": "deteriorate",
+        "gcs_total": "deteriorate",
+        "creatinine": "deteriorate"
+      },
+      "confidence": 1.0,
+      "source_case": "exp_32092423_1773025451"
+    }
+  ],
+  "last_updated": "2026-03-09T11:04:13.290230"
+}

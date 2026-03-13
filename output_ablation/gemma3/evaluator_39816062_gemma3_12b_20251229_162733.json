@@ -1,0 +1,113 @@
+{
+  "timestamp": "2025-12-29 16:27:33",
+  "model_name": "gemma3:12b",
+  "prediction_model_name": "gemma3:12b",
+  "patient_id": "39816062",
+  "input_description": "ICU住院编号 39816062，对应患者编号 17911943， a 19-year-old male weighing 73.0 kg. The monitoring duration is 0 hours (a total of 7 measurements, once every 4 hours): 【Vital signs】 Heart rate changes: [86.33, 86.33] (Unit: beats/min) Systolic blood pressure changes: [78.0, 78.0] (Unit: mmHg) Diastolic blood pressure changes: [62.0, 62.0] (Unit: mmHg) Body temperature changes: [98.75, 98.75] (Unit: °C) Respiratory rate changes: [17.67, 17.67] (Unit: breaths/min) Oxygen saturation changes: [100.0, 100.0] (Unit: %) Mean arterial pressure changes: [67.33, 67.33] (Unit: mmHg) 【Characteristics related to SOFA score】 Oxygenation index changes: [311.17, 311.17, 311.17, 311.17, 311.17, 311.17, 311.17] (Unit: mmHg) Mechanical ventilation usage: [0, 0, 0, 0, 0, 0, 0] (Unit: ) Platelet count changes: [75.0, 109.0, 109.0, 109.0, 109.0, 109.0, 109.0] (Unit: ×10³/μL) Total bilirubin changes: [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6] (Unit: mg/dL) Vasoactive drug dosage: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] (Unit: μg/kg/min) Glasgow Coma Scale score changes: [15, 15, 15, 15, 15, 15, 15] (Unit: points) Serum creatinine changes: [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1] (Unit: mg/dL) Urine output changes: [0.0, 0.0, 0.0, 0.0, 0.0, 240.0, 240.0] (Unit: mL) 【Disease scores】 Total SOFA score changes: [0, 0, 0, 0, 2, 5, 5] (Unit: points) SIRS score changes: [0, 0, 0, 0, 1, 2, 2] (Unit: points)",
+  "intervention": "Immediately initiate norepinephrine infusion at a maintenance dose of 10.0 μg·kg⁻¹·min⁻¹, with a dose adjustment interval of 2 hours. Closely monitor blood pressure and organ perfusion. An increasing dose trend indicates a decrease in vascular reactivity. Assess the risk of septic shock within 8 hours.",
+  "evaluator_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 16,
+    "dynamic_confidence": 0.0,
+    "total_confidence": 0.15790465738538137
+  },
+  "prediction_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 16,
+    "dynamic_confidence": 0.0,
+    "total_confidence": 0.15790465738538137
+  },
+  "predicted_vital_signs": {
+    "pao2_fio2_ratio": [
+      280.0,
+      260.0,
+      240.0,
+      220.0,
+      200.0,
+      350.0,
+      330.0,
+      310.0
+    ],
+    "platelet": [
+      180.0,
+      160.0,
+      140.0,
+      120.0,
+      100.0,
+      80.0,
+      60.0,
+      40.0
+    ],
+    "bilirubin_total": [
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5,
+      5.0
+    ],
+    "vasopressor_rate": [
+      10.0,
+      12.0,
+      14.0,
+      16.0,
+      18.0,
+      20.0,
+      22.0,
+      24.0
+    ],
+    "gcs_total": [
+      14.0,
+      13.0,
+      12.0,
+      11.0,
+      10.0,
+      9.0,
+      8.0,
+      7.0
+    ],
+    "creatinine": [
+      1.2,
+      1.6,
+      2.0,
+      2.4,
+      2.8,
+      3.2,
+      3.6,
+      4.0
+    ],
+    "urine_output_ml": [
+      1800.0,
+      1600.0,
+      1400.0,
+      1200.0,
+      1000.0,
+      800.0,
+      600.0,
+      400.0
+    ],
+    "mechanical_ventilation": [
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "confidence_score": 0.45,
+  "evaluation": {
+    "success": true,
+    "model_output": "置信度评分：0.45\n\n**分析理由：**\n\n总体而言，预测的SOFA相关指标变化在逻辑上与干预措施（去甲肾上腺素）的预期效果有一定的关联，但是细节上存在诸多不合理的地方，导致预测的置信度较低。以下逐一分析：\n\n**1. 各项SOFA相关指标数值的合理性：**\n\n*   **Pao2/Fio2 ratio:** 初始值 280，后续下降至220，再次上升至 310 是合理的，提示可能对呼吸支持效果改变。但数值的精准度过高，实际临床测量精确到这种程度较为罕见。\n*   **Platelet:** 预测值不断下降至40，这在临床上不太可能，除非发生严重的出血或其他导致血小板急剧减少的情况。正常的血小板计数范围为150-450 ×10³/μL, 预测过低。\n*   **Bilirubin_total:** 持续升高，提示肝功能可能受损。升高幅度（从1.6 mg/dL 到 5.0 mg/dL）较快，需要注意是否反映了真实的病情加重，如果仅仅是药物影响，通常不会出现如此快速的变化。\n*   **Vasopressor_rate:** 持续增加，符合去甲肾上腺素剂量调整的逻辑，反映病情恶化，需要更强的血管收缩作用。\n*   **GCS_total:** 持续下降，提示意识障碍。这可能与去甲肾上腺素的影响或病情本身的恶化有关，但如此快速且持续的下降需要警惕颅内压升高或其他神经系统并发症。GCS评分的精确度也过高。\n*   **Creatinine:** 持续升高，提示肾功能受损。升高幅度较快，需要注意是否有急性肾损伤。数值过高且精确度也过高。\n*   **Urine_output_ml:** 初始值高，后续持续下降至 400，这是一个问题。去甲肾上腺素会收缩肾脏血管，减少尿量，初始高尿量是不合理的。\n*   **Mechanical_ventilation:** 切换到机械通气符合病情恶化，考虑呼吸功能支持，但切换时间点略有不合理。\n\n**2. 干预措施的预期效果与SOFA相关指标变化趋势的逻辑一致性：**\n\n*   去甲肾上腺素的目的是维持血压和改善器官灌注。预测的指标变化在一定程度上反映了这一点，例如血压及 vasoactive drug dosage 升高。\n*   但是，肾功能参数 (creatinine, urine output) 的恶化以及血小板的急剧下降与去甲肾上腺素的预期效果并不完全一致。虽然去甲肾上腺素可能对肾脏有一定影响，但如此显著的肾功能恶化和血小板减少较为罕见。\n\n**3. SOFA评分各组件之间的逻辑一致性：**\n\n*   呼吸功能(pao2/fio2_ratio)和循环功能(vasopressor_rate)指标的协调性较好。\n*   但肾功能指标与循环功能指标的协调性较差，肾脏恶化过于迅速，且和去甲肾上腺素的肾脏影响程度不符。\n*   神经功能指标与整体病情严重度存在一定的矛盾，GCS如此快速下降，需要考虑其他因素。\n\n**4. 整体趋势是否符合临床改善的预期：**\n\n*   整体趋势是病情恶化，这与去甲肾上腺素增加并反映了病情未得到有效控制。\n*   但是，如此急剧和全面的恶化可能过于极端，在缺乏其他信息的情况下不太可能发生。\n\n**5. 数据单位的统一性：**\n\n已确认所有指标使用了正确的医学单位。\n\n**6. 时间序列数据的合理性：**\n\n相邻时间点之间的变化幅度过于剧烈，尤其是在肾功能和神经功能方面，缺乏临床合理性。例如血小板下降速度过快，GCS持续下降。\n\n**7. 数值的精确度：**\n\n一些指标的精确度过高，与实际临床测量情况不符。例如，Pao2/Fio2 ratio, GCS, creatinine 等。\n\n**总结：**\n\n预测结果在逻辑上与干预措施及病情恶化的关联，但是细节上存在诸多不合理的地方，包括时间序列数据的变化幅度过大、肾功能恶化过于迅速、一些指标的精确度过高、以及部分指标在逻辑上存在矛盾。因此，置信度较低。如果数据是用于报警，需要严格的阈值和校正，才能避免误报。",
+    "error": null
+  },
+  "key_reasons": [
+    "总体而言，预测的SOFA相关指标变化在逻辑上与干预措施（去甲肾上腺素）的预期效果有一定的关联，但是细节上存在诸多不合理的地方，导致预测的置信度较低。以下逐一分析：",
+    "Pao2/Fio2 ratio: 初始值 280，后续下降至220，再次上升至 310 是合理的，提示可能对呼吸支持效果改变。但数值的精准度过高，实际临床测量精确到这种程度较为罕见。",
+    "Platelet: 预测值不断下降至40，这在临床上不太可能，除非发生严重的出血或其他导致血小板急剧减少的情况。正常的血小板计数范围为150-450 ×10³/μL, 预测过低。"
+  ]
+}

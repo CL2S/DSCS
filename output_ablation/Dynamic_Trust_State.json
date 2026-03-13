@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "schema_version": 2,
+    "dynamic_method": "weighted_avg_v2",
+    "a": 0.2,
+    "counterfactual_runs": 20,
+    "updated_at": 1773025453.215567
+  },
+  "models": {
+    "gemma3:12b": {
+      "dynamic_sum": 0.5286197101376491,
+      "dynamic_count": 4,
+      "dynamic_confidence": 0.13215492753441227,
+      "completed_predictions": 20
+    },
+    "deepseek-r1:32b": {
+      "dynamic_sum": 0.6376811573191852,
+      "dynamic_count": 4,
+      "dynamic_confidence": 0.1594202893297963,
+      "completed_predictions": 20
+    },
+    "qwen3:30b": {
+      "dynamic_sum": 1.6490817181582667,
+      "dynamic_count": 4,
+      "dynamic_confidence": 0.41227042953956666,
+      "completed_predictions": 20
+    }
+  }
+}

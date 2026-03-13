@@ -1,0 +1,109 @@
+{
+  "timestamp": "2026-03-06 15:25:22",
+  "model_name": "qwen3:30b",
+  "prediction_model_name": "qwen3:30b",
+  "patient_id": "30117609",
+  "input_description": "ICU住院编号 30117609，对应患者编号 14413751，43岁男性，体重71.4kg。【生命体征】心率变化：[108.0, 108.0]（单位：次/分）呼吸频率变化：[26.83, 26.83]（单位：次/分）血氧饱和度变化：[99.5, 99.5]（单位：%）平均动脉压变化：[72.25, 72.25]（单位：mmHg）【SOFA评分相关特征】氧合指数变化：[49.77, 49.77]（单位：mmHg）机械通气使用情况：[ 0, 0]（单位：）血小板计数变化：[174.0, 174.0]（单位：×10³/μL）总胆红素变化：[5.1, 5.1]（单位：mg/dL）格拉斯哥昏迷评分变化：[15, 11]（单位：分）血清肌酐变化：[2.8, 2.8]（单位：mg/dL）尿量变化：[ 150.0, 150.0]（单位：mL）  【疾病评分】SOFA总分变化：[0, 0, 0, 0, 0, 10, 10]（单位：分）SIRS评分变化：[0, 0, 0, 0, 0, 4, 4]（单位：分）",
+  "intervention": "立即启动去甲肾上腺素输注，初始剂量为5.0μg·kg⁻¹·min⁻¹，根据血压反应调整至最大12.56μg·kg⁻¹·min⁻¹，剂量调整间隔2小时，密切监测血压和器官灌注，剂量呈递增趋势，提示血管反应性下降，评估8小时内发生感染性休克的风险",
+  "evaluator_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 18,
+    "dynamic_confidence": 0.5862437103477209,
+    "total_confidence": 0.6281446643164936
+  },
+  "prediction_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 18,
+    "dynamic_confidence": 0.5862437103477209,
+    "total_confidence": 0.6281446643164936
+  },
+  "predicted_vital_signs": {
+    "pao2_fio2_ratio": [
+      280.0,
+      260.0,
+      240.0,
+      220.0,
+      200.0,
+      180.0,
+      160.0,
+      140.0
+    ],
+    "platelet": [
+      130.0,
+      125.0,
+      120.0,
+      115.0,
+      110.0,
+      105.0,
+      100.0,
+      95.0
+    ],
+    "bilirubin_total": [
+      1.5,
+      1.7,
+      1.9,
+      2.1,
+      2.3,
+      2.5,
+      2.7,
+      2.9
+    ],
+    "vasopressor_rate": [
+      5.0,
+      6.5,
+      8.0,
+      9.5,
+      11.0,
+      12.5,
+      12.5,
+      12.5
+    ],
+    "gcs_total": [
+      12.0,
+      11.0,
+      10.0,
+      9.0,
+      8.0,
+      7.0,
+      6.0,
+      5.0
+    ],
+    "creatinine": [
+      1.5,
+      1.6,
+      1.7,
+      1.8,
+      1.9,
+      2.0,
+      2.1,
+      2.2
+    ],
+    "urine_output_ml": [
+      1500.0,
+      1300.0,
+      1100.0,
+      900.0,
+      700.0,
+      500.0,
+      300.0,
+      100.0
+    ],
+    "mechanical_ventilation": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "confidence_score": 0.0,
+  "evaluation": {
+    "success": false,
+    "model_output": null,
+    "error": "Ollama命令执行失败: Error: ollama server not responding - could not connect to ollama server, run 'ollama serve' to start it\n"
+  },
+  "key_reasons": []
+}

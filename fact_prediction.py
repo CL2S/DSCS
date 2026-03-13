@@ -14,7 +14,7 @@ from experiment import AdaptiveExperimentAgent, configure_dspy
 from sofa_prediction_evaluator import extract_patient_id
 
 # 定义要计算信任度的所有模型名称列表
-MODEL_NAMES = ["gemma3:12b", "meditron:7b", "medllama2:latest", "deepseek-r1:32b", "qwen3:30b", "gpt-oss:20b"]
+MODEL_NAMES = ["gemma3:12b", "deepseek-r1:32b", "qwen3:30b", "gpt-oss:20b"]
 
 # 定义SOFA评分的六项指标
 SOFA_COMPONENTS = [

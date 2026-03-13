@@ -8,12 +8,9 @@
 const CONFIG = {
   API_BASE_URL: window.location.origin,
   DEFAULT_MODELS: [
-    "gemma3:12b",
-    "mistral:7b",
-    "qwen3:4b",
-    "qwen3:30b",
     "deepseek-r1:32b",
-    "medllama2:latest"
+    "gemma3:12b",
+    "qwen3:30b"
   ],
   POLLING_INTERVAL: 30000, // 30 seconds
   MAX_LOG_ENTRIES: 50,
@@ -392,12 +389,13 @@ const ChartManager = {
       // Create gauge chart for single risk
       const trace = {
         type: "indicator",
-        mode: "gauge+number",
+        mode: "gauge+number+delta",
         value: riskScore,
         title: { text: "Risk Level", font: { size: 16 } },
+        delta: { reference: 0.5, increasing: { color: "#ef4444" }, decreasing: { color: "#10b981" } },
         gauge: {
           axis: { range: [0, 1], tickwidth: 1, tickcolor: darkMode ? "#f1f5f9" : "#0f172a" },
-          bar: { color: riskScore > 0.7 ? '#ef4444' : riskScore > 0.4 ? '#f59e0b' : '#10b981', thickness: 0.3 },
+          bar: { color: "rgba(0,0,0,0)", thickness: 0 }, // Hide default bar, use threshold/needle
           bgcolor: darkMode ? "#1e293b" : "#f8fafc",
           borderwidth: 2,
           bordercolor: darkMode ? "#475569" : "#e2e8f0",
@@ -407,12 +405,12 @@ const ChartManager = {
             { range: [0.7, 1], color: "#ef4444" }
           ],
           threshold: {
-            line: { color: "#dc2626", width: 4 },
-            thickness: 0.75,
-            value: 0.8
+            line: { color: darkMode ? "#f1f5f9" : "#0f172a", width: 6 },
+            thickness: 0.8,
+            value: riskScore // Use threshold as needle
           }
         },
-        number: { font: { size: 20 } }
+        number: { font: { size: 20 }, valueformat: ".2f" }
       };
 
       const layout = {
@@ -866,7 +864,17 @@ const app = createApp({
 
           // Update KPI for single mode
           const modelName = data.prediction_model || '-';
-          const riskLevel = predictionData.risk_level || predictionData.weighted_risk || '-';
+          // Try multiple locations for risk level
+          let riskLevel = predictionData.risk_level || predictionData.weighted_risk;
+          
+          // If still not found, check root level properties that might be available
+          if (!riskLevel) {
+            riskLevel = data.risk_level || data.final_weighted_risk_level;
+          }
+          
+          // Default to '-' if absolutely nothing found
+          if (!riskLevel) riskLevel = '-';
+          
           const confidenceValue = data.total_confidence;
           const confidenceStr = confidenceValue !== undefined ? confidenceValue.toFixed(2) : '-';
           const sofaValue = businessLogic.extractLatestSOFA(data) || '-';

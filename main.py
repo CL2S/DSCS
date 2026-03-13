@@ -67,12 +67,9 @@ except Exception:
     process_all_fact_predictions = None
     run_fact_prediction = None
     MODEL_NAMES = [
-        "gemma3:12b",
-        "mistral:7b",
-        "qwen3:4b",
-        "qwen3:30b",
         "deepseek-r1:32b",
-        "medllama2:latest"
+        "gemma3:12b",
+        "qwen3:30b"
     ]
 
 # Optional visualization module

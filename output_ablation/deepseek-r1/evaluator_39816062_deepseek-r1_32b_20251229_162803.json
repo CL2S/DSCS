@@ -1,0 +1,113 @@
+{
+  "timestamp": "2025-12-29 16:28:03",
+  "model_name": "deepseek-r1:32b",
+  "prediction_model_name": "gemma3:12b",
+  "patient_id": "39816062",
+  "input_description": "ICU住院编号 39816062，对应患者编号 17911943， a 19-year-old male weighing 73.0 kg. The monitoring duration is 0 hours (a total of 7 measurements, once every 4 hours): 【Vital signs】 Heart rate changes: [86.33, 86.33] (Unit: beats/min) Systolic blood pressure changes: [78.0, 78.0] (Unit: mmHg) Diastolic blood pressure changes: [62.0, 62.0] (Unit: mmHg) Body temperature changes: [98.75, 98.75] (Unit: °C) Respiratory rate changes: [17.67, 17.67] (Unit: breaths/min) Oxygen saturation changes: [100.0, 100.0] (Unit: %) Mean arterial pressure changes: [67.33, 67.33] (Unit: mmHg) 【Characteristics related to SOFA score】 Oxygenation index changes: [311.17, 311.17, 311.17, 311.17, 311.17, 311.17, 311.17] (Unit: mmHg) Mechanical ventilation usage: [0, 0, 0, 0, 0, 0, 0] (Unit: ) Platelet count changes: [75.0, 109.0, 109.0, 109.0, 109.0, 109.0, 109.0] (Unit: ×10³/μL) Total bilirubin changes: [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6] (Unit: mg/dL) Vasoactive drug dosage: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] (Unit: μg/kg/min) Glasgow Coma Scale score changes: [15, 15, 15, 15, 15, 15, 15] (Unit: points) Serum creatinine changes: [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1] (Unit: mg/dL) Urine output changes: [0.0, 0.0, 0.0, 0.0, 0.0, 240.0, 240.0] (Unit: mL) 【Disease scores】 Total SOFA score changes: [0, 0, 0, 0, 2, 5, 5] (Unit: points) SIRS score changes: [0, 0, 0, 0, 1, 2, 2] (Unit: points)",
+  "intervention": "Immediately initiate norepinephrine infusion at a maintenance dose of 10.0 μg·kg⁻¹·min⁻¹, with a dose adjustment interval of 2 hours. Closely monitor blood pressure and organ perfusion. An increasing dose trend indicates a decrease in vascular reactivity. Assess the risk of septic shock within 8 hours.",
+  "evaluator_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 16,
+    "dynamic_confidence": 0.0,
+    "total_confidence": 0.1573636885585769
+  },
+  "prediction_trust": {
+    "a": 0.2,
+    "counterfactual_runs": 16,
+    "dynamic_confidence": 0.0,
+    "total_confidence": 0.15790465738538137
+  },
+  "predicted_vital_signs": {
+    "pao2_fio2_ratio": [
+      280.0,
+      260.0,
+      240.0,
+      220.0,
+      200.0,
+      350.0,
+      330.0,
+      310.0
+    ],
+    "platelet": [
+      180.0,
+      160.0,
+      140.0,
+      120.0,
+      100.0,
+      80.0,
+      60.0,
+      40.0
+    ],
+    "bilirubin_total": [
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5,
+      5.0
+    ],
+    "vasopressor_rate": [
+      10.0,
+      12.0,
+      14.0,
+      16.0,
+      18.0,
+      20.0,
+      22.0,
+      24.0
+    ],
+    "gcs_total": [
+      14.0,
+      13.0,
+      12.0,
+      11.0,
+      10.0,
+      9.0,
+      8.0,
+      7.0
+    ],
+    "creatinine": [
+      1.2,
+      1.6,
+      2.0,
+      2.4,
+      2.8,
+      3.2,
+      3.6,
+      4.0
+    ],
+    "urine_output_ml": [
+      1800.0,
+      1600.0,
+      1400.0,
+      1200.0,
+      1000.0,
+      800.0,
+      600.0,
+      400.0
+    ],
+    "mechanical_ventilation": [
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "confidence_score": 0.4,
+  "evaluation": {
+    "success": true,
+    "model_output": "Thinking...\n好，我现在要评估预测的SOFA相关指标数据是否合理。首先，我得回顾一下患者的基本信息和干预措施。\n\n患者是19岁男性，体重73kg，ICU入院前监测时间为0小时，但有七次测量记录。生命体征显示心率稳定在86bpm左右，血压稍微偏低，收缩压78mmHg，舒张压62mmHg，平均动脉压67.33mmHg。体温正常，呼吸频率17.67次/分钟，氧饱和度100%。SOFA相关指标中，氧合指数稳定在311.17mmHg，没有使用机械通气，血小板计数波动但整体偏低（从75到109×10³/μL），总胆红素正常，血管活性药物剂量为0。格拉斯哥昏迷评分满分，肾功能方面肌酐1.1mg/dL，尿量开始时为0，后来增加到240mL。\n\n干预措施是立即给予去甲肾上腺素，起始剂量10μg/kg/min，每两小时调整一次，监测血压和器官灌注情况。预测指标包括氧合指数、血小板、胆红素、血管活性药物速率、GCS评分、肌酐和尿量，以及机械通气的使用。\n\n接下来分析各项指标：\n\n1. **PaO2/FiO2比值**：从311降到200，然后又升到350，最后降到310。这个趋势看起来不太合理，因为使用血管活性药物可能会影响氧合情况。如果血流动力学改善，氧合应该提升而不是下降，特别是当开始使用机械通气后。\n\n2. **血小板计数**：从180下降到40，这种快速下降可能与脓毒症或DIC有关，但患者初始血小板并不低，且干预措施中没有直接导致血小板减少的因素。这个趋势可能不合理。\n\n3. **总胆红素**：逐步上升，这可能提示肝功能恶化。虽然脓毒症可能导致肝损伤，但预测中的上升幅度较大，是否合理需要考虑是否有其他因素影响。\n\n4. **血管活性药物速率**：逐渐增加到24μg/kg/min。初始剂量10，每两小时增2，这在临床中通常不会有这么快的调整，尤其是在没有明确效果的情况下。快速增加可能提示病情恶化，但预测中的尿量和肌酐变化显示肾功能先改善后恶化。\n\n5. **GCS评分**：从14降到7，这表明神经系统恶化，可能与低灌注或脑损伤有关，但在干预开始后是否预期这种情况？患者初始意识正常，这种急剧下降可能不太合理。\n\n6. **肌酐和尿量**：肌酐逐步上升，而尿量却逐步减少。这可能提示肾功能恶化，但预测中尿量在第四天突然增加到1800mL，随后逐渐减少。这样的变化趋势是否符合临床情况？因为如果肾功能恶化，通常尿量会持续减少而不是先增加。\n\n7. **机械通气**：第三天开始使用，这可能是因为氧合指数下降，但预测中的PaO2/FiO2在之后又有所波动，是否合理？\n\n时间序列方面，各项指标的变化幅度有时较大，比如PaO2/FiO2在第四天突然增加到350，随后又下降。这种突变可能不太符合临床实际的渐进性变化。\n\n数值精确度方面，大部分指标的精度适中，但某些如血小板和肌酐可能需要整数或一位小数，预测中的数据似乎合理。\n\n整体来看，虽然部分指标的变化趋势有其逻辑，但整体协调性和时间序列的合理性存在问题。尤其是PaO2/FiO2、血管活性药物剂量和GCS评分的变化不太符合预期。\n...done thinking.\n\n置信度评分：0.4\n\n分析理由：\n1. **氧合指数变化**：预测显示氧合指数先下降后上升，这可能不符合临床预期。使用去甲肾上腺素应改善循环而提升氧合，但机械通气的引入可能导致氧合波动。\n\n2. **血小板计数下降**：快速减少可能不合理，除非存在明确诱因如脓毒症或DIC，但初始数据未提示这些情况。\n\n3. **总胆红素上升**：虽然可能合理，但预测中的幅度较大，需进一步评估肝功能恶化的原因。\n\n4. **血管活性药物剂量增加**：调整速度较快，不符合常规临床实践，通常会根据反应逐步调整。\n\n5. **GCS评分下降**：急剧降低缺乏明确诱因，患者初始意识正常，这种情况可能不合理。\n\n6. **肌酐和尿量变化**：肌酐上升而尿量先增后减，趋势不协调。肾功能恶化时尿量应持续减少而非增加。\n\n7. **机械通气使用**：第三天开始合理，但PaO2/FiO2的波动与预期效果不符。\n\n8. **时间序列和数值合理性**：部分指标变化幅度较大，缺乏渐进性，数值精确度总体适中。\n\n综合考虑，预测的数据存在多处不符合临床逻辑的情况，整体可信度较低。",
+    "error": null
+  },
+  "key_reasons": [
+    "患者是19岁男性，体重73kg，ICU入院前监测时间为0小时，但有七次测量记录。生命体征显示心率稳定在86bpm左右，血压稍微偏低，收缩压78mmHg，舒张压62mmHg，平均动脉压67.33mmHg。体温正常，呼吸频率17.67次/分钟，氧饱和度100%。SOFA相关指标中，氧合指数稳定在311.17mmHg，没有使用机械通气，血小板计数波动但整体偏低（从75到109×10³/μL），总胆红素正常，血管活性药物剂量为0。格拉斯哥昏迷评分满分，肾功能方面肌酐1.1mg/dL，尿量开始时为0，后来增加到240mL。",
+    "干预措施是立即给予去甲肾上腺素，起始剂量10μg/kg/min，每两小时调整一次，监测血压和器官灌注情况。预测指标包括氧合指数、血小板、胆红素、血管活性药物速率、GCS评分、肌酐和尿量，以及机械通气的使用。",
+    "1. PaO2/FiO2比值：从311降到200，然后又升到350，最后降到310。这个趋势看起来不太合理，因为使用血管活性药物可能会影响氧合情况。如果血流动力学改善，氧合应该提升而不是下降，特别是当开始使用机械通气后。"
+  ]
+}
