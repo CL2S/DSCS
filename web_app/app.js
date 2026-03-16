@@ -289,7 +289,7 @@ const ChartManager = {
     return { traces: [trace], layout };
   },
 
-  createRiskChart(data, darkMode) {
+  createRiskChart(data, darkMode, mode = 'single') {
     // For single mode: show single model risk assessment
     // For auto mode: show per_model_risk comparison
 
@@ -298,11 +298,15 @@ const ChartManager = {
       has_prediction_data_risk: !!data.prediction_data?.risk_level,
       has_prediction_data_weighted_risk: !!data.prediction_data?.weighted_risk,
       prediction_data_risk_level: data.prediction_data?.risk_level,
-      prediction_data_weighted_risk: data.prediction_data?.weighted_risk
+      prediction_data_weighted_risk: data.prediction_data?.weighted_risk,
+      top_level_risk_level: data.risk_level,
+      top_level_weighted_risk: data.weighted_risk,
+      final_weighted_risk_level: data.final_weighted_risk_level,
+      mode
     });
 
     // Check if we have per_model_risk (auto mode)
-    if (data.per_model_risk && Array.isArray(data.per_model_risk) && data.per_model_risk.length > 0) {
+    if (mode === 'auto' && data.per_model_risk && Array.isArray(data.per_model_risk) && data.per_model_risk.length > 0) {
       console.log('Using per_model_risk data for auto mode');
       const models = data.per_model_risk.map(item => item.model);
       const scores = data.per_model_risk.map(item => item.risk_score || 0);
@@ -348,54 +352,52 @@ const ChartManager = {
       // Try to get risk level from various sources
       let riskLevel = 'Unknown';
       let riskScore = 0;
+      const riskMap = {
+        low: 0.2,
+        moderate: 0.5,
+        medium: 0.5,
+        high: 0.8,
+        severe: 0.9,
+        critical: 1.0,
+        unknown: 0.3
+      };
 
-      if (data.prediction_data?.risk_level) {
-        riskLevel = data.prediction_data.risk_level;
-        // Map risk level to score
-        const riskMap = {
-          'low': 0.2,
-          'moderate': 0.5,
-          'high': 0.8,
-          'critical': 1.0,
-          'unknown': 0.3
-        };
-        riskScore = riskMap[riskLevel.toLowerCase()] || 0.3;
-      } else if (data.prediction_data?.weighted_risk) {
-        riskLevel = data.prediction_data.weighted_risk;
-        // Try to parse numeric score from string
-        const match = riskLevel.match(/[\d.]+/);
-        if (match) {
-          riskScore = parseFloat(match[0]) / 100; // Assume percentage
-        } else {
-          const riskMap = {
-            'low': 0.2,
-            'moderate': 0.5,
-            'high': 0.8,
-            'critical': 1.0,
-            'unknown': 0.3
-          };
-          riskScore = riskMap[riskLevel.toLowerCase()] || 0.3;
-        }
-      } else if (data.final_weighted_risk_level) {
-        riskLevel = data.final_weighted_risk_level;
-        riskScore = 0.6; // Default moderate
-      } else if (data.risk_level) {
-        riskLevel = data.risk_level;
-        riskScore = 0.6; // Default moderate
+      riskLevel =
+        data.prediction_data?.risk_level ||
+        data.prediction_data?.weighted_risk ||
+        data.final_weighted_risk_level ||
+        data.risk_level ||
+        data.weighted_risk ||
+        'Unknown';
+
+      const riskLevelText = String(riskLevel).toLowerCase();
+      const match = riskLevelText.match(/[\d.]+/);
+      if (match) {
+        const parsed = parseFloat(match[0]);
+        riskScore = parsed > 1 ? parsed / 100 : parsed;
+      } else {
+        riskScore = riskMap[riskLevelText] ?? 0.3;
       }
+
+      if (data.final_weighted_risk_score !== undefined && data.final_weighted_risk_score !== null) {
+        const parsed = Number(data.final_weighted_risk_score);
+        if (!Number.isNaN(parsed)) {
+          riskScore = parsed > 1 ? parsed / 100 : parsed;
+        }
+      }
+      riskScore = Math.max(0, Math.min(1, Number(riskScore) || 0));
 
       console.log('Single mode risk:', { riskLevel, riskScore });
 
       // Create gauge chart for single risk
       const trace = {
         type: "indicator",
-        mode: "gauge+number+delta",
+        mode: "gauge+number",
         value: riskScore,
         title: { text: "Risk Level", font: { size: 16 } },
-        delta: { reference: 0.5, increasing: { color: "#ef4444" }, decreasing: { color: "#10b981" } },
         gauge: {
           axis: { range: [0, 1], tickwidth: 1, tickcolor: darkMode ? "#f1f5f9" : "#0f172a" },
-          bar: { color: "rgba(0,0,0,0)", thickness: 0 }, // Hide default bar, use threshold/needle
+          bar: { color: riskScore > 0.7 ? '#ef4444' : riskScore > 0.4 ? '#f59e0b' : '#10b981', thickness: 0.3 },
           bgcolor: darkMode ? "#1e293b" : "#f8fafc",
           borderwidth: 2,
           bordercolor: darkMode ? "#475569" : "#e2e8f0",
@@ -405,12 +407,12 @@ const ChartManager = {
             { range: [0.7, 1], color: "#ef4444" }
           ],
           threshold: {
-            line: { color: darkMode ? "#f1f5f9" : "#0f172a", width: 6 },
-            thickness: 0.8,
-            value: riskScore // Use threshold as needle
+            line: { color: darkMode ? "#f8fafc" : "#0f172a", width: 6 },
+            thickness: 0.9,
+            value: riskScore
           }
         },
-        number: { font: { size: 20 }, valueformat: ".2f" }
+        number: { font: { size: 20 }, valueformat: '.2f' }
       };
 
       const layout = {
@@ -864,17 +866,13 @@ const app = createApp({
 
           // Update KPI for single mode
           const modelName = data.prediction_model || '-';
-          // Try multiple locations for risk level
-          let riskLevel = predictionData.risk_level || predictionData.weighted_risk;
-          
-          // If still not found, check root level properties that might be available
-          if (!riskLevel) {
-            riskLevel = data.risk_level || data.final_weighted_risk_level;
-          }
-          
-          // Default to '-' if absolutely nothing found
-          if (!riskLevel) riskLevel = '-';
-          
+          const riskLevel =
+            predictionData.risk_level ||
+            predictionData.weighted_risk ||
+            data.final_weighted_risk_level ||
+            data.risk_level ||
+            data.weighted_risk ||
+            '-';
           const confidenceValue = data.total_confidence;
           const confidenceStr = confidenceValue !== undefined ? confidenceValue.toFixed(2) : '-';
           const sofaValue = businessLogic.extractLatestSOFA(data) || '-';
@@ -1264,7 +1262,7 @@ const app = createApp({
         // Generate and store chart data
         const sofaTrend = ChartManager.createSOFATrendChart(data, darkMode.value);
         const componentChart = ChartManager.createComponentChart(data, darkMode.value);
-        const riskChart = ChartManager.createRiskChart(data, darkMode.value);
+        const riskChart = ChartManager.createRiskChart(data, darkMode.value, appState.mode.value);
 
         appState.chartData.value = {
           sofaTrend,
