@@ -1,0 +1,2 @@
+# No third-party dependencies required.
+# This standalone project runs with Python standard library only.

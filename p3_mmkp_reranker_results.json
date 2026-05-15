@@ -1,0 +1,186 @@
+{
+  "pass1_mae": 3.5,
+  "pass2_mae": 3.25,
+  "weights_initial": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "weights_learned": [
+    1.027,
+    1.018,
+    1.063,
+    0.966,
+    0.982,
+    0.982,
+    0.982,
+    0.949,
+    1.031
+  ],
+  "pass1": [
+    {
+      "stay": 38372527,
+      "error": 11,
+      "gt": 19,
+      "pred": 8
+    },
+    {
+      "stay": 38432543,
+      "error": 4,
+      "gt": 16,
+      "pred": 12
+    },
+    {
+      "stay": 38442306,
+      "error": 9,
+      "gt": 15,
+      "pred": 6
+    },
+    {
+      "stay": 38673044,
+      "error": 7,
+      "gt": 14,
+      "pred": 7
+    },
+    {
+      "stay": 38817112,
+      "error": 4,
+      "gt": 12,
+      "pred": 8
+    },
+    {
+      "stay": 38839114,
+      "error": 1,
+      "gt": 13,
+      "pred": 12
+    },
+    {
+      "stay": 38854605,
+      "error": 0,
+      "gt": 12,
+      "pred": 12
+    },
+    {
+      "stay": 38937052,
+      "error": 0,
+      "gt": 12,
+      "pred": 12
+    },
+    {
+      "stay": 38948720,
+      "error": 2,
+      "gt": 13,
+      "pred": 15
+    },
+    {
+      "stay": 39452059,
+      "error": 2,
+      "gt": 10,
+      "pred": 8
+    },
+    {
+      "stay": 39657585,
+      "error": 2,
+      "gt": 10,
+      "pred": 8
+    },
+    {
+      "stay": 39816062,
+      "error": 0,
+      "gt": 4,
+      "pred": 4
+    }
+  ],
+  "pass2": [
+    {
+      "stay": 38372527,
+      "error": 4,
+      "gt": 19,
+      "pred": 15,
+      "improvement": 7
+    },
+    {
+      "stay": 38432543,
+      "error": 4,
+      "gt": 16,
+      "pred": 12,
+      "improvement": 0
+    },
+    {
+      "stay": 38442306,
+      "error": 9,
+      "gt": 15,
+      "pred": 6,
+      "improvement": 0
+    },
+    {
+      "stay": 38673044,
+      "error": 7,
+      "gt": 14,
+      "pred": 7,
+      "improvement": 0
+    },
+    {
+      "stay": 38817112,
+      "error": 4,
+      "gt": 12,
+      "pred": 8,
+      "improvement": 0
+    },
+    {
+      "stay": 38839114,
+      "error": 1,
+      "gt": 13,
+      "pred": 12,
+      "improvement": 0
+    },
+    {
+      "stay": 38854605,
+      "error": 0,
+      "gt": 12,
+      "pred": 12,
+      "improvement": 0
+    },
+    {
+      "stay": 38937052,
+      "error": 0,
+      "gt": 12,
+      "pred": 12,
+      "improvement": 0
+    },
+    {
+      "stay": 38948720,
+      "error": 6,
+      "gt": 13,
+      "pred": 7,
+      "improvement": -4
+    },
+    {
+      "stay": 39452059,
+      "error": 2,
+      "gt": 10,
+      "pred": 8,
+      "improvement": 0
+    },
+    {
+      "stay": 39657585,
+      "error": 2,
+      "gt": 10,
+      "pred": 8,
+      "improvement": 0
+    },
+    {
+      "stay": 39816062,
+      "error": 0,
+      "gt": 4,
+      "pred": 4,
+      "improvement": 0
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "config": {
+    "bank_size": 60,
+    "test_size": 12,
+    "model": "gemma3:12b"
+  },
+  "results": [
+    {
+      "stay": 38372527,
+      "gt": 19,
+      "baseline_pred": 4,
+      "baseline_err": 15,
+      "memory_pred": 12,
+      "memory_err": 7,
+      "improvement": 8,
+      "retrieved": [
+        30,
+        35,
+        36
+      ],
+      "time_s": 16.6
+    },
+    {
+      "stay": 38432543,
+      "gt": 16,
+      "baseline_pred": 6,
+      "baseline_err": 10,
+      "memory_pred": 12,
+      "memory_err": 4,
+      "improvement": 6,
+      "retrieved": [
+        30,
+        35,
+        36
+      ],
+      "time_s": 7.0
+    },
+    {
+      "stay": 38442306,
+      "gt": 15,
+      "baseline_pred": 4,
+      "baseline_err": 11,
+      "memory_pred": 10,
+      "memory_err": 5,
+      "improvement": 6,
+      "retrieved": [
+        30,
+        36,
+        47
+      ],
+      "time_s": 6.8
+    },
+    {
+      "stay": 38673044,
+      "gt": 14,
+      "baseline_pred": 7,
+      "baseline_err": 7,
+      "memory_pred": 12,
+      "memory_err": 2,
+      "improvement": 5,
+      "retrieved": [
+        30,
+        35,
+        36
+      ],
+      "time_s": 7.1
+    },
+    {
+      "stay": 38817112,
+      "gt": 12,
+      "baseline_pred": 4,
+      "baseline_err": 8,
+      "memory_pred": 6,
+      "memory_err": 6,
+      "improvement": 2,
+      "retrieved": [
+        30,
+        35,
+        39
+      ],
+      "time_s": 7.2
+    },
+    {
+      "stay": 38839114,
+      "gt": 13,
+      "baseline_pred": 12,
+      "baseline_err": 1,
+      "memory_pred": 12,
+      "memory_err": 1,
+      "improvement": 0,
+      "retrieved": [
+        30,
+        35,
+        36
+      ],
+      "time_s": 7.1
+    },
+    {
+      "stay": 38854605,
+      "gt": 12,
+      "baseline_pred": 6,
+      "baseline_err": 6,
+      "memory_pred": 7,
+      "memory_err": 5,
+      "improvement": 1,
+      "retrieved": [
+        30,
+        31,
+        36
+      ],
+      "time_s": 6.9
+    },
+    {
+      "stay": 38937052,
+      "gt": 12,
+      "baseline_pred": 6,
+      "baseline_err": 6,
+      "memory_pred": 9,
+      "memory_err": 3,
+      "improvement": 3,
+      "retrieved": [
+        0,
+        1,
+        2
+      ],
+      "time_s": 6.7
+    },
+    {
+      "stay": 38948720,
+      "gt": 13,
+      "baseline_pred": 4,
+      "baseline_err": 9,
+      "memory_pred": 12,
+      "memory_err": 1,
+      "improvement": 8,
+      "retrieved": [
+        30,
+        36,
+        39
+      ],
+      "time_s": 7.0
+    },
+    {
+      "stay": 39452059,
+      "gt": 10,
+      "baseline_pred": 4,
+      "baseline_err": 6,
+      "memory_pred": 7,
+      "memory_err": 3,
+      "improvement": 3,
+      "retrieved": [
+        30,
+        31,
+        32
+      ],
+      "time_s": 6.8
+    },
+    {
+      "stay": 39657585,
+      "gt": 10,
+      "baseline_pred": 6,
+      "baseline_err": 4,
+      "memory_pred": 15,
+      "memory_err": 5,
+      "improvement": -1,
+      "retrieved": [
+        3,
+        12,
+        36
+      ],
+      "time_s": 6.7
+    },
+    {
+      "stay": 39816062,
+      "gt": 4,
+      "baseline_pred": 4,
+      "baseline_err": 0,
+      "memory_pred": 8,
+      "memory_err": 4,
+      "improvement": -4,
+      "retrieved": [
+        30,
+        36,
+        46
+      ],
+      "time_s": 7.0
+    }
+  ],
+  "summary": {
+    "base_mae": 6.916666666666667,
+    "memory_mae": 3.8333333333333335,
+    "mean_improvement": 3.0833333333333335,
+    "helped": 9,
+    "harmed": 2
+  }
+}

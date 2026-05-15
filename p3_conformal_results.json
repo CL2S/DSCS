@@ -1,0 +1,187 @@
+{
+  "method": "P3 v3 + Conformal Prediction (Jackknife)",
+  "n_test": 12,
+  "results": [
+    {
+      "stay": 38372527,
+      "gt": 19,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 9,
+      "error": 10,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "time_s": 13.8
+    },
+    {
+      "stay": 38432543,
+      "gt": 16,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 6,
+      "error": 10,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        2
+      ],
+      "time_s": 4.4
+    },
+    {
+      "stay": 38442306,
+      "gt": 15,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 4,
+      "error": 11,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        2
+      ],
+      "time_s": 4.4
+    },
+    {
+      "stay": 38673044,
+      "gt": 14,
+      "sofa_start": 5,
+      "trend": "rise",
+      "pred": 8,
+      "error": 6,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "time_s": 4.4
+    },
+    {
+      "stay": 38817112,
+      "gt": 12,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 6,
+      "error": 6,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        2
+      ],
+      "time_s": 4.3
+    },
+    {
+      "stay": 38839114,
+      "gt": 13,
+      "sofa_start": 9,
+      "trend": "rise",
+      "pred": 7,
+      "error": 6,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        2
+      ],
+      "time_s": 4.4
+    },
+    {
+      "stay": 38854605,
+      "gt": 12,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 9,
+      "error": 3,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "time_s": 4.3
+    },
+    {
+      "stay": 38937052,
+      "gt": 12,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 9,
+      "error": 3,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "time_s": 4.3
+    },
+    {
+      "stay": 38948720,
+      "gt": 13,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 4,
+      "error": 9,
+      "silenced": false,
+      "retrieved": [
+        0,
+        2,
+        16
+      ],
+      "time_s": 4.4
+    },
+    {
+      "stay": 39452059,
+      "gt": 10,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 6,
+      "error": 4,
+      "silenced": false,
+      "retrieved": [
+        0,
+        1,
+        2
+      ],
+      "time_s": 4.4
+    },
+    {
+      "stay": 39657585,
+      "gt": 10,
+      "sofa_start": 4,
+      "trend": "rise",
+      "pred": 4,
+      "error": 6,
+      "silenced": false,
+      "retrieved": [
+        0,
+        2,
+        16
+      ],
+      "time_s": 4.4
+    },
+    {
+      "stay": 39816062,
+      "gt": 4,
+      "sofa_start": 4,
+      "trend": "stable",
+      "pred": 4,
+      "error": 0,
+      "silenced": true,
+      "retrieved": [
+        0,
+        1,
+        2
+      ],
+      "time_s": 4.2
+    }
+  ],
+  "point_mae": 6.166666666666667
+}

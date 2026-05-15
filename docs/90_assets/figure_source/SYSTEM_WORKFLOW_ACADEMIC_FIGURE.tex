@@ -1,0 +1,227 @@
+\documentclass[tikz,border=6pt]{standalone}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft YaHei}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,shapes.multipart,backgrounds}
+
+\begin{document}
+\begin{tikzpicture}[
+  font=\small,
+  >=Latex,
+  node distance=8mm and 10mm,
+  box/.style={
+    draw,
+    rounded corners=2pt,
+    align=left,
+    minimum height=10mm,
+    text width=37mm,
+    inner sep=4pt,
+    fill=white
+  },
+  widebox/.style={
+    draw,
+    rounded corners=2pt,
+    align=left,
+    minimum height=10mm,
+    text width=50mm,
+    inner sep=4pt,
+    fill=white
+  },
+  datastore/.style={box, fill=blue!6, draw=blue!45!black},
+  process/.style={box, fill=teal!6, draw=teal!50!black},
+  memory/.style={box, fill=orange!10, draw=orange!60!black},
+  infer/.style={box, fill=green!7, draw=green!45!black},
+  output/.style={box, fill=purple!6, draw=purple!45!black},
+  note/.style={box, fill=gray!10, draw=gray!50!black},
+  line/.style={-Latex, thick},
+  dashedline/.style={-Latex, thick, dashed}
+]
+
+% Left: dataset and sample construction
+\node[datastore] (datasets) at (0, 0) {\textbf{Forecasting 数据源}\\
+三类 benchmark 数据集\\
+\quad 1. tourism\_monthly\\
+\quad 2. nn5\_daily\\
+\quad 3. australian\_electricity\_demand\\
+文件格式：\texttt{.tsf}，包含频率、horizon、属性与序列值};
+
+\node[process, below=of datasets] (builder) {\textbf{样本构造：\texttt{build\_tsf\_forecasting\_dataset}}\\
+读取 \texttt{.tsf} 元数据与序列\\
+窗口切分、历史长度设定、尺度归一化\\
+生成 train / val / test 样本};
+
+\node[widebox, below=of builder, fill=blue!3, draw=blue!40!black] (sample) {\textbf{\texttt{ForecastSample}}\\
+\texttt{sequence}（归一化窗口）\\
+\texttt{static}（均值、尺度、last、trend、seasonal gap、history length、horizon）\\
+\texttt{raw\_context / raw\_target}（参数无关经验写入基础）\\
+\texttt{metadata}（series, seasonality, window\_end\_index 等）};
+
+\node[process, right=28mm of builder] (formation) {\textbf{Formation 抽取：\texttt{build\_window\_formation}}\\
+16 个 formation 特征\\
+\quad 趋势、波动、季节、level shift、相位、曲率、自相关、稳定性等\\
+弱标签生成：\\
+\texttt{pattern\_label}\\
+\texttt{trajectory\_label}\\
+\texttt{experience\_label}};
+
+% Encoder
+\node[process, right=28mm of sample, yshift=8mm] (encoder) {\textbf{共享编码主干：GRU Manifold Encoder}\\
+输入：\texttt{sequence} + \texttt{static}\\
+时序骨干：双向 GRU\\
+多视角上下文：\\
+\quad \texttt{final\_hidden}\\
+\quad \texttt{pooled\_hidden}\\
+\quad \texttt{delta\_hidden}\\
+\quad \texttt{static\_projector(static)}};
+
+\node[note, below=of encoder] (context) {\textbf{Context 表示}\\
+\[
+\texttt{context} = [h_{\text{final}}; h_{\text{pool}}; h_{\Delta}; h_{\text{static}}]
+\]
+不是单一最后隐藏态，而是末端状态、全局轮廓、变化方向与静态背景的联合表示};
+
+\node[process, below=of context] (qkv) {\textbf{投影头：\texttt{query / key / value / input\_embedding}}\\
+\texttt{query}, \texttt{key}：L2 normalize，用于相似性检索\\
+\texttt{value}：保持内容表达\\
+\texttt{input\_embedding}：当前窗口主表示};
+
+% Training time memory build
+\node[process, right=32mm of encoder, yshift=28mm] (managerwrite) {\textbf{训练期记忆写入：\texttt{MetaMemoryManager.write}}\\
+输入：编码结果 + 三个弱标签 + metadata\\
+将样本分发到三类 memory 组件\\
+并记录 activity / support / write\_confidence / freshness};
+
+\node[memory, below=of managerwrite] (pmemory) {\textbf{PatternMemory}\\
+局部形态原型\\
+同 label 合并，偏波形相似};
+
+\node[memory, below=of pmemory] (tmemory) {\textbf{TrajectoryMemory}\\
+阶段走势原型\\
+阈值更严，偏 regime 相似};
+
+\node[memory, below=of tmemory] (ememory) {\textbf{ExperienceMemory}\\
+综合经验原型\\
+支持 hot bank / archive bank\\
+支持 blended retrieval};
+
+% Persistent store
+\node[datastore, right=34mm of managerwrite, yshift=5mm] (store) {\textbf{Persistent Experience Store}\\
+\texttt{upsert\_samples(...)}\\
+保存参数无关经验\\
+\texttt{load\_samples(...)} / \texttt{load\_prototypes(...)}\\
+跨运行、跨实验经验复用};
+
+\node[datastore, below=of store] (files) {\textbf{持久化文件层}\\
+\texttt{experience\_entries.jsonl}\\
+\texttt{prototypes.jsonl}\\
+\texttt{events.jsonl}\\
+\texttt{semantic\_index.json}\\
+\texttt{cache/<model\_fingerprint>.pt}};
+
+% Inference path
+\node[infer, below=45mm of qkv] (readmanager) {\textbf{推理期调度：\texttt{MetaMemoryManager.read}}\\
+场景特征：horizon ratio, seasonality ratio, series density, regime mix\\
+planner weights：pattern / trajectory / experience\\
+label priors：pattern, trajectory, experience\\
+semantic retrieval：prototype top-k 命中};
+
+\node[infer, right=28mm of readmanager] (attnread) {\textbf{三路读取：Attention Memory Reader}\\
+\[
+\texttt{query} \cdot \texttt{keys} \rightarrow \text{top-k} \rightarrow \text{softmax}(\texttt{values})
+\]
+输出：readout、matched labels、confidence、top label\\
+experience 分支可融合 archive 与 prototype template};
+
+\node[infer, right=28mm of attnread] (fusion) {\textbf{融合层：Gate Network + Multi Fusion}\\
+门控输入：\\
+\quad \texttt{input\_embedding}\\
+\quad normalized static\\
+\quad normalized formation\\
+\quad planner weights\\
+\quad memory confidence\\
+\quad scenario features\\
+输出：三路 gate 与融合表示};
+
+\node[infer, below=of fusion] (heads) {\textbf{预测头}\\
+\texttt{base\_regressor}：直接预测整段 horizon\\
+\texttt{bucket\_heads}：short / mid / long 三段 residual\\
+\[
+\hat{y}_{fusion} = \hat{y}_{base} + \hat{y}_{residual}
+\]};
+
+\node[output, right=28mm of heads] (outputs) {\textbf{输出与诊断}\\
+最终预测：\texttt{test\_metrics}\\
+基线对照：\texttt{base\_only}\\
+记忆增益：\texttt{memory\_effectiveness}\\
+过程诊断：\texttt{memory\_diagnostics}\\
+样例检索轨迹：\texttt{example\_retrieval\_trace}};
+
+% Semantic prototype branch
+\node[infer, above=of attnread] (prototype) {\textbf{Prototype 语义模板}\\
+\texttt{semantic\_retrieve(...)}\\
+formation similarity + label match + support + quality\\
+聚合 \texttt{template\_curve}\\
+经 \texttt{prototype\_curve\_encoder} 变成 semantic value};
+
+% Neural cache branch
+\node[datastore, below=of files] (cache) {\textbf{Neural Cache}\\
+\texttt{compute\_model\_fingerprint()}\\
+\texttt{export\_neural\_cache()}\\
+\texttt{load\_neural\_cache(...)}\\
+同模型条件下直接恢复最终 memory bank};
+
+% Legend
+\node[note, below=40mm of readmanager, text width=196mm] (legend) {\textbf{图注与学术说明}\\
+\textbf{训练阶段：} 数据集窗口化后，经 formation 与 GRU manifold encoder 生成 \texttt{query/key/value/input\_embedding}，样本依据三个弱标签写入三类 memory，同时原始窗口与语义摘要写入 persistent experience store。\\
+\textbf{推理阶段：} 当前窗口先由 manager 生成 planner weights 与 label priors，再联合 semantic prototype 与三路 memory 做检索，随后通过 gate network 和 residual forecasting heads 生成最终预测。\\
+\textbf{系统特征：} 该架构同时包含参数无关经验层（entries / prototypes）、参数相关神经缓存层（fingerprint / cache）、以及 end-to-end 训练的 GRU retrieval-fusion forecasting 主干。};
+
+% arrows left path
+\draw[line] (datasets) -- (builder);
+\draw[line] (builder) -- (sample);
+\draw[line] (builder) -- (formation);
+\draw[line] (sample.east) -- ++(8mm,0) |- (encoder.west);
+\draw[line] (formation.south) |- (encoder.north);
+\draw[line] (encoder) -- (context);
+\draw[line] (context) -- (qkv);
+
+% training arrows
+\draw[line] ($(qkv.east)+(0,18mm)$) -- (managerwrite.west);
+\draw[line] (formation.east) -- ++(10mm,0) |- (managerwrite.west);
+\draw[line] (managerwrite) -- (pmemory);
+\draw[line] (managerwrite) -- (tmemory);
+\draw[line] (managerwrite) -- (ememory);
+\draw[line] (sample.east) -- ++(20mm,0) |- (store.west);
+\draw[line] (store) -- (files);
+\draw[dashedline] (managerwrite.east) -- (store.west);
+\draw[dashedline] (ememory.east) -- ++(10mm,0) |- (cache.west);
+\draw[dashedline] (store.south) -- (cache.north);
+
+% inference arrows
+\draw[line] (qkv.south) -- ++(0,-10mm) -| (readmanager.north);
+\draw[line] (formation.south) |- (readmanager.west);
+\draw[line] (pmemory.east) |- (attnread.north west);
+\draw[line] (tmemory.east) -- ++(12mm,0) |- (attnread.north);
+\draw[line] (ememory.east) |- (attnread.south west);
+\draw[line] (readmanager) -- (attnread);
+\draw[line] (readmanager.east) -- ++(12mm,0) |- (prototype.west);
+\draw[dashedline] (files.west) -- ++(-10mm,0) |- (prototype.north);
+\draw[dashedline] (cache.west) -- ++(-14mm,0) |- (readmanager.south);
+\draw[line] (prototype) -- (attnread);
+\draw[line] (attnread) -- (fusion);
+\draw[line] (fusion) -- (heads);
+\draw[line] (heads) -- (outputs);
+
+% group boxes
+\begin{scope}[on background layer]
+  \node[draw=black!45, rounded corners=4pt, dashed, inner sep=6pt, fit=(datasets)(builder)(sample)(formation), label={[font=\bfseries]north:阶段 A：数据准备与语义构造}] {};
+  \node[draw=black!45, rounded corners=4pt, dashed, inner sep=6pt, fit=(encoder)(context)(qkv)(managerwrite)(pmemory)(tmemory)(ememory), label={[font=\bfseries]north:阶段 B：训练期表示学习与记忆形成}] {};
+  \node[draw=black!45, rounded corners=4pt, dashed, inner sep=6pt, fit=(store)(files)(cache), label={[font=\bfseries]north:阶段 C：持久化经验层与神经缓存层}] {};
+  \node[draw=black!45, rounded corners=4pt, dashed, inner sep=6pt, fit=(readmanager)(prototype)(attnread)(fusion)(heads)(outputs), label={[font=\bfseries]north:阶段 D：推理期检索、融合与预测}] {};
+  \node[draw=black!45, rounded corners=4pt, dashed, inner sep=6pt, fit=(legend), label={[font=\bfseries]north:图例说明}] {};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

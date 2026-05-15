@@ -1,88 +1,65 @@
-# SOFA预测与评估系统
+# Memory MVP Project
+## 2026-04 Stage-1/2 Update
 
-这是一个整合了SOFA评分预测和评估功能的系统。该系统可以根据患者数据预测SOFA评分，并使用不同的模型对预测结果进行评估。
+本轮在反事实预测链路中补了两类能力。
 
-## 功能特点
+1. `knowledge-safe write + donor hard filter`
+   - memory bank 和 intervention store 在写入前会计算 `knowledge_quality_score`、`knowledge_feasibility_score`、`write_confidence`
+   - donor 检索时新增硬约束，优先过滤明显缺失关键救治的候选
 
-- 预测功能：基于患者数据预测SOFA评分和感染性休克风险
-- 评估功能：使用不同的模型对预测结果进行评估
-- 并行处理：支持预测和评估的并行执行
-- 两种模式：自动模式（批量处理数据文件）和手动模式（交互式输入）
+2. `KG-guided candidate generation`
+   - 反事实阶段新增 `generated_best` 模式
+   - 该模式会同时评估原始 donor 干预和 `generated_kg_repaired` 候选
+   - `generated_kg_repaired` 会按 sepsis / shock / lactate 相关规则对 donor 干预做最小修复，再交给模型比较效果
 
-## 文件说明
+关于 memory bank 的训练与保留逻辑，当前代码是：
 
-- `merged_main.py`: 合并后的主程序文件
-- `experiment.py`: 预测模型实现
-- `sofa_prediction_evaluator.py`: 评估模型实现
-- `sofa_prediction_input.py`: 输入处理模块
-- `icu_stays_descriptions88.json`: 示例患者数据文件
+- 训练开始前先构建一次初始 online memory bank
+- 每个 epoch 结束后都会基于当前 encoder 重新构建一次 online memory bank
+- 每个 epoch 同时做验证，记录 `best_state`
+- 训练结束后先恢复 `best_state`，再重建最终 online memory bank
 
-## 安装依赖
+所以最终留下来的不是“最后一个 epoch 的 memory bank”，而是“验证集最优模型状态对应的 memory bank”。
 
-```bash
-pip install -r environment.yml
-```
+本仓库是一个围绕“记忆增强时序建模”构建的研究与工程系统，目标不是实现单一模型，而是把以下几类能力放到同一框架中：
 
-## 使用方法
+- 时序窗口的结构化表示
+- 基于历史经验的检索与复用
+- 患者状态与干预信息的分离建模
+- 反事实 donor 检索与干预迁移
+- 脓毒症知识图谱与临床规则的接入
 
-### 运行合并后的主程序
+当前系统包含三条主线：
 
-```bash
-python merged_main.py [--mode auto|manual]
-```
+- `tabular`：面向表格分类任务的动态记忆模型
+- `temporal`：面向 ICU / Sepsis 时序任务的 patient 级与 window 级实验
+- `forecasting`：面向多步预测与反事实分析的主线系统，也是当前最完整的一条线
 
-参数说明：
-- `--mode auto`: 自动模式，批量处理`icu_stays_descriptions88.json`中的所有患者数据
-- `--mode manual`: 手动模式，交互式输入患者信息（默认模式）
+如果你第一次进入仓库，建议按这个顺序阅读：
 
-### 使用流程
+1. [DOC_INDEX.md](docs/DOC_INDEX.md)
+2. [SYSTEM_ARCHITECTURE_DETAILED_GUIDE.md](docs/01_core/SYSTEM_ARCHITECTURE_DETAILED_GUIDE.md)
+3. [PERSISTENT_EXPERIENCE_MEMORY_GUIDE.md](docs/01_core/PERSISTENT_EXPERIENCE_MEMORY_GUIDE.md)
+4. [EICU_FORECASTING_AND_EVALUATION_GUIDE.md](docs/02_eicu/EICU_FORECASTING_AND_EVALUATION_GUIDE.md)
+5. [Sepsis_KG_MVP_详细说明.md](docs/03_knowledge_graph/Sepsis_KG_MVP_详细说明.md)
 
-1. 运行程序时，首先需要输入三个模型名称：
-   - 预测模型：用于进行SOFA评分预测的模型
-   - 评估模型1：用于对预测结果进行评估的第一个模型
-   - 评估模型2：用于对预测结果进行评估的第二个模型
+主要入口脚本：
 
-2. 根据选择的模式进行处理：
-   - 自动模式：程序会自动读取`icu_stays_descriptions88.json`文件中的患者数据，逐个进行预测和评估
-   - 手动模式：用户可以交互式地输入患者信息，程序会对每个输入的病例进行预测和评估
+- [run_experiment.py](run_experiment.py)
+- [run_temporal_experiment.py](run_temporal_experiment.py)
+- [run_forecasting_experiment.py](run_forecasting_experiment.py)
 
-3. 预测和评估过程支持并行执行：
-   - 预测模型使用一张显卡进行预测
-   - 两个评估模型分别使用另外两张显卡进行评估
-   - 当一个预测完成后，两个评估模型会并行对预测结果进行评估
+核心源码目录：
 
-## 输出结果
+- `src/`
+- `input/`
+- `output/`
+- `docs/`
 
-- 预测结果保存在`experiment_results_DS/`目录下
-- 评估结果保存在`output/`目录下
+知识图谱相关脚本与资源位于：
 
-## 注意事项
+- `input/knowledge/`
+- [build_sepsis_kg_mvp.py](input/knowledge/scripts/build_sepsis_kg_mvp.py)
+- [build_sepsis_kg_guideline_enhanced.py](input/knowledge/scripts/build_sepsis_kg_guideline_enhanced.py)
 
-- 确保系统中已安装并配置好Ollama
-- 根据模型需求确保有足够的GPU资源
-- 在并行处理时，程序会自动管理GPU资源分配
-
-## 经验知识库（前沿记忆增强）
-
-项目已支持混合记忆经验库（`advanced_experience_memory.py`），用于持续积累历史病例经验并在新预测时提供检索增强。
-
-核心机制：
-- 混合检索：语义向量 + 符号规则 + 时间衰减
-- 记忆分层：情景记忆（病例）、语义记忆（统计分布）、程序记忆（可执行规则）
-- 在线巩固：新结果写入后自动更新规则与统计
-
-默认会由 `experience_integration.py` 优先加载该前沿经验库（失败时回退到原有经验库实现）。
-
-详细技术路线图与学术化说明见：`TECHNICAL_ROUTE_EXPERIENCE_MEMORY.md`。
-
-可直接执行的函数级改造清单见：`EXECUTABLE_REFACTOR_CHECKLIST.md`。
-
-
-## GitHub 提交说明（当前分支）
-
-若需将本地 `work` 分支提交到 GitHub，可执行：
-
-```bash
-git remote add origin git@github.com:CL2S/DSCS.git  # 若已存在可跳过
-git push -u origin work
-```
+本仓库文档现在以“系统说明”为主，不再把每一轮修改过程写成主文档。历史材料只保留在归档目录，不作为当前方法介绍的主体。

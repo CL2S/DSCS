@@ -1,0 +1,231 @@
+{
+  "fixes": [
+    "#1 diversity nudge in retrieval prompt",
+    "#2 clinical-rule gate (SOFA<=6 & no deterioration -> silence)"
+  ],
+  "results": [
+    {
+      "stay": 38372527,
+      "gt": 19,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 15,
+      "memory_pred": 9,
+      "memory_err": 10,
+      "improvement": 5,
+      "retrieved": [
+        0,
+        1,
+        38
+      ],
+      "gate_silenced": false,
+      "time_s": 6.3
+    },
+    {
+      "stay": 38432543,
+      "gt": 16,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 12,
+      "memory_pred": 12,
+      "memory_err": 4,
+      "improvement": 8,
+      "retrieved": [
+        0,
+        3,
+        16
+      ],
+      "gate_silenced": false,
+      "time_s": 6.2
+    },
+    {
+      "stay": 38442306,
+      "gt": 15,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 11,
+      "memory_pred": 9,
+      "memory_err": 6,
+      "improvement": 5,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "gate_silenced": false,
+      "time_s": 6.3
+    },
+    {
+      "stay": 38673044,
+      "gt": 14,
+      "sofa_start": 5,
+      "trend": "rise",
+      "baseline_pred": 8,
+      "baseline_err": 6,
+      "memory_pred": 10,
+      "memory_err": 4,
+      "improvement": 2,
+      "retrieved": [
+        0,
+        3,
+        16
+      ],
+      "gate_silenced": false,
+      "time_s": 6.3
+    },
+    {
+      "stay": 38817112,
+      "gt": 12,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 8,
+      "memory_pred": 9,
+      "memory_err": 3,
+      "improvement": 5,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "gate_silenced": false,
+      "time_s": 6.5
+    },
+    {
+      "stay": 38839114,
+      "gt": 13,
+      "sofa_start": 9,
+      "trend": "rise",
+      "baseline_pred": 7,
+      "baseline_err": 6,
+      "memory_pred": 12,
+      "memory_err": 1,
+      "improvement": 5,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "gate_silenced": false,
+      "time_s": 6.1
+    },
+    {
+      "stay": 38854605,
+      "gt": 12,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 8,
+      "memory_pred": 10,
+      "memory_err": 2,
+      "improvement": 6,
+      "retrieved": [
+        0,
+        6,
+        16
+      ],
+      "gate_silenced": false,
+      "time_s": 6.1
+    },
+    {
+      "stay": 38937052,
+      "gt": 12,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 8,
+      "memory_pred": 12,
+      "memory_err": 0,
+      "improvement": 8,
+      "retrieved": [
+        0,
+        3,
+        10
+      ],
+      "gate_silenced": false,
+      "time_s": 6.2
+    },
+    {
+      "stay": 38948720,
+      "gt": 13,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 9,
+      "memory_pred": 9,
+      "memory_err": 4,
+      "improvement": 5,
+      "retrieved": [
+        0,
+        1,
+        3
+      ],
+      "gate_silenced": false,
+      "time_s": 6.3
+    },
+    {
+      "stay": 39452059,
+      "gt": 10,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 4,
+      "baseline_err": 6,
+      "memory_pred": 10,
+      "memory_err": 0,
+      "improvement": 6,
+      "retrieved": [
+        0,
+        3,
+        16
+      ],
+      "gate_silenced": false,
+      "time_s": 6.2
+    },
+    {
+      "stay": 39657585,
+      "gt": 10,
+      "sofa_start": 4,
+      "trend": "rise",
+      "baseline_pred": 5,
+      "baseline_err": 5,
+      "memory_pred": 10,
+      "memory_err": 0,
+      "improvement": 5,
+      "retrieved": [
+        0,
+        3,
+        16
+      ],
+      "gate_silenced": false,
+      "time_s": 6.3
+    },
+    {
+      "stay": 39816062,
+      "gt": 4,
+      "sofa_start": 4,
+      "trend": "stable",
+      "baseline_pred": 4,
+      "baseline_err": 0,
+      "memory_pred": 4,
+      "memory_err": 0,
+      "improvement": 0,
+      "retrieved": [
+        0,
+        3,
+        16
+      ],
+      "gate_silenced": true,
+      "time_s": 5.8
+    }
+  ],
+  "summary": {
+    "base_mae": 7.833333333333333,
+    "memory_mae": 2.8333333333333335,
+    "helped": 11,
+    "harmed": 0,
+    "gated": 1
+  }
+}
